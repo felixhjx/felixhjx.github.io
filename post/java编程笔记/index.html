@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+
+ | felix blog</title>
+
+    
+
+
+  
+  <meta name="author" content="" />
+  <meta name="description" content="这是felix的个人博客" />
+
+
+
+<meta name="generator" content="Hugo 0.69.2" />
+
+<link rel="canonical" href="https//felixhjx.github.io/post/java%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/" />
+
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="JAVA编程笔记 Java技术体系  Java程序设计语言 Java虚拟机（JVM）与底层硬件作一层支撑层 Java API类库（Java标准库函数） 一系列辅助工具 javac &hellip;  1&#43;2&#43;3&#43;4=JDK 2&#43;3=JRE (java运行时环境)
+Java&rsquo;技术体系所划分的三大平台
+变量 局部变量  声明在方法构造方法 局部变量没有默认值，所以局部变量被声明后，必须经过初始化，才可以使用。  方法 方法可以传入多个参数，但可以有0或者1个返回值，不能有多个返回值
+可以通过数组作为方法的返回类型来实现多个结果的数据返回
+调用 对象变量名.方法名（实参列表）
+ 通过对象名.方法名进行调用，这是最普通的也是最常见的一种调用方式。 通过new关键字调用构造方法，这种是在实例化对象时使用的方式。 通过类名.方法名调用，当需要调用的那个方法为静态（有static的）方法时使用  无返回值的方法只能使用单独调用
+圆括号中的“实参列表”为调用方法时实际传入的实际参数，称为==实参列表==。声明方法时圆括号中的参数称为形式参数，形式参数和实际参数在数据类型和个数上一定要匹配。
+构造方法 专门用于创建对象的方法，当通过new关键字创建对象时就是调用构造方法
+格式
+public 类名称（参数类型，参数名称）
+注意事项
+ 必须与所在类名称相同，大小写一致 构造方法不写返回值，void都不写 构造方法不能return具体返回值 如果没有编写任何构造方法，编译器将至少赠送编写一个，没有参数，方法体什么也不做 一旦编写了一个构造方法，那么编译器不在赠送 构造方法也可以重载  标准类（Java Bean） 组成：
+ 所有成员变量都需要使用private关键字修饰 为每一个成员变量编写一对Getter/Setter方法 编写一个无参数的构造方法 编写一个全参数的构造方法  API 应用程序接口
+方法重载(Overload) 多个方法名称相同，但参数列表不同，与前端修饰词无关。 大小写为不同方法，不是方法重载。
+方法重载相关因素
+ 参数个数不同 参数类型不同 参数多类型但是顺序不同  无关因素
+参数名称不同不代表两个不同方法，与参数名称无关 与方法返回值无关" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https//felixhjx.github.io/post/java%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/" />
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="JAVA编程笔记 Java技术体系  Java程序设计语言 Java虚拟机（JVM）与底层硬件作一层支撑层 Java API类库（Java标准库函数） 一系列辅助工具 javac &hellip;  1&#43;2&#43;3&#43;4=JDK 2&#43;3=JRE (java运行时环境)
+Java&rsquo;技术体系所划分的三大平台
+变量 局部变量  声明在方法构造方法 局部变量没有默认值，所以局部变量被声明后，必须经过初始化，才可以使用。  方法 方法可以传入多个参数，但可以有0或者1个返回值，不能有多个返回值
+可以通过数组作为方法的返回类型来实现多个结果的数据返回
+调用 对象变量名.方法名（实参列表）
+ 通过对象名.方法名进行调用，这是最普通的也是最常见的一种调用方式。 通过new关键字调用构造方法，这种是在实例化对象时使用的方式。 通过类名.方法名调用，当需要调用的那个方法为静态（有static的）方法时使用  无返回值的方法只能使用单独调用
+圆括号中的“实参列表”为调用方法时实际传入的实际参数，称为==实参列表==。声明方法时圆括号中的参数称为形式参数，形式参数和实际参数在数据类型和个数上一定要匹配。
+构造方法 专门用于创建对象的方法，当通过new关键字创建对象时就是调用构造方法
+格式
+public 类名称（参数类型，参数名称）
+注意事项
+ 必须与所在类名称相同，大小写一致 构造方法不写返回值，void都不写 构造方法不能return具体返回值 如果没有编写任何构造方法，编译器将至少赠送编写一个，没有参数，方法体什么也不做 一旦编写了一个构造方法，那么编译器不在赠送 构造方法也可以重载  标准类（Java Bean） 组成：
+ 所有成员变量都需要使用private关键字修饰 为每一个成员变量编写一对Getter/Setter方法 编写一个无参数的构造方法 编写一个全参数的构造方法  API 应用程序接口
+方法重载(Overload) 多个方法名称相同，但参数列表不同，与前端修饰词无关。 大小写为不同方法，不是方法重载。
+方法重载相关因素
+ 参数个数不同 参数类型不同 参数多类型但是顺序不同  无关因素
+参数名称不同不代表两个不同方法，与参数名称无关 与方法返回值无关"/>
+
+
+<link rel="stylesheet" href="/https/felixhjx.github.io/css/github-markdown.css" />
+<link rel="stylesheet" href="/https/felixhjx.github.io/css/semantic.min.css" />
+<link rel="stylesheet" href="/https/felixhjx.github.io/css/site.css" />
+
+
+
+
+
+  </head>
+
+  
+  <body>
+  
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = 'https\/\/felixhjx.github.io\/'"></i>
+  </div>
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          
+<div class="ui centered relaxed grid dream-grid">
+  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single">
+
+    <section class="ui top attached segment" id="dream-save-post-as-img">
+      <header style="margin-top: 0 !important;">
+        <h2 class="ui header">
+          
+          <div class="sub header">@  · Monday, Jan 1, 0001 · 4 minute read · Update at Jan 1, 0001</div>
+        </h2>
+      </header>
+      <article style="margin-top: 2rem;"><h1 id="java编程笔记">JAVA编程笔记</h1>
+<h3 id="java技术体系">Java技术体系</h3>
+<ol>
+<li>Java程序设计语言</li>
+<li>Java虚拟机（JVM）与底层硬件作一层支撑层</li>
+<li>Java API类库（Java标准库函数）</li>
+<li>一系列辅助工具 javac &hellip;</li>
+</ol>
+<p>1+2+3+4=JDK    2+3=JRE (java运行时环境)</p>
+<p>Java&rsquo;技术体系所划分的三大平台</p>
+<h2 id="变量">变量</h2>
+<h3 id="局部变量">局部变量</h3>
+<ul>
+<li>声明在方法构造方法</li>
+<li>局部变量没有默认值，所以局部变量被声明后，必须经过初始化，才可以使用。</li>
+</ul>
+<h2 id="方法">方法</h2>
+<p>方法可以传入多个参数，但可以有0或者1个返回值，不能有多个返回值</p>
+<p>可以通过数组作为方法的返回类型来实现多个结果的数据返回</p>
+<h3 id="调用">调用</h3>
+<p>对象变量名.方法名（实参列表）</p>
+<ol>
+<li>通过对象名.方法名进行调用，这是最普通的也是最常见的一种调用方式。</li>
+<li>通过new关键字调用构造方法，这种是在实例化对象时使用的方式。</li>
+<li>通过类名.方法名调用，当需要调用的那个方法为静态（有static的）方法时使用</li>
+</ol>
+<p>无返回值的方法只能使用单独调用</p>
+<p>圆括号中的“实参列表”为调用方法时实际传入的实际参数，称为==实参列表==。声明方法时圆括号中的参数称为形式参数，形式参数和实际参数在数据类型和个数上一定要匹配。</p>
+<h3 id="构造方法">构造方法</h3>
+<p>专门用于创建对象的方法，当通过new关键字创建对象时就是调用构造方法</p>
+<p><strong>格式</strong></p>
+<p>public 类名称（参数类型，参数名称）</p>
+<p><strong>注意事项</strong></p>
+<ol>
+<li>必须与所在类名称相同，大小写一致</li>
+<li>构造方法不写返回值，void都不写</li>
+<li>构造方法不能return具体返回值</li>
+<li>如果没有编写任何构造方法，编译器将至少赠送编写一个，没有参数，方法体什么也不做</li>
+<li>一旦编写了一个构造方法，那么编译器不在赠送</li>
+<li>构造方法也可以重载</li>
+</ol>
+<h3 id="标准类java-bean">标准类（Java Bean）</h3>
+<p>组成：</p>
+<ul>
+<li>所有成员变量都需要使用private关键字修饰</li>
+<li>为每一个成员变量编写一对Getter/Setter方法</li>
+<li>编写一个无参数的构造方法</li>
+<li>编写一个全参数的构造方法</li>
+</ul>
+<h3 id="api">API</h3>
+<p>应用程序接口</p>
+<h3 id="方法重载overload">方法重载(Overload)</h3>
+<p>多个方法名称相同，但参数列表不同，与前端修饰词无关。
+大小写为不同方法，不是方法重载。</p>
+<p><strong>方法重载相关因素</strong></p>
+<ul>
+<li>参数个数不同</li>
+<li>参数类型不同</li>
+<li>参数多类型但是顺序不同</li>
+</ul>
+<p><strong>无关因素</strong></p>
+<p>参数名称不同不代表两个不同方法，与参数名称无关
+与方法返回值无关</p>
+<h3 id="方法使用注意事项">方法使用注意事项</h3>
+<ol>
+<li>方法定义在类中，不能方法中调用方法，禁止套娃</li>
+<li>方法定义顺序没有先后</li>
+<li>方法定义后不会执行，执行须调用，（单独，打印，赋值）</li>
+<li>方法若有返回值，必须写上“return”，且返回值类型必须相同</li>
+<li>一个方法中可以存在多个return语句，但只能同时执行一个，双return不能连写</li>
+</ol>
+<h3 id="数组">数组</h3>
+<p>直接打印数组名称，得到的是数组对应的哈希地址值</p>
+<h3 id="循环遍历数组">循环遍历数组</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">++){</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>最大值判断算法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> Array<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Demo01ArrayMax</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> array <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>1<span style="color:#f92672">,</span> 4<span style="color:#f92672">,</span> 61<span style="color:#f92672">,</span> 7<span style="color:#f92672">,</span> 238<span style="color:#f92672">,</span> 68<span style="color:#f92672">,</span> 32<span style="color:#f92672">,</span> 65<span style="color:#f92672">,};</span>
+
+        <span style="color:#66d9ef">int</span> max <span style="color:#f92672">=</span> array<span style="color:#f92672">[</span>0<span style="color:#f92672">];</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> max<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                max <span style="color:#f92672">=</span> array<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>max<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>数组元素反转</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> Array<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Demo01ArrayReverse</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> array<span style="color:#f92672">={</span>1<span style="color:#f92672">,</span>2<span style="color:#f92672">,</span>3<span style="color:#f92672">,</span>4<span style="color:#f92672">,</span>5<span style="color:#f92672">,</span>6<span style="color:#f92672">,</span>7<span style="color:#f92672">};</span>
+
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">++){</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;=======&#34;</span><span style="color:#f92672">);</span>
+
+        <span style="color:#75715e">/*
+</span><span style="color:#75715e">        初始化语句:int min=0，max=array.length-1
+</span><span style="color:#75715e">        条件判断：min&lt;max
+</span><span style="color:#75715e">        步进表达式：min++,max--
+</span><span style="color:#75715e">        循环体：利用第三变量转换
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> min<span style="color:#f92672">=</span>0<span style="color:#f92672">,</span>max<span style="color:#f92672">=</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>min<span style="color:#f92672">&lt;</span>max<span style="color:#f92672">;</span>min<span style="color:#f92672">++,</span>max<span style="color:#f92672">--){</span>
+            <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span>array<span style="color:#f92672">[</span>min<span style="color:#f92672">];</span>
+            array<span style="color:#f92672">[</span>min<span style="color:#f92672">]=</span>array<span style="color:#f92672">[</span>max<span style="color:#f92672">];</span>
+            array<span style="color:#f92672">[</span>max<span style="color:#f92672">]=</span>temp<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">++){</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h1 id="面向对象编程">面向对象编程</h1>
+<p><strong>特点</strong>：封装，继承，多态</p>
+<h3 id="封装">封装</h3>
+<p><strong>定义</strong>：一些细节信息隐藏，对外界不可见</p>
+<p>封装性在JAVA中的体现</p>
+<ul>
+<li>方法是一种封装</li>
+<li>关键字private是一种封装</li>
+</ul>
+<h1 id="类与对象">类与对象</h1>
+<h2 id="权限修饰符">权限修饰符</h2>
+<h3 id="类的访问">类的访问</h3>
+<p><em>Java中文件存储在包中，代码编写在类中。为了实现Java的多态性，常需要创建子，父类。为了更好的管理类之前关系。对类的访问权限进行控制</em></p>
+<p>类修饰符可定义为：<strong>public,abstract,final,friendly</strong></p>
+<p><strong>public</strong></p>
+<p>公共类
+当一个类定义为 <strong>public</strong> 时，该类对任何一个类可见，创建这个类的对象（==对象实例化==），就可以使用这个类的成员变量和方法</p>
+<p><strong>abstract</strong></p>
+<p>抽象类</p>
+<p>抽象类无法直接实例化，不能直接产生属于这个类的对象，但可以通过创建子类继承这个类来使用经过重写的子类方法。</p>
+<p>如果子类不全部实现父类中的抽象方法，那么子类也只能声明为抽象类。</p>
+<p><strong>final</strong></p>
+<p>最终类</p>
+<p>final类不能被继承和覆盖，执行密码管理的类，处理数据库信息的管理类。</p>
+<hr>
+<h3 id="类成员的访问">类成员的访问</h3>
+<ul>
+<li>
+<p>类一组相关属性和行为的集合,属性：事物的状态信息，行为：事物能够做什么</p>
+</li>
+<li>
+<p>类与对象的关系</p>
+<p>类是对一类事物的描述，抽象化</p>
+<p>对象是一类事物的实例，具体化</p>
+<p>类是对象的模板，对象是类的实体</p>
+</li>
+</ul>
+<h3 id="类的定义">类的定义</h3>
+<ul>
+<li>
+<p>成员变量（属性）定义</p>
+<p>数据类型 变量名称</p>
+</li>
+<li>
+<p>成员方法（行为）定义
+<code>public void 方法名（）{}</code></p>
+<p><!-- raw HTML omitted -->无static关键字<!-- raw HTML omitted --></p>
+</li>
+</ul>
+<p>一个类无法直接使用，需根据类创建对象才能使用</p>
+<h3 id="java标准类">JAVA标准类</h3>
+<ul>
+<li>所有成员方法都用private关键字修饰</li>
+<li>为每一个成员变量都编写一对Getter和Setter</li>
+<li>编写一个无参数的构造方法</li>
+<li>编写一个全参数的构造方法</li>
+</ul>
+<h3 id="创建对象步骤">创建对象步骤</h3>
+<ol>
+<li>导包：指出需要使用的类所在位置.需要的类当前类属于同一个包下时，可以不用导包
+import  包名称.类名称；</li>
+<li>创建；根究类创建一个对象
+类名称 对象名 =new类名称();</li>
+<li>使用
+使用成员变量：对象名.成员变量名;
+使用成员方法：对象名.成员方法名(参数）;</li>
+</ol>
+<p>若成员变量没有进行赋值操作，也会存在一个默认值，规则与组相同## 类与对象的内存分析</p>
+<h3 id="局部变量与成员变量的区别">局部变量与成员变量的区别</h3>
+<ul>
+<li><strong>定义位置不同</strong>，局部变量定义在方法内，成员变量定义在方法外部，直接写在类中。</li>
+<li><strong>作用域不同</strong>，局部变量只能在方法中使用，出方法不能使用,成员变量作用在类中，整个类都能使用。</li>
+<li><strong>默认值不同</strong>，局部变量不存在默认值，若要使用须先手动赋值，成员变量存在默认值，规则与数组相同</li>
+</ul>
+<h3 id="private关键字">private关键字</h3>
+<ul>
+<li>
+<p>什么时候需要private关键字</p>
+<p>定义类时可能传入不合理数据，可以通过private关键字对成员变量进行修饰
+一旦使用private修饰时，本类当中可以随意访问，超出本类无法直接访问。</p>
+</li>
+</ul>
+<p>间接访问private成员变量就是定义一对Setter/Getter方法</p>
+<ul>
+<li>Setter/Getter使用方法</li>
+</ul>
+<p>Set必须有参数无返回值，参数类型须与Set对象保持一致
+Get必须有返回值无参数。</p>
+<p><!-- raw HTML omitted -->boolean类型的Getter要改成is xxx<!-- raw HTML omitted --></p>
+<h3 id="this关键字">this关键字</h3>
+<p>==this关键字只能在方法内部使用==</p>
+<ul>
+<li>
+<p>什么时候用到this关键字</p>
+<p>当方法的局部变量和类的成员变量重名时</p>
+<p>根据“就近原则”，优先使用局部变量</p>
+<p>如果需要访问类中成员变量使用this.成员变量名调用</p>
+</li>
+</ul>
+<h3 id="匿名对象">匿名对象</h3>
+<p>匿名对象只能使用唯一的一次，再次使用就得创建一个新对象。</p>
+<p>所以，如果确认一个对象只需要使用唯一的一次就可以使用匿名对象</p>
+<p>new 类名称();</p>
+<h2 id="scanner类">Scanner类</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Scanner sc<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> Scanner<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">);</span>
+</code></pre></div><p>获取键盘输入字符</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String str <span style="color:#f92672">=</span>sc<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">();</span>
+</code></pre></div><h2 id="random-类">Random 类</h2>
+<p>导包:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.Random<span style="color:#f92672">;</span>
+</code></pre></div><p>创建：类名称 对象名 =new类名称();</p>
+<p>使用成员方法：对象名.成员方法名(参数）</p>
+<p>定义随即范围：参数代表范围，左闭右开区间</p>
+<h2 id="对象数组arraylist">对象数组（ArrayList）</h2>
+<p><code>ArrayList&lt;E&gt;</code>	泛型内数据类型统一，只能时引用类型，不能是基本类型</p>
+<p>ArrayList直接打印得到的不是地址值，是内容，内容为空则得到空中括号</p>
+<p>Alt +Ins</p>
+<h2 id="字符串">字符串</h2>
+<p>程序当中引号字符串都是String类的对象，不需要new操作也是字符串</p>
+<p>字符串特点</p>
+<ol>
+<li>==字符串内容永不改变，字符串是常量==</li>
+<li>字符串不可变所以字符串可以共享使用，节省内存</li>
+<li>字符串相当于char[]字符数组，但底层原理是byte[]字节数组。String类底层存储时是用一个字节数组储存每一个字幕的字节数据</li>
+</ol>
+<p>创建字符串的3+1方法</p>
+<p>三种构造方法</p>
+<ol>
+<li>
+<p>public String():创建一个空白字符串，不包含内容</p>
+</li>
+<li>
+<p>public String(char[] array):根究字符数组的内容，创建对应字符串</p>
+</li>
+<li>
+<p>public String(byte[] array):根究字节数组的内容，创建对应字符串</p>
+</li>
+</ol>
+<p>直接引用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String str <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;	&#34;</span><span style="color:#f92672">;</span>
+</code></pre></div><p><strong>字符串的截取方法</strong></p>
+<p><code>public String substring (int index)</code>从索引位置开始到末尾(从零开始)，返回新字符串</p>
+<p><code>public String substring (int begin，int end)</code>从begin到end中间的字符串，<strong>左闭右开</strong>区间</p>
+<p>创建一个新的字符串并传入字符。如果改变字符只是</p>
+<h3 id="字符串的常量池">字符串的常量池</h3>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200518230219032.png" alt="image-20200518230219032"></p>
+<h3 id="static关键字">static关键字</h3>
+<p>静态变量(类变量)和静态方法(类方法)为类所拥有，创建的所有对象都有，可以不创建对象直接使用</p>
+<p>如果声明时不用static关键字修饰，则为实例变量和实例方法。</p>
+<p>static的函数只能调用static的函数，只能访问static的成员变量。也能通过对象名字访问。</p>
+<h4 id="引用方式">引用方式</h4>
+<p>类名.静态变量/静态方法</p>
+<p>实例对象进行调用</p>
+<p><strong>一个类可以通过new运算符创建多个对象，这些对象的实例变量被分配到不同的内存空间，若类的成员变量中有类变量则将类变量分配至一处保存，即对象共享类变量，所以改变一个类变量则会影响其他对象的此类变量</strong></p>
+<h4 id="类方法与实例方法">类方法与实例方法</h4>
+<p>类方法不能访问实例变量，只能访问类变量</p>
+<p>实例方法可以调用实例变量，类变量。由实例对象调用</p>
+<h2 id="继承">继承</h2>
+<p><strong>在同一个包下的继承关系</strong></p>
+<p>==在同一个包下==，子类自然继承父类中Private的成员变量作为自己的成员变量，Private方法作为自己的方法</p>
+<p><strong>在不同的包下的继承关系</strong></p>
+<p>==在不同包下==，子类继承了父类的Protected，Public成员变量作为子类的成员变量，继承父类的Protected，Public方法作为子类方法</p>
+<p>不用private，public，protected修饰的成员变量和方法被称为<strong>友好变量和友好方法</strong>，在不同包下，子类不能继承父类的友好变量和友好方法</p>
+<h3 id="特点">特点</h3>
+<p>Java语言是单继承的，一个类的直接父类只有一个</p>
+<p>Java可以多级继承</p>
+<p>一个子类只有唯一的父类，一个父类可以有多个子类</p>
+<h3 id="由来">由来</h3>
+<p>多个类中存在相同属性和行为时，将这些内容抽取到单独一个类中，那么多个类无需再定义这些属性和行为，只要继承那一个类即可，子类可以直接访问父类中非私有的属性和行为</p>
+<p>==继承是多态的前提==</p>
+<p>继承主要解决的问题：共性抽取，父类中包含子类的公共部分。只需在父类中编写一遍</p>
+<p><strong>好处</strong>：提高代码的复用性，类与类之前产生关系</p>
+<p><strong>子父类成员变量重名</strong></p>
+<p>子父类中出现了同名的成员变量时，在子类中需要访问父类中<strong>非私有成员变量</strong>时，需要使用<code>super</code>关键字，修饰父类成员变量</p>
+<h3 id="变量重名问题">变量重名问题</h3>
+<p>局部变量						直接写成员变量名</p>
+<p>本类中的成员变量		this.成员变量名</p>
+<p>父类中的成员变量		super.成员变量名</p>
+<p>无论成员方法还是成员变量，如果重名且没有super关键字，则向上找父类，绝不会向下找子类</p>
+<h2 id="方法的覆盖override">方法的覆盖（override）</h2>
+<p>覆盖：方法名称相同，==参数列表也相同==</p>
+<p>重写：方法名称相同，==参数列表不同==</p>
+<p><strong>方法覆盖注意事项</strong></p>
+<ul>
+<li>
+<p>必须保证父子类之间的方法的名称相同，参数列表也相同</p>
+<p>@Override，写在方法前，用于检测是否是有效的正确覆盖重写</p>
+</li>
+<li>
+<p>子类方法返回值必须小于父类的返回值类型</p>
+<p>java.long.Object类是所有类的公共最高类</p>
+</li>
+<li>
+<p>子类方法权限修饰符必须大于等于父类方法权限修饰符</p>
+<p>public&gt;protected&gt;(default)&gt;private</p>
+<p>公共的&gt; 受保护的&gt;预设的&gt;似有的</p>
+<p>(default)不是关键字default，而是什么都不写</p>
+</li>
+</ul>
+<h3 id="设计原则">设计原则</h3>
+<p>对于以及实用的类，尽量不要进行修改，推荐定义一个新的类</p>
+<p>，来重复利用其中的共性内容1，并添加新的内容</p>
+<h3 id="父子类的构造方法的访问特点">父子类的构造方法的访问特点</h3>
+<ul>
+<li>子类构造方法当中有一个默认隐含的&quot;super()&ldquo;调用，所以一定要先调用父类，后执行子类构造</li>
+<li>子类构造可以通过super关键字来调用父类重载构造</li>
+<li>super的父类构造调用，必须是子类构造方法的第一个语句，一个子类构造方法不能调用多次super构造</li>
+</ul>
+<h3 id="super关键字用法">super关键字用法</h3>
+<ul>
+<li>在子类的成员方法中访问父类的成员变量</li>
+<li>在子类的成员方法中，访问父类的成员方法</li>
+<li>在子类的构造方法中，访问父类的构造方法</li>
+</ul>
+<p>与this关键字类似，this用于访问本类内容，super用于访问父类内容，==super与this两种构造调用，不能同时使用，两者都必须唯一==</p>
+<h2 id="抽象方法和抽象类">抽象方法和抽象类</h2>
+<p><strong>抽象方法</strong>：加上abstract关键字，去掉大括号，直接分号结束</p>
+<p><code>public abstract 返回值类型 方法名称(参数列表)；</code></p>
+<p><strong>抽象类</strong>：抽象方法所在的类，必须是抽象类，在class前写上abstract</p>
+<p>使用</p>
+<ul>
+<li>
+<p>不能直接new创建抽象类对象</p>
+</li>
+<li>
+<p>必须用一个子类来继承抽象父类</p>
+</li>
+<li>
+<p>子类必须覆盖重写抽象父类当中的抽象方法</p>
+<p>覆盖重写^^子类去掉抽象方法的abstract关键字，补全方法体大括号</p>
+</li>
+<li>
+<p>创建子类对象进行使用</p>
+</li>
+</ul>
+<h2 id="接口">接口</h2>
+<p>接口时多个类的公共规范，接口是一个 引用数据类型，</p>
+<h3 id="抽象方法">抽象方法</h3>
+<p><strong>定义格式</strong>：public interface 接口名称（大驼峰）{&hellip;.}</p>
+<p>Java 9接口包含内容</p>
+<ol>
+<li>常量</li>
+<li>抽象方法</li>
+<li>默认方法</li>
+<li>静态方法</li>
+<li>私有方法</li>
+</ol>
+<p>接口当中的抽象方法，修饰符必须是两个固定关键字：</p>
+<p>==public abstract==,两个修饰符可以选择性省略，方法三要素可以随意定义</p>
+<p><strong>接口使用步骤</strong></p>
+<ol>
+<li>
+<p>接口不能直接使用，必须有一个“实现类”(子类)来实现(extends)该接口</p>
+<p><code>public class 接口类名称 implements 接口名称{....}</code></p>
+</li>
+<li>
+<p>接口的实现类必须覆盖重写(==实现==)接口中所有的抽象方法</p>
+<p>实现：去掉abstract关键字，加上方法体大括号</p>
+</li>
+<li>
+<p>创建实现类的对象，进行使用</p>
+</li>
+</ol>
+<p>注意事项：如果实现类并没有覆盖重写接口中所有的抽象方法，那么这个实现类自己必须是抽象类</p>
+<h3 id="默认方法">默认方法</h3>
+<p>用于接口升级问题，类A，B分别是接口的实现类，当接口中添加抽象方法时，A，B必须实现接口所有的抽象方法，若A，B已经投入使用</p>
+<p><code>public default 返回值类型 方法名称(参数列表){ 方法体 }</code></p>
+<h3 id="静态方法">静态方法</h3>
+<p><code>public static 返回值类型 方法名称(参数列表){...} </code></p>
+<p>不能通过接口实现类的对象来调用接口当中的静态方法，一个类有多个接口，多接口静态方法产生冲突,静态与类有关</p>
+<p>调用格式</p>
+<p>接口名称.静态方法名(参数)</p>
+<h3 id="私有方法">私有方法</h3>
+<p>我们需要抽取一个共有方法，用来解决两个默认方法之前重复代码的问题，而且此共有方法还不能让实现类使用，将其私有化</p>
+<p>格式：</p>
+<ul>
+<li>
+<p>普通私有方法</p>
+<p><code>public 返回值类型 方法名称 (参数列表){方法体}</code></p>
+</li>
+<li>
+<p>静态私有方法</p>
+<p><code>public static 返回值类型 方法名称 (参数列表){方法体}</code></p>
+</li>
+</ul>
+<p>接口中的常量，必须进行赋值</p>
+<p>接口中常量的名称必须使用全大写，单词之间用下划线分割</p>
+<h4 id="接口小结">接口小结</h4>
+<p>接口内容包括</p>
+<ol>
+<li>
+<p>常量</p>
+<p>格式:<code>public static final 数据类型 变量名=数据值</code></p>
+</li>
+<li>
+<p>接口中最重要的是抽象方法</p>
+<p>格式：<code>public abstract 返回值类型 方法名称（参数列表）;</code></p>
+<p>实现类必须覆盖重写接口所有的抽象方法，除非实现类是抽像类</p>
+</li>
+<li>
+<p>从Java 8开始，接口允许定义默认方法，
+格式：<code>public default 返回值类型 方法名称(参数列表){方法体}</code></p>
+<p>也可以覆盖重写，覆盖重写调用实现类的方法，没有则调用接口中的</p>
+</li>
+<li>
+<p>从Java 8开始接口允许使用静态方法</p>
+<p>格式:<code>public static 返回值类型 方法名称 (参数列表){方法体}</code></p>
+<p>应该通过接口名称进行调用，不能通过实现类对象进行调用接口静态方法</p>
+</li>
+<li>
+<p>Java 9开始，接口允许定义私有方法</p>
+<p>普通私有方法	<code>public 返回值类型 方法名称 (参数列表){方法体}</code></p>
+<p>静态私有方法	<code>public static 返回值类型 方法名称 (参数列表){方法体}</code></p>
+<p>private的方法只能接口自己才能调用，不能被实现类或其他调用</p>
+<hr>
+<h4 id="接口注意事项">接口注意事项</h4>
+<ul>
+<li>
+<p>接口不能有静态代码块，不能有构造方法</p>
+</li>
+<li>
+<p>一个类的父类是唯一的，但一个类可以同时实现多个接口</p>
+</li>
+</ul>
+<p><code>public class MyInterfaceImpl implements 接口A,接口B</code></p>
+<ul>
+<li>如果一个实现类所实现的多个接口当中，存在重复的抽象方法，那么只需要覆盖重写一次</li>
+<li>如果实现类当中没有覆盖重写所有的抽象方法，那么实现类必须是一个抽象类</li>
+<li>如果实现类实现的多个接口中，存在重复的默认方法，那么一定要对冲突的默认方法进行覆盖重写</li>
+<li>一个类如果继承父类中的方法，和接口当中的默认方法产生冲突，优先用父类当中的方法，优先级 继承&gt;接口实现</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>
+<p>类与类之间是单继承，直接父类只能有一个</p>
+</li>
+<li>
+<p>类与接口之间是实现的，一个类可与实现多个接口</p>
+</li>
+<li>
+<p>接口与接口之间是多继承</p>
+</li>
+</ul>
+<p>多个父接口的抽象方法重复没关系，默认方法重复那么子接口必须进行默认方法覆盖重写，而且带着default关键字</p>
+<h2 id="多态多种形态">多态（多种形态）</h2>
+<p>一个对象同时拥有多种形态</p>
+<p>方法的重写和重载是Java多态性的不同表现，重写是父类与子类之间多态性的一种表现，重载是一个类中多态性的一种表现</p>
+<p>如果在子类中定义某方法与其父类有相同的名称和参数，则说该方法被<strong>重写</strong></p>
+<p>如果在一个类中定义多个同名的方法，他们或有不同的参数个数或有不同的参数类型，则称为方法被<strong>重载</strong></p>
+<p>继承是多态的前提</p>
+<p>继承性在Java的体现：类的继承extends或者接口的实现implement  类与类的继承，接口与接口的继承，类与接口的实现</p>
+<p>代码当中体现多态性：父类引用指向子类对象</p>
+<p>父子类关系	格式：<code>父类名称 对象名 =new 子类名称();</code></p>
+<p>接口实现关系	格式：<code>接口名称 对象名 =new 实现类名称();</code></p>
+<p><strong>多态中成员方法使用特点</strong></p>
+<p>编译看左，运行看右</p>
+<p><strong>对象的向上转型</strong></p>
+<p>格式：<code>父类名称 对象名 = new 子类名称();</code></p>
+<p>含义：右键创建一个子类对象，把他当中父类来对待使用，向上转型一定是安全的，从小范围转向大范围</p>
+<p><strong>对象的向下转型</strong></p>
+<p>向上转型存在弊端：对象一旦向上转型为父类，那么无法再调用子类原本特有方法。所以提出解决方法：==向下转型==(还原)</p>
+<p>格式：<code>子类名称 对象名=（子类名称）父类对象 </code></p>
+<p>==类转换异常（Class Cast Exception==</p>
+<p>当一个子类向上转型成为父类时，只能向下转型回原子类。若转换成其他子类则会运行报错类转换异常（编译时不会报错）</p>
+<h4 id="instanceof关键字">instanceof关键字</h4>
+<p>向下转型时需要进行instanceof判断</p>
+<h3 id="四种权限修饰符">四种权限修饰符</h3>
+<ol>
+<li>public</li>
+<li>protected</li>
+<li>default</li>
+</ol>
+<h3 id="final关键字">final关键字</h3>
+<p>最终的不可变的，可以修饰</p>
+<ul>
+<li>
+<p>类，修饰类时表示这个类不能拥有任何子类，但是可以拥有父类。</p>
+<p>一个类如果是final类，其中所有成员方法都不能被覆盖重写</p>
+<p><code>public final class 类名称</code></p>
+</li>
+<li>
+<p>方法，修饰一个方法时表示是最终方法，不能被覆盖重写</p>
+<p><code>修饰符 final 返回值类型方法名称 (参数列表)</code></p>
+<p>==对于类和方法来说，abstract和final关键字不能同时使用，两者矛盾==</p>
+</li>
+<li>
+<p>局部变量，修饰局部变量，那这个变量不能改变，==一次赋值，终生不变==，对于基本数据类型来说，变量当中的数据不能改变。对于引用类型来说，变量当中的的地址值不能改变，但是地址所指向的对象能改变</p>
+</li>
+<li>
+<p>成员变量。修饰后，变量不变。成员变量存在默认值，使用final后必须手动赋值。赋值方式直接复制或构造方法。必须保证类当中所有重载的构造方法都最终对final的成员变量赋值</p>
+</li>
+</ul>
+<h3 id="内部类">内部类</h3>
+<h4 id="成员内部类">成员内部类</h4>
+<p>格式：<code>修饰符 class 外部类名称{</code>
+<code>修饰符 class 内部类名称}</code></p>
+<p>内用外随意访问，外用内要借助内部类对象</p>
+<p>直接调用：</p>
+<p><code>外部类名称.内部类名称 对象名=new 外部类名称().new内部类名称()</code></p>
+<p>内部类的同名变量访问</p>
+<p>假设定义一个外部类，一个内部类，内部类中包含内部类的成员变量和成员方法，外部类当中包含成员变量，当内部类中的局部变啦需要访问成员变量时使用this关键字访问。想要访问外部类的成员变量时可以通过==外部类名称.this.外部类成员变量==</p>
+<h4 id="局部内部类">局部内部类</h4>
+<p>一个类定义在方法内部，只有这个方法可以创建对象引用这个类</p>
+<ul>
+<li>匿名内部类</li>
+</ul>
+<h2 id="泛型">泛型</h2>
+<p>泛型就是一种未知的数据类型，当我们不知道用什么数据类型时就可以使用泛型。泛型也可以看做是一个变量，用来接收数据类型，==当创建对象时，确定泛型的数据类型。==</p>
+<p><strong>使用泛型的好处</strong>：
+1.避免了类型转换的麻烦，存储什么类型，取出就是什么类型
+2.运行期（代码运行之后才会抛出的异常）异常转换为编译期（写编码是就会报错）异常</p>
+<h2 id="system类">System类</h2>
+<h2 id="stringbuilder类">StringBuilder类</h2>
+<p>字符串是常量，它们的值不能被创建后改变。字符串缓冲区支持可变字符串。因为字符串对象是不可改变的，所以可以共享。==字符串不能变但是字符串缓冲区可以发生变化==</p>
+<p>字符串底层是一个==final修饰的数组==，赋值之后无法改变。在底层中有N个字符串进行相加，就需要生成2N-1个（N+N-1)数组。较为麻烦，需要StringBuilder类进行效率优化</p>
+<p><strong>StringBuilder&ndash;字符串缓冲区</strong></p>
+<p>一个长度可变的的字符串，在底层中也是一个数组但是没有被final修饰，初始容量16，如果超过自动扩容</p>
+<h1 id="多线程">多线程</h1>
+<h2 id="并发与并行">并发与并行</h2>
+<p>并发：两个或多个时间在同一时间段内发生（交替执行）</p>
+<p>并行：两个或多个时间同一时刻发生（同时进行）</p>
+<h2 id="进程与线程">进程与线程</h2>
+<p><strong>进程</strong>：一个内存中运行的应用程序，每个进程都有独立内存空间</p>
+<p>当我们双击打开软件时，软件从硬盘中进入内存，占用一定存储空间，此时创建了一个进程</p>
+<p><strong>线程</strong>：当我们点击功能时，就会开启一条应用程序到CPU的执行路径，CPU可以通过这个路径执行功能，这条路径叫线程</p>
+<p>CPU：中央处理器，对数据进行计算，常见几线程就代表可以同时执行多任务</p>
+<p>==线程是进程中的一个执行单元，负责程序执行==</p>
+<h3 id="hashmap">HashMap</h3>
+<p>哈希表是一种数据结构，所有以一对值存入，键，值。键值</p>
+<h1 id="io流">I/O流</h1>
+<p>字节输出流的使用</p>
+<ol>
+<li>创建一个fileOutputStream对象，构造方法中传递写入数据的目的地</li>
+<li>调用fileOutputStream对象中de方法write，把数据写入文件</li>
+<li>释放资源</li>
+</ol>
+<p>文件存储原理</p>
+<p>创建FileOUtoutStream对象时，根究传入的路径，使用文件路径创建一个文件并指向它，然后调用.writh方法写入文件，写入数据时是将10进制整数转换为二进制整数。</p>
+<h2 id="字节输出流">字节输出流</h2>
+<p>单次实现多个字节写入</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">write</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> b<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException
+</code></pre></div><p>如果写入的第一个字节是正数（0-127），显示的时候查询ASCII码
+如果写入的第一个字节是负数，第一和第二组成一个中文显示，查询系统默认码表（GBK）
+public void write(byte[] b)</p>
+<p>写入数组索引</p>
+<pre><code>public void write​(byte[] b,int off,int len)
+	throws IOException
+</code></pre><p>从索引off开始，写入len长度的数组</p>
+<p>字节输出流续写和换行</p>
+<p>创建对象时使用</p>
+<pre><code>FileOutputStream (File file, boolean append)
+</code></pre><p>Boolean为真则续写</p>
+<p>换行:Windows系统:\r\n,Linux:/n.Mac:/r</p>
+<h2 id="字节输入流">字节输入流</h2>
+<p>InputStream抽象类</p>
+<p>red(byte[] b)  从输入流中读取一定数量的字节，并将其存储在缓冲区b中</p>
+<p><strong>flush,close方法区别</strong></p>
+<ul>
+<li>
+<p><strong>flush</strong>：刷新缓冲区，流对象可以继续使用</p>
+<p>使用flush吧内存缓冲区中的数据刷新到文件中，还能继续使用流对象往文件添加</p>
+</li>
+<li>
+<p><strong>close</strong>：刷新缓冲区，通知JVM释放资源，流对象不能再用</p>
+<p>close方法释放资源，无法再次使用。</p>
+</li>
+</ul>
+<h2 id="properties类">Properties类</h2>
+<p>properties类表示一个持久属性值，可保存在流中或从流中加载。属性列表中每个键对应一个字符串</p>
+<p>properties集合是一个双列集合，key和value默认都是字符串</p>
+<p><strong>store</strong>方法</p>
+<p>可使用properties集合中的store方法，把集合中的临时数据，持久化的写入硬盘存储。</p>
+<p><strong>load</strong>方法</p>
+<p>可使用properties集合中的load方法，把硬盘中保存的文件（键值对），读取到集合中使用</p>
+<h2 id="缓冲流">缓冲流</h2>
+<p><strong>原理</strong>：使用基本的字节输入流读取文件时，使用FIleInputStream类中的read方法读取，java程序使用虚拟机，虚拟机使用OS 然后读取文件返回。过程中只能实现单字节读取。而字节缓冲流是给基本的字节输入流增加一个缓存区（数组），读取文件时可使用数组多字节读取，</p>
+<h1 id="代码习惯">代码习惯</h1>
+<p>首字母大写,多个单词构成，把他们并在一起并且首字母大写。类，方法，字段，对象引用名称</p>
+<p>标识符全小写。</p>
+<p>方法是类的动作行为，一般以动词开头</p>
+<p>包的命名全部使用小写，包括中间</p>
+</article>
+    </section>
+
+    <footer class="ui attached segment dream-tags">
+      
+          <a class="ui label">No Tags</a>
+      
+      <div
+        class="ui label"
+        style="float: right; cursor: pointer;"
+        onclick="savePostAsImg()">
+        <i class="save icon"></i>Save as image
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+  <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+    <article class="dream-header">
+  <section class="ui top attached center aligned segment">
+    <div class="ui small circular image">
+      
+    </div>
+
+    <h1 class="ui medium header">&#39;s blog<div class="sub header" style="margin-top: 0.5rem;"></div>
+    </h1>
+
+    <div class="ui horizontal list">
+      
+      <a class="item" href="/https/felixhjx.github.io/tags">
+        <i class="tags icon" title="All Tags"></i>
+      </a>
+      <a class="item" href="/https/felixhjx.github.io/categories">
+        <i class="th list icon" title="All Categories"></i>
+      </a>
+    </div>
+  </section>
+
+  
+
+  
+
+  <section class="ui attached segment header-socials">
+    <nav class="ui secondary menu dream-menu dream-socials">
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+  </section>
+
+  <section class="ui bottom attached center aligned segment">
+    
+      <p>© 2022 felix blog</p>
+    
+
+    <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+  </section>
+</article>
+
+  </div>
+</div>
+
+        </section>
+        <section class="back">
+          
+<nav class="ui secondary menu dream-menu">
+
+  <div class="item">
+    <i class="large link bullseye icon dream-flip-toggle" title="Flip it!"></i>
+  </div>
+  <div class="item">
+    <i class="large link home icon" title="Home" onclick="window.location.href = 'https\/\/felixhjx.github.io\/'"></i>
+  </div>
+  <div class="item">
+    <i class="large link icon theme-switch" onclick="themeSwitch()"></i>
+  </div>
+</nav>
+
+          <div class="ui centered relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article>
+      <div class="ui top attached segment">
+        <h3 class="ui header">Social Links</h3>
+      </div>
+      <div class="ui attached segment">
+        <nav class="ui secondary menu dream-menu dream-socials">
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</nav>
+
+      </div>
+    </article>
+  </section>
+
+  <section class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+  </section>
+
+  
+    
+  
+</div>
+
+        </section>
+      </div>
+    </div>
+
+    <script src="/https/felixhjx.github.io/js/jquery.min.js"></script>
+<script src="/https/felixhjx.github.io/js/semantic.min.js"></script>
+<script src="/https/felixhjx.github.io/js/imagesloaded.pkgd.min.js"></script>
+<script src="/https/felixhjx.github.io/js/masonry.pkgd.min.js"></script>
+<script src="/https/felixhjx.github.io/js/nav.js"></script>
+<script src="/https/felixhjx.github.io/js/header.js"></script>
+<script src="/https/felixhjx.github.io/js/main.js"></script>
+<script src="/https/felixhjx.github.io/js/theme.js"></script>
+
+    
+<script src="/https/felixhjx.github.io/js/html2canvas.min.js"></script>
+
+
+    
+  </body>
+</html>
