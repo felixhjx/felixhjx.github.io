@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>compute_networks | hjxblog</title>
+
+    
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+
+<meta name="author" content="felixhe" />
+<meta name="description" content="" />
+
+
+
+<meta name="generator" content="Hugo 0.60.1" />
+
+<link rel="canonical" href="https://github.com/felixhjx/felixhjx.github.io/posts/computer_network/" />
+
+
+<meta property="og:title" content="compute_networks" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://github.com/felixhjx/felixhjx.github.io/posts/computer_network/" />
+<meta property="og:image" content="https://github.com/felixhjx/felixhjx.github.io/me/background.jpg"/>
+<meta property="article:published_time" content="2022-02-12T21:13:46+08:00" />
+<meta property="article:modified_time" content="2022-02-12T21:13:46+08:00" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://github.com/felixhjx/felixhjx.github.io/me/background.jpg"/>
+
+<meta name="twitter:title" content="compute_networks"/>
+<meta name="twitter:description" content=""/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" integrity="sha256-UXesixbeLkB/UYxVTzuj/gg3+LMzgwAmg3zD+C4ZASQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/felixhjx/felixhjx.github.io/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css" integrity="sha256-WKijf8KI68sbq8Znd6yMepIuFF0wdWfIt6gk3JWcQfk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="/felixhjx/felixhjx.github.io/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+  a:not(.item, .ui.button) {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a:not(.item, .ui.button) {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: #fff;
+    
+
+    
+    background-image: url(/me/background.jpg);
+    
+  }
+  
+
+  
+  body.dark {
+    
+    background-color: #333;
+    
+
+    
+    background-image: url(/me/background.jpg);
+    
+  }
+  
+</style>
+
+
+    
+
+
+
+<link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/tomorrow.min.css" />
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/felixhjx/felixhjx.github.io/css/custom.css" />
+    
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://github.com/felixhjx/felixhjx.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  <a class="item" onclick="themeSwitch(event)">
+    <i class="large link icon theme-switch"></i>
+  </a>
+  
+  
+  <a class="item" title="搜索" onclick="toggleSearch(event)">
+    <i class="large link search icon"></i>
+  </a>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading">计算机网络的性能指标</a></li>
+    <li><a href="#heading1">以太网</a></li>
+    <li><a href="#mac">MAC地址</a>
+      <ul>
+        <li><a href="#mac1">以太网的MAC帧</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading2">不同层次使用的中间设备</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#heading4">物理层设备</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading6">基本概念</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading7">三个基本问题</a>
+      <ul>
+        <li><a href="#heading8">封装成帧</a></li>
+        <li><a href="#heading9">透明传输</a></li>
+        <li><a href="#heading10">差错控制</a></li>
+      </ul>
+    </li>
+    <li><a href="#csma">CSMA协议</a></li>
+    <li><a href="#csmacd">CSMA/CD协议</a>
+      <ul>
+        <li><a href="#2t">争用期2t</a></li>
+        <li><a href="#heading11">多点接入</a></li>
+        <li><a href="#heading12">载波监听</a></li>
+        <li><a href="#heading13">碰撞检测</a></li>
+        <li><a href="#heading14">截断二进制指数退避算法</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading15">可靠传输的实现机制</a>
+      <ul>
+        <li><a href="#sw">停止等待协议SW</a></li>
+        <li><a href="#n">回退N帧协议</a></li>
+        <li><a href="#sr">选择重传协议SR</a></li>
+      </ul>
+    </li>
+    <li><a href="#ppp">PPP协议</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#arp">ARP协议</a></li>
+    <li><a href="#ip">IP协议</a>
+      <ul>
+        <li><a href="#ip1">分类的IP地址</a></li>
+        <li><a href="#heading17">划分子网</a></li>
+        <li><a href="#cidr">CIDR</a></li>
+        <li><a href="#ip2">ip数据报的格式</a></li>
+        <li><a href="#ip3">IP层转发分组流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#dhcp">DHCP协议</a></li>
+    <li><a href="#icmp">ICMP协议</a></li>
+    <li><a href="#heading18">路由选择协议</a>
+      <ul>
+        <li><a href="#rip">RIP</a></li>
+        <li><a href="#ospf">OSPF</a></li>
+        <li><a href="#bgp">BGP</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#udp">UDP协议</a></li>
+    <li><a href="#tcp">TCP</a>
+      <ul>
+        <li><a href="#tcp1">TCP报文段首部格式</a></li>
+        <li><a href="#tcp2">TCP可靠传输实现</a></li>
+        <li><a href="#tcp3">TCP流量控制</a></li>
+        <li><a href="#tcp4">TCP拥塞控制</a></li>
+        <li><a href="#tcp5">TCP运输连接管理</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#dns">DNS</a></li>
+    <li><a href="#ftp">FTP</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui segment">
+      <header>
+        <h1 class="ui large header">compute_networks<span class="sub header">
+            <span class="left">
+              @
+              
+                felixhe
+              
+
+              | 
+                  <span data-format="luxon">2022-02-12T21:13:46&#43;08:00</span>
+                
+
+              | 23 分钟阅读
+
+              
+              | 更新于
+                
+                  <span data-format="luxon">2022-02-12T21:13:46&#43;08:00</span>
+                
+              
+            </span>
+
+            
+            <span class="dream-share">
+  <a href="#" class="save-as-image" title="保存为图片" onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </a>
+  <a href="https://twitter.com/intent/tweet?text=compute_networks&url=https%3a%2f%2fgithub.com%2ffelixhjx%2ffelixhjx.github.io%2fposts%2fcomputer_network%2f" title="Twitter">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fgithub.com%2ffelixhjx%2ffelixhjx.github.io%2fposts%2fcomputer_network%2f" title="Facebook">
+    <i class="facebook icon"></i>
+  </a>
+</span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+
+        <p>局域网</p>
+<h2 id="heading">计算机网络的性能指标</h2>
+<p><strong>速率</strong></p>
+<p>链接在计算机网络上的主机在数字信道上的传送数据位数的速率</p>
+<p><strong>一秒内传输数据的多少</strong></p>
+<p>1kb/s=10^3^b/s</p>
+<p>1Mb/s=10^3^kb/s=10^6^b/s</p>
+<p>Gb/s,Tb/s换算都是10^3^</p>
+<p>存储容量</p>
+<p>1Byte（字节）=8bit</p>
+<p>1KB=2^10^B=1024B=1024*8b</p>
+<p>1MB=2^10^KB=1024KB</p>
+<p>GB,TB换算都是2^10^</p>
+<p><strong>带宽</strong></p>
+<p>网络的通信线路所能传送数据的能力，理想中（单位b/s,kb/s,mb/s&hellip;)</p>
+<p>发送端最高能发送的数据域，带宽变大说明单位时间内往链路内注入的数据增加了</p>
+<p><strong>吞吐量</strong></p>
+<p>单位时间内通过某个网络（信道或接口）的数据量（单位b/s,kb/s,mb/s&hellip;)</p>
+<p>吞吐量受网络的带宽或网络的额定功率的限制，一般&lt;带宽</p>
+<p><strong>时延</strong></p>
+<p>数据（报文/分组/比特流）从网络（或链路）的一端传送到另一端所需的时间</p>
+<p>发送时延（机器内）</p>
+<p>发送分组的第一个比特算起，到该分组的最后一个比特发送完毕所需的时间</p>
+<p>传播时延（信道中）</p>
+<p>一个比特从链路的一端传播到另一端所需的时间</p>
+<p>排队时延</p>
+<p>分组在进入路由器后，输出对立中</p>
+<p>处理时延</p>
+<p>数据在交换点为存储转发而进行的一些必要的处理所花费的时间</p>
+<p><strong>时延带宽积</strong>（以比特为单位的链路长度）</p>
+<p>发送端发送的第一个比特即将到达终点时，发送端已经发出了多少比特</p>
+<p><strong>往返时延</strong>    RTT(round-trip time)</p>
+<p>从发送方发送数据数据开始，到发送方收到接收方的确认（接收方收到数据后立即发送确认）总共经历的时延</p>
+<p>RTT越大，可以发送的数据越多</p>
+<p>RTT=往返传播时延（传播时延*2）+末端处理时间（一般给出或忽略）</p>
+<h2 id="heading1">以太网</h2>
+<p>符合DIX Ethernet V2标准的==局域网==，目前使用范围最广的局域网（802.3局域网）</p>
+<h2 id="mac">MAC地址</h2>
+<p>计算机与外界有局域网的链接是通过通信适配器的，每个适配器有一个全球唯一的48位二进制地址，前24表示厂家（IEEE规定），后24由厂家自己定，常用6个16进制表示</p>
+<h3 id="mac1">以太网的MAC帧</h3>
+<h2 id="heading2">不同层次使用的中间设备</h2>
+<p>物理层&ndash;转发器</p>
+<p>数据链路层&ndash;网桥</p>
+<p>网络层&ndash;路由器</p>
+<p>网络层以上&ndash;网关</p>
+<h1 id="heading3">物理层</h1>
+<p>比特，位字节</p>
+<p>1比特=1位</p>
+<p>1字节=8比特=8位</p>
+<p>数据通信基本术语</p>
+<p>信源，信道，信宿</p>
+<p>起点，中间，终点</p>
+<p>两种传输方式</p>
+<ol>
+<li>
+<p>串行</p>
+<p>速度慢，费用低，适合远距离</p>
+</li>
+<li>
+<p>并行</p>
+<p>速度快，费用高，适合近距离</p>
+</li>
+</ol>
+<p><strong>码元</strong></p>
+<p>用一个固定时长的信号波形，代表不同的离散数值的基本波形</p>
+<p>时长-码元宽度</p>
+<p><strong>码元传输速率</strong></p>
+<p>单位时间内数字通信系统所传输的码元个数（脉冲个数或信号变化的次数）</p>
+<p>信息传输速率（比特率）</p>
+<p>单位时间内数字通信系统所传输的二进制码元个数（比特数）</p>
+<p>奈氏准则</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215201050513.png" alt="image-20211215201050513"></p>
+<p>香农公式</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215201148804.png" alt="image-20211215201148804"></p>
+<h2 id="heading4">物理层设备</h2>
+<p>集线器（多口中继器）</p>
+<p>连在集线器上的工作主机平分带宽</p>
+<h1 id="heading5">数据链路层</h1>
+<p>数据链路层用的信道类型</p>
+<ol>
+<li>点对点	一对一的点对点通信</li>
+<li>广播信道    一对多，广播信道必须使用专用的共享信道协议来协调主机间数据发送</li>
+</ol>
+<h3 id="heading6">基本概念</h3>
+<ul>
+<li>链路（link）一条无源的<strong>点到点</strong>的==物理线路段==。中间无任何其他交换节点。传输通路由无数的链路与连接链路的节点组成</li>
+<li>结点：主机，路由器</li>
+<li>数据链路（data link）除了物理线路外。必须有通信协议来控制这些数据的传输。</li>
+<li>帧：链路层的协议数据单元，封装网络层的数据报。</li>
+</ul>
+<p>数据链路层负责通过一条链路从一个结点向另一个数据链路直接相连结点安全无差错的传输数据报</p>
+<p><strong>点对点信道的数据链路层的通信步骤</strong></p>
+<ol>
+<li>结点A的数据链路层把网络层交下来的IP数据报添加首部尾部封装成帧</li>
+<li>物理层全部还原比特流，调制成信号进行发送给节点B的物理层</li>
+<li>B节点的物理层还原比特流成一个个帧，读取无差错就上交B节点网络层，出错则抛弃</li>
+</ol>
+<h2 id="heading7">三个基本问题</h2>
+<p>在物理层中有三个问题还没解决，</p>
+<h3 id="heading8">封装成帧</h3>
+<p>需要从比特流中确认帧的数据部分。所以需要添加帧头帧尾。</p>
+<p>中间帧的数据部分就是上层封装后的IP数据报，这部分 长度称为最大传输单元（MTU）</p>
+<p>接收端再收到物理层上交的比特流后，就能根据首部和尾部的标记，从收到的比特流中识别帧的开始和结束</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/18464438-cc85b7e4069b24a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/format/webp" alt="img"></p>
+<h3 id="heading9">透明传输</h3>
+<p>传输过程会存在这种情况，==传送的比特流中数据部分的数据恰好和帧尾部相同==，</p>
+<p>那么在传输过程碰到该部分数据时，接收端可能误认为到这里传输结束了，那直接丢弃之后的数据了，这就会导致数据传输不完整，</p>
+<p>所以要采取措施，即使有这些问题也要保证数据能正确的传输，保证链路层不管所传数据是什么样的比特组合都能传送，在数据看来，链路层没有东西妨碍自己传送或者说链路层对数据是透明的。</p>
+<p><strong>解决办法</strong>：字符计数法，字符填充，零比特填充，违规编码法</p>
+<p><strong>字符填充</strong></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/18464438-7869dfb3bff197ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/format/webp" alt="img"></p>
+<p>==数据中可能某个字节的二进制码恰好与SOH或EOT控制字符一样==。数据链路层就会错误的认为找到帧的边界，把剩下部分帧丢弃（因为这部分没有找到控制字符SOH）</p>
+<p>为了避免以上情况 在数据中出现控制字符SOH或EOT的前面插入一个转义字符ESC。还会存在转义字符出现在数据中，解决方法就是转义字符前插入一个转义字符</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/18464438-b7bf99e0faa0d9cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/format/webp" alt="img"></p>
+<p><strong>零比特填充法：</strong></p>
+<p>发送端，扫描整个信息字段，只要连续发5个1就无脑填入一个0。相应的，接受端只要看到连续5个1就删除一个0</p>
+<p><strong>违规编码法</strong></p>
+<p>用编码用不存在的编码格式作为帧定界的起始和终止</p>
+<h3 id="heading10">差错控制</h3>
+<p><strong>差错的由来</strong>：现实中的通信链路都不会是理想的，由于噪声的存在，比特在传输的过程可能会产生差错。</p>
+<p>差错</p>
+<ul>
+<li>位错：比特位出错，0变1，1变0</li>
+<li>帧错    发送1,2,3
+<ul>
+<li>丢失2，3</li>
+<li>重复1，2，2，3</li>
+<li>失序3，2，1</li>
+</ul>
+</li>
+</ul>
+<p><strong>比特错</strong></p>
+<p>CRC<strong>循环冗余校验</strong></p>
+<p>海明码校验</p>
+<p>停止等待协议</p>
+<p>无差错情况</p>
+<p><strong>冗余编码</strong>：在数据发送前，先按某种关系附加上一定的冗余位，构成一个符合某一规则的码字后再发送。</p>
+<p>当要发送的有效数据变化时，相应的冗余位也随之变化，使码字遵从不变的规则。接收端根据收到的码字是否仍符合原规则，从而判断是否出错。</p>
+<p><strong>循环冗余检验原理</strong>：在发送端，假设要发送k个比特，CRC运算就是在这k个比特后添加供查错检验的n位冗余码，n位冗余码又称为<strong>帧检验序列FCS（Frame Check Sequence）</strong>，</p>
+<p>然后构成一个帧发送出去，一共发送（k + n）个位。这n位冗余码可以通过发送的数据和<strong>一个数相除得来，这个数是收发双发事先约定好的数</strong>。接收端收到发送端发送的（k + n）位比特后，需要将这些比特位和FCS相除，如果余数是0，表示没有差错就接收，反之，则丢弃。</p>
+<p><strong>课本例子</strong></p>
+<p>如果客户端要发送的数据是M = 101001，除数多项式P = 1101</p>
+<ol>
+<li>
+<p>先确定n的大小。由于1101 = 1 * 23 + 1 * 22 + 0 * 21 + 1 * 21，所以该多项式是3阶，即（n = 3），也就是<strong>如果多项式是N位，阶就是N-1位</strong>，同样如果除数多项式为11000，那么阶数就是4，n的值就是4。</p>
+</li>
+<li>
+<p>计算n为冗余码（FCS）。n位冗余码是M 与 P的余数，先用n位的0代替冗余码添加到M之后即被除数为<strong>101001</strong>000，然后在于P相除，所得的余数就是冗余码</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/18464438-1f6296b44f5792bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/format/webp" alt=""></p>
+<ol start="3">
+<li>发送端发送的数据就是101001001。</li>
+<li>如果接收端接收到的数据是101001001，那么同样除以P，看余数是否为0。如果是0，表示数据没有发生错误，则接受，反之则丢弃</li>
+</ol>
+</li>
+</ol>
+<p>介质访问控制</p>
+<ul>
+<li>动态分配信道
+<ul>
+<li>轮询询问介质访问控制—令牌传递协议</li>
+<li>随机访问介质访问控制,所有用户可随机发送信息，占用全部带宽
+<ul>
+<li>ALOHA protocol</li>
+<li>CSMA protocol</li>
+<li>CSMA/CD protocol</li>
+<li>CSMA/CA protocol</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>静态划分信道</li>
+</ul>
+<h2 id="csma">CSMA协议</h2>
+<p>载波监听，多点接入</p>
+<p>当多个站同时再总线上发送数据时，总线上信号的电压摆动值增大，超过门限值</p>
+<p><strong>1-坚持CSMA思想</strong></p>
+<p>坚持指的是对监听信道忙之后的坚持</p>
+<p>空闲就直接传输，不必等待；忙则一直监听，直到空闲马上传输</p>
+<p>如果有冲突（一段时间内未收到肯定回复），则等待一个随机长的时间再监听</p>
+<p><strong>非坚持CSMA思想</strong></p>
+<p>空闲就直接传输，不必等待；忙则等待一个随机时间后再监听</p>
+<p>优点：采用随机重发延迟时间可以减少冲突发生的可能性</p>
+<p>缺点：引起大家都在延迟等待过程中，媒体利用率低</p>
+<p><strong>P坚持CSMA</strong></p>
+<p>P-坚持是对于监听信道空闲的处理</p>
+<p>如果一个主机要发送信息，先监听信道，空闲则以P概率直接传输，不必等待；概率1-p等待到下一个时间槽在传输</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>1-坚持CSMA</th>
+<th>非坚持CSMA</th>
+<th>p-坚持CSMA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>信道空闲</td>
+<td>马上发</td>
+<td>马上发</td>
+<td>p概率马上发，1-p概率下一时隙发</td>
+</tr>
+<tr>
+<td>信道忙</td>
+<td>继续坚持监听</td>
+<td>放弃监听，等一个随机事件再监听</td>
+<td>放弃监听，等一个随机事件再监听</td>
+</tr>
+</tbody>
+</table>
+<p>令牌传递协议</p>
+<p>一个特殊格式的MAC控制帧，不含任何信息</p>
+<p>控制信道的使用，确保同一时刻只有一个结点独占信道</p>
+<p>每个结点都可以再一定的时间内（令牌持有时间）获得发送数据的权力，并不是无限制持有令牌</p>
+<h2 id="csmacd">CSMA/CD协议</h2>
+<p>局域网</p>
+<p>某一区域内由多台计算机互联成的计算机组，广播信道</p>
+<p>局域网分类</p>
+<ul>
+<li>以太网</li>
+<li>ATM网</li>
+<li>无线局域网WLAN</li>
+</ul>
+<h3 id="2t">争用期2t</h3>
+<p>t单程端到端传播时延</p>
+<p>在时刻0，主机A检测信道空闲96bit时间后，立即发送帧，在时刻T-t，主机D检测信道空闲96bit后发送数据，然而实际信道非空闲，在</p>
+<p>T-2t时刻发生碰撞，主机最多经过2T（51.2微秒），t-&gt;0的市场就能检测本此发送是否发生碰撞。经过争用期这段时间没有检测到碰撞，才能肯定本次没有发生碰撞</p>
+<p><strong>在以太网中发送帧的主机越多，端到端往返传播时延越大，发生碰撞的概率越大，共享式以太网不能链接太多的主机，使用的总线也不能太长</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211030205322636.png" alt="image-20211030205322636"></p>
+<h3 id="heading11">多点接入</h3>
+<p>多点接入说明是总线型网络，计算机以多点接入的方式连接在一根总线上</p>
+<h3 id="heading12">载波监听</h3>
+<p>(先听后说)</p>
+<p>载波监听就是利用电子技术检测总线上有没有其他计算机也在发送。**载波监听实际上就是检测信道。**在发送前，每个站不停地检测信道，是为了获得发送权；在发送中检测信道，是为了及时发现有没有其他站的发送和本站发送的碰撞，这就是碰撞检测。总之，==载波监听是全程都在进行的==。</p>
+<h3 id="heading13">碰撞检测</h3>
+<p>（边说边听，一旦冲突，立即停说，等待时机，重新再说）</p>
+<p>碰撞检测就是边发送边监听。就是网卡边发送数据边检测新岛上的信号电压的变化情况，以便判断自己在发送数据的时候其他站是否也在发送数据。当几个站同时在总线上发送数据时，总线上的信号电压变化幅度将会增大（互相叠加），当网卡检测到的信号电压超过一定的门限值时，说明总线上至少有两个站同时在发送数据，表明产生了碰撞（冲突），所以也称为==冲突检测==。这时，由于接收的信号已经识别不出来，所以任何一个正在发送的站就会立即停止发送数据，然后等待一段随机事件以后再次发送。等待时间使用阶段二进制指数退避算法</p>
+<h3 id="heading14">截断二进制指数退避算法</h3>
+<p>退避时间=基本退避时间2t*随机数r</p>
+<ul>
+<li>
+<p>协议规定了基本退避时间为2t，具体的争用期时间通常取51.2us,对于10Mb/s的以太网，在争用期内可发送512bit，即64字节。</p>
+</li>
+<li>
+<p>从离散的整数集合【0，1，……（2^k^-1）】中随机取一个数，记为r，重传应推后的时间就是r倍的争用期。</p>
+<p>​						$k=Min[重传次数,10]$</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>重传次数</th>
+<th>k</th>
+<th>离散的整数集合{0,1&hellip;(2^k^-1)}</th>
+<th>可能退避时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>{0,1}</td>
+<td>0x2t,1x2t</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>{0,1,2,3}</td>
+<td>0x2t,1x2t,2x2t,3x2t</td>
+</tr>
+<tr>
+<td>12</td>
+<td>10</td>
+<td>{0,1,2,3&hellip;1023}</td>
+<td>1,2,3,4&hellip;1023x2t</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>当重传次数不超过10时，参数k等于重传次数；当重传次数超过10时，k就不再增大一直等于10。</li>
+<li>当重传16次仍然不能成功时（这表明同时打算发送数据的站太多，以致连续发生冲突），则丢弃该帧，并向高层报告。</li>
+</ul>
+<p><strong>Example</strong></p>
+<ul>
+<li>在第一次重传时，k=1，随机数从{0，1}中选一个数。所以重传的推迟时间可以是0或者2t，随机选择。</li>
+<li>第二次发生碰撞，k=2，随机数从{0，1，2，3}中选一个，所以重传的推迟时间可以是0，2t，4t，6t随机选择一个。</li>
+<li>以此类推&hellip;</li>
+</ul>
+<p><strong>为什么控制最短帧长为64字节，512bit</strong></p>
+<p>会存在这样一种情况。某个站发送了一个很短的帧，但发生了碰撞，不过在这个帧发送完毕后才检测到发生了碰撞（即在这个帧继续向前传播到达目的站之前与其他站的发送帧发生碰撞）。已经没有办法中止帧的发送，因为已经发送完了。这个时候即使发生了碰撞，那么刚才的帧也无法进行重传，就会产生错误。最短帧长=64字节，即512bit（51.2微秒，即2t）</p>
+<p>为了解决以上问题，在较短帧长内填充字节，使帧长不小于64字节，当争用期内检测到碰撞，就立即中止发送，已经发送出去的数据一定小于64字节，==凡长度小于64字节的帧都是由于碰撞而异常的无效帧==</p>
+<p>==注：==数据帧能够重传的一个条件：以太网要实现重传，必须保证这个站在收到冲突信号的时候这个帧没有传完。</p>
+<p>最大帧长</p>
+<p>如果发送一个很大的帧会长期占用信道，并且可能接收主机的缓存区不够</p>
+<p>CSMA/CA</p>
+<p>无线局域网使用的</p>
+<p>在无线局域网能使用</p>
+<h2 id="heading15">可靠传输的实现机制</h2>
+<p>这三种可靠传输实现机制的基本原理不仅局限于数据链路层，可以应用导计网体系结构的各层协议中</p>
+<h3 id="sw">停止等待协议SW</h3>
+<p><img src="C:\Users\1211\AppData\Roaming\Typora\typora-user-images\image-20211029204414400.png" alt="image-20211029204414400" style="zoom:67%;" /></p>
+<p><strong>正常情况</strong>:发送方发送分组，接收方接收分组后，发送确认分组ACK给发送方，发送方接收到ACK后，说明数据传输成功，继续发送下一分组</p>
+<p><strong>误码情况</strong>:接收方接收分组检测到误码，则丢弃该分组，发送否认分组NAK，发送方接收到否认分组后，知道发生误码，立刻重传分组，所以发送方发送分组之后不能立刻从缓存中删除该分组，只有收到ACK后才能删除并发送下一分组</p>
+<p><img src="C:\Users\1211\AppData\Roaming\Typora\typora-user-images\image-20211029205610690.png" alt="image-20211029205610690" style="zoom:67%;" /></p>
+<p>发送方在发送分组过程中就丢失，接收方没有接收到分组就不可能发送接受分组或否认分组，所以需要==超时重传==，在发送方发送一个分组时就启动一个超时计时器，超过重传时间就重新发送一个分组，一般重传时间略大于”平均往返时间“</p>
+<p><img src="C:\Users\1211\AppData\Roaming\Typora\typora-user-images\image-20211029210107789.png" alt="image-20211029210107789" style="zoom:67%;" /></p>
+<p>还会存在，接收方接收到分组==发送ACK丢失情况==，接收方没有接收到ACK，触发超时重传，再次发送该数组分组，为了分辨是旧数据还是新数据，对每个分组编号，</p>
+<p><img src="C:\Users\1211\AppData\Roaming\Typora\typora-user-images\image-20211029210613101.png" alt="image-20211029210613101" style="zoom:67%;" /></p>
+<p>在接收方发送ACK某种原因迟到了，触发超时重传，此时，接受方先后接收到到两个不同的数据分组，要发送两个确认分组，为了让发送方知道那个是重复的ACK，所以需要对其编号，本例中DATA0不同于第一次的DATA0，只是与DATA1区分开而已</p>
+<p><strong>对于数据链路层的点对点信道来说，往返时间比较固定，不会出现确认迟到的情况，因此在数据链路层实现SW不同对确认分组编号</strong></p>
+<p>往返时间较大时（卫星链路），SW协议信道利用率很低，出现超时重传更低</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211029211730486.png" alt="image-20211029211730486"></p>
+<h3 id="n">回退N帧协议</h3>
+<p>对分组采用三bit编号，即序号0~7</p>
+<p>发送窗口W~t~的取值：1&lt;W~t~&lt;=2^3^-1，本例中去5，W~t~=1就是体停止等待协议</p>
+<p>接受窗口：W~r~=1,只接受序号与窗口内序号匹配的数据分组</p>
+<p>累积接受：接收方不一定要对收到的数据分组逐个发送确认，而是在收到几个分组后，对按序到达的最后一个数据分组进行确认，ACK~n~表示序号n及以前的所有数据分组都已正确接收，知道ACK~n~到达，即使ACK部分丢失也不影响发送方继续传输新的分组</p>
+<p><strong>有差错的情况</strong></p>
+<p>当发送分组出现误码，接收方检错后丢弃该分组，本例中五号分组出现错误，丢弃该分组，那么剩下其余分组序号与接收窗口序号不匹配，接收窗口丢弃分组，并对之前按序接收的最后一个数据分组（4）进行确认，每丢弃一个就发送一个ACK~4~，发送发接收到重复确认就知道之前发送分组出错，于是不等超时计时器超时就立刻重传（具体实现决定）。由于某个分组出错，其他一同发送的分组也收到牵连，导致重新发送这些分组，就是==回退N帧==</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211029213724451.png" alt="image-20211029213724451"></p>
+<p><strong>W~t~超过取值范围问题</strong></p>
+<p>本例中W~t~=8，发送发将发送窗口内0~7发送出去，接收方接收这七个分组，并发送ACK ~7~，此时ACK~7~传输过程中丢失，触发超时重传，此时接受发就无法分辨新旧分组</p>
+<h3 id="sr">选择重传协议SR</h3>
+<p>发送窗口，接收窗口都&gt;1，这样接收方可以先收下，失序但无误码并且序号落在接收窗口内的那些分组</p>
+<p>==SR协议为了使放送方仅重传出现差错的分组，接受方不再使用累计确认，需要对每个正确接受的数据分组进行逐一确认==</p>
+<p>对分组采用三bit编号，即序号0~7</p>
+<p>发送窗口的尺寸W~t~的取值：1&lt;W~t~&lt;2^n-1^,本例W~t~=4</p>
+<p>发送窗口，接收窗口问题</p>
+<p>W~t~&gt;2^n-1^接收方无法分辨新旧数据分组，本例取W~t~=5，发送方发送五个数据，接收方正确接收并返回5个ack，假如此时0号分组丢失，发送方正确接收ACK~1，2，3，4~，引发0号分组的超时重传，此时接收方无法分辨新旧0号分组</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211030203205541.png" alt="image-20211030203205541"></p>
+<p><strong>MAC地址，IP地址，ARP协议</strong></p>
+<p>mac地址</p>
+<p>当多个主机连接在同一个广播信道上，要实现两个主机之间的通信，则每个主机都必须有唯一一个标识，即一个数据链路层地址，是对网络上各接口的唯一标识</p>
+<p>在每个主机发送的帧中必须携带标识发送主机和接受主机的地址，由于这类主机用于媒体接入控制，(Media Access Control)MAC地址</p>
+<p>IP地址</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211031220812097.png" alt="image-20211031220812097"></p>
+<p>路由器R1，R2都知道ip地址而不知道相应的MAC地址，根究IP地址找MAC地址-ARP协议</p>
+<p>集线器与交换机</p>
+<p><strong>以太网交换机自学习和转发帧</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215202518268.png" alt="image-20211215202518268"></p>
+<p><strong>最小生成树协议</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215203141029.png" alt="image-20211215203141029"></p>
+<h2 id="ppp">PPP协议</h2>
+<h1 id="heading16">网络层</h1>
+<p>实现网络互联，实现数据包在各网络之前的传输</p>
+<h2 id="arp">ARP协议</h2>
+<ol>
+<li>ARP在局域网中广播发送一个ARP请求分组，局域网中所有主机上运行的ARP进程都收到此ARP分组</li>
+<li>主机B的IP地址与ARP请求分组中查询的ARP地址一致，就收下ARP请求，并向发送主机发送ARP响应分组，分组中包含自己的硬件地址（MAC），其他与其不匹配的主机都不理会</li>
+<li>A接收到B的ARP响应后，在其ARP高速缓存中写入主机B的IP地址到物理地址的映射</li>
+</ol>
+<p><strong>ARP协议只能在一段链路或一个网络上使用，跨网络需要逐段ARP协议进行</strong></p>
+<p>IP数据包的发送和转发过程</p>
+<h2 id="ip">IP协议</h2>
+<h3 id="ip1">分类的IP地址</h3>
+<p><strong>A类IP地址</strong></p>
+<p>==最高位固定为0==最小网络号0，保留不指派，00000000</p>
+<p>第一个可指派的网络号：1，网络地址：1.0.0.0</p>
+<p>可指派的网络数量2^7-1^-2=126(一个最小网络号一个最大网络号)</p>
+<p>最大网络号127，作为本地环回测试地址，不指派</p>
+<ul>
+<li>最小本地环回测试地址为127.0.0.1</li>
+<li>最大本地环回测试地址127.255.255.254</li>
+</ul>
+<p>每个网络中可分配的IP地址数量：2^24^-2(一个全0的网络地址和一个全1的广播地址)</p>
+<p>一主机IP地址：5.6.7.8，该主机所在的网络地址为5.0.0.0</p>
+<p><strong>B类IP地址</strong></p>
+<p>可指派的网络数量：2^16-2^=16384</p>
+<p>每个网络中可分配的IP地址数量为2^16^-2=65534(一个全0的网络地址一个全1的广播地址)</p>
+<p>128.0可以分配</p>
+<p><strong>C类IP地址</strong></p>
+<p>可指派的网络数量2^24-3^=2097152</p>
+<p>每个网络中可分配的IP地址数量2^8^-2=254(一个全0的网络地址一个全1的广播地址)</p>
+<p>192.0.0可以分配</p>
+<p>以下三种情况的地址不能指派给主机或路由器接口</p>
+<ol>
+<li>A类网络号0和127</li>
+<li>主机号”全0“，网络地址</li>
+<li>主机号”全1“，广播地址</li>
+</ol>
+<p>地址0.0.0.0是一个特殊的IPv4地址，只能作为源地址使用，表示”本网络上的本主机“</p>
+<p>左起第一个十进制的值</p>
+<table>
+<thead>
+<tr>
+<th>小于127</th>
+<th>128~191</th>
+<th>192~223</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A类</td>
+<td>B类</td>
+<td>C类</td>
+</tr>
+<tr>
+<td>左起第一个字节</td>
+<td>左起前两个字节</td>
+<td>左起前三个字节</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading17">划分子网</h3>
+<p>IP地址={网络号，子网号，主机号}</p>
+<p>从主机号中借用若干个位作为子网号，主机号相应减少若干个位</p>
+<p><strong>子网掩码（32位）</strong></p>
+<p>某位1：IP地址中的对应位位网络号和子网号</p>
+<p>某位0：IP地址中的对应位位主机号</p>
+<p>IP地址与子网掩码==与运算==后得到网络地址，借用n位网络号就能表示2^n^个子网9子网号全0和全1不用）</p>
+<p><strong>使用子网时的分组的转发</strong></p>
+<p>判断两个IP地址是不是在同一网络</p>
+<ol>
+<li>判断子网掩码是否相同</li>
+<li>IP地址与掩码与运算后结果相同</li>
+</ol>
+<p>使用子网划分后，路由表由三部分组成：目的网络地址，子网掩码，下一跳地址</p>
+<p>路由转发分组算法：</p>
+<ol>
+<li>从收到的IP数据包首部中提取目的IP地址D</li>
+<li>先判断是否直接交付，对路由器相连的网络逐个检测，用各网络的子网掩码和D逐位与（AND操作）看是否与相应的网络地址匹配，若匹配进行直接交付，否则（3）</li>
+<li>若路由表中有目的地址为D的特定主机路由</li>
+</ol>
+<h3 id="cidr">CIDR</h3>
+<p>边长子网掩码，使用主机数较多时，分配一个较短的子网掩码，主机数较少时，分配一个较长子网掩码，合理分配IP地址资源</p>
+<p><strong>无分类域间路由选择</strong></p>
+<p>IP地址：={网络前缀，主机号}</p>
+<p>CIDR记法，IP地址后加上”/“然后写上网络前缀</p>
+<p>e.g 128.14.32.0/20</p>
+<p>表示前20位是网络前缀，后12位是主机号</p>
+<p>该地址块中Max，Min add：</p>
+<p>min：128.14.32.0（10000000 00001110 00100000 00000000）</p>
+<p>max：128.14.47.255（10000000 00001110 ==00101111== 11111111）</p>
+<p>地址掩码（子网掩码）11111111 11111111 1111==0000 00000000==</p>
+<p>网络号全1（20），主机号全0</p>
+<p><strong>构造超网（路由聚合）</strong></p>
+<p><strong>最长前缀匹配</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215195402636.png" alt="image-20211215195402636"></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215195611566.png" alt="image-20211215195611566"></p>
+<h3 id="ip2">ip数据报的格式</h3>
+<p><img src="http://c.biancheng.net/uploads/allimg/191106/6-191106153044K1.gif" alt=""></p>
+<p><strong>版本</strong></p>
+<p>占4bit</p>
+<p><strong>首部长度</strong></p>
+<p>4bit，该字段取值以4字节为单位</p>
+<p>0101-1111</p>
+<p>最小取值为5，表示IP数据报首部只有20字节固定部分</p>
+<p>最大值为115，表示该IP数据报包含20字节固定部分+40字节可变部分</p>
+<p><strong>总长度</strong></p>
+<p>占16bit，表示ip数据报的总长度（首部+数据载荷）</p>
+<p>假设总长度字段(0000001111111100)~2~=1020字节</p>
+<p>首部字段（0101）~2~x4=5x4=20字节</p>
+<p>数据载荷长度=总长度-首部长度=1020-20=1000字节</p>
+<p>一下三个字段用于IP数据报分片</p>
+<p>网际层封装IP数据报，在数据链路层封装成帧，每种数据链路层协议都规定了帧的数据载荷的最大长度MTU，以太网规定数据链路层MTU的值为1500字节，当某个IP数据报超过MTU时，无法封装，需要分片来实现封装成帧</p>
+<p><strong>标识</strong></p>
+<p>占16bit，属于同个数据报的分片有相同标识，IP软件维持一个计数器，没产生一个数据报，计数器值+1，并将此值赋给表示字符</p>
+<p><strong>标志</strong></p>
+<ul>
+<li>MF（more fragment）=1表示后面还有分片，0表示是最后一个分片</li>
+<li>FM（Don't fragment)不能分片，=1表示不允许分片，=0才允许分片</li>
+</ul>
+<p><strong>片偏移</strong></p>
+<p>占13bit，指出分片数据包的数据载荷部分偏移其在原数据报的位置有多少个单位，以8字节为单位</p>
+<p>以原IP数据报数据载荷中编号位置</p>
+<p>首部检验和</p>
+<p><strong>源地址目的地址</strong></p>
+<h3 id="ip3">IP层转发分组流程</h3>
+<p>路由器的路由表</p>
+<p>目的网络地址，下一跳地址</p>
+<p><strong>静态路由配置</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215203702316.png" alt="image-20211215203702316"></p>
+<p><strong>特定主机路由</strong></p>
+<p>对特定主机的目的主机指明一个路由</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215204316002.png" alt="image-20211215204316002"></p>
+<p><strong>默认路由</strong></p>
+<p>为了减小路由表所占用空间，和搜索路由表所用时间，对于具有相同下一跳的不同目的网络的路由条目，可用默认路由代替</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215204131303.png" alt="image-20211215204131303"></p>
+<h2 id="dhcp">DHCP协议</h2>
+<p>动态主机配置协议</p>
+<p>应用层协议</p>
+<h2 id="icmp">ICMP协议</h2>
+<p>为了更有效地转发IP数据报和提高交付成功机会</p>
+<p>国际控制报文协议，支持主机或路由器差错报告，网络探寻</p>
+<p>终点不可达</p>
+<p>时间超过</p>
+<p>参数问题</p>
+<h2 id="heading18">路由选择协议</h2>
+<p>自治域（autonomous system）</p>
+<p>一个AS对其他AS表现出一个单一的和一致的路由选择策略</p>
+<p><strong>内部网关协议IGP</strong></p>
+<p>小网络</p>
+<h3 id="rip">RIP</h3>
+<p>routing information protocol</p>
+<p>是一种分布式基于距离向量的路由选择协议，要求网络中每个路由器都维护从它到其他每个目的网络的唯一最佳距离记录，距离也称跳数，每经过一个路由器，跳数+1，<strong>一条路径只能包含15个路由。16表示不可到达，中间有路由器损坏也是16</strong></p>
+<ul>
+<li>路由器到直连网络的距离定义为1</li>
+<li>路由器到非直连网络的距离定义为所经过的路由器数+1</li>
+<li>RIP认为好的路由就是距离短的路由，所能通过的路由器的数量最少的路由</li>
+<li>当到达同一目的网络有多条距离相等路径的路由时，进行等价负载均衡</li>
+</ul>
+<p>RIP特点</p>
+<ol>
+<li>仅与相邻路由器交换信息</li>
+<li>交换的信息是当前本路由器所知道的全部信息（自己的路由表）</li>
+<li>按固定时间间隔交换路由信息</li>
+</ol>
+<p><strong>RIP的基本工作原理</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215195928577.png" alt="image-20211215195928577"></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211115203339324.png" alt="image-20211115203339324"></p>
+<p><strong>好消息传播快，坏消息传播慢</strong></p>
+<h3 id="ospf">OSPF</h3>
+<p>基于链路状态（本路由器都和那些路由器相邻，以及相应的链路代价），不像RIP基于距离向量</p>
+<p>特点</p>
+<ul>
+<li>使用洪泛法向自治系统内所有路由器发送信息，即路由器通过输出端口向所有相邻的路由器发送信息，每一个相邻路由器再这样做</li>
+<li>发送的信息是本路由器相邻的所有路由器的链路状态</li>
+<li>只有当链路状态发生变化时，路由器才向所有路由器洪泛发送此信息</li>
+</ul>
+<p>经过以上过程，每个路由器都知道到自己网络内的所有路由器应该经过多少代价，每个路由器都知道自己到全网络内其他路由器的最短路径（链路状态数据库，全网）</p>
+<p>OSPF的五种分组类型</p>
+<ol>
+<li>问候分组</li>
+<li>数据库描述分组</li>
+<li>链路状态请求分组</li>
+<li>链路状态更新分组</li>
+<li>链路状态确认分组</li>
+</ol>
+<p>链路状态路由算法</p>
+<p><strong>外部网关协议EGP</strong></p>
+<p>大网络</p>
+<p>特点</p>
+<ul>
+<li>与其他AS的邻站BGP发言人交换信息</li>
+<li>交换的网络可达性的信息，即要到达某个网络所要经过的一系列AS</li>
+<li>发送变化时更新有变化部分</li>
+</ul>
+<h3 id="bgp">BGP</h3>
+<h1 id="heading19">传输层</h1>
+<p>如何为运行在不同主机上的应用进程提供直接的通信服务是运输层的任务</p>
+<p>一台主机经常有多个应用进程同时分别和另一台主机的多个应用进程通信，所以需要复用，</p>
+<p>无连接，不可靠</p>
+<h2 id="udp">UDP协议</h2>
+<p>用户数据报协议（User Datagram Protocol）</p>
+<p>UDP是无连接通信协议。即在数据传输时，发送端和接收端之间不需要建立逻辑连接，简单说i就是搭档一台计算机向另一台发送数据时，发送端不会确定接受端是否存在，就会发送数据，同时接收端接收数据时，不会发送反馈。</p>
+<h2 id="tcp">TCP</h2>
+<p>面向连接的，可靠的，采用面向字节流的方式</p>
+<p>在TCP发送数据时，从发送缓存中取出一部分或全部字节并添加一个首部使之成为TCP报文段后进行发送</p>
+<h3 id="tcp1">TCP报文段首部格式</h3>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215204544368.png" alt="image-20211215204544368"></p>
+<p>==源端口==：占16比特，写入源端口号，用来标识==发送==该TCP报文段的应用进程</p>
+<p>==目的端口==：占16比特，写入目的端口号，用来标识==接收==该TCP报文段的应用进程</p>
+<p>==序号==：四字节，占32bit取值范围[0，2^32^-1],序号增加到最后一个后，下一个序号又回到0</p>
+<p><strong>指出本TCP报文段数据载荷的第一个字节的序号</strong></p>
+<p>==确认号==：四字节，占32bit取值范围[0，2^32^-1],序号增加到最后一个后下一个序号又回到0</p>
+<p><strong>指出期望收到对方下一个TCP报文段的数据载荷的第一个字节的序号，同时也是对之前收到的所有数据的确认</strong></p>
+<p>确认号为n，说明序号n-1为止的所有序号都正确接收，期望接收序号为n的数据</p>
+<p>ACK取1时确认号有效，0无效，TCP规定，在连接建立后，所有传送的TCP报文段必须ACK置1</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211108191304714.png" alt="image-20211108191304714"></p>
+<p>TCP客户进程发送一个TCP报文段，序号为201，说明该数据报载荷部分第一个字节的编号是201，数据载荷长度为100，确认号为800，收到800之前的数据，希望接收从800开始，ACK=1</p>
+<hr>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211108191804980.png" alt="image-20211108191804980"></p>
+<p>TCP服务进程发送TCP报文段，序号为800，说明该数据报载荷部分第一个字节的编号是800，长度为200，正符合TCP客户进程需要的确认号800，确认号也正好对应于201+100</p>
+<p>==数据偏移==</p>
+<p>用来指出TCP报文段的数据载荷的起始处距离TCP报文段的起始处有多远</p>
+<p>实际上是指出TCP报文段的首部长度(min:0101~1111 max) ~2~</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211108192731699.png" alt="image-20211108192731699"></p>
+<p>==窗口==</p>
+<p>占16bit，以字节为单位，指出发送本报文段的一方的接收窗口，决定数据传输的长度，<strong>窗户值作为接收方让发送方设置其发送窗口的依据</strong>，指出现在允许对方发送的数据量，以接收方的接受能力来控制发送方的发送能力-<strong>流量控制</strong>。从接收窗口和拥塞窗口中取小者</p>
+<p>==SYN==：同步标志位，TCP连接建立时用来同步序号</p>
+<p>==FIN==：终止标志位，用来释放TCP连接</p>
+<h3 id="tcp2">TCP可靠传输实现</h3>
+<p>计算机网络P221</p>
+<h3 id="tcp3">TCP流量控制</h3>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215192926689.png" alt="image-20211215192926689"></p>
+<p>TCP流量控制的死锁解决：</p>
+<p>TCP为每个连接设有一个持续计时器，只要接收到零窗口通知，就启动持续计时器，时间到期后就发送一i个零窗口探测报文段，TCP规定即使零窗口也接受。然后发回现在的窗口值，如果还是零，重新启动持续计时器，不是零死锁就打破</p>
+<h3 id="tcp4">TCP拥塞控制</h3>
+<p>cwnd：congestion window拥塞窗口</p>
+<p>swnd：发送窗口</p>
+<p>ssthresh：慢开始门限值</p>
+<p><strong>传输轮次</strong>：发送方给接收方发送数据报文段后，接收方给发送方发回相应的确认报文段（一个往返时间）</p>
+<p><strong>慢开始slow start</strong></p>
+<p>从1开始指数增大</p>
+<p><strong>拥塞避免</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215192057945.png" alt="image-20211215192057945"></p>
+<p><strong>快重传</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215191947230.png" alt="image-20211215191947230"></p>
+<p><strong>快恢复</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215192435171.png" alt="image-20211215192435171"></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215192333115.png" alt="image-20211215192333115"></p>
+<h3 id="tcp5">TCP运输连接管理</h3>
+<p><strong>TCP连接建立</strong></p>
+<p>建立连接：三次握手🤝</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215185520611.png" alt="image-20211215185520611"></p>
+<p>为什么要三次🤝，两次行吗</p>
+<p>假设TCP报文段在某网络结点长时间滞留，必将触发该报文段的超时重传，重传报文段被TCP服务进程正常接收，TCP服务进程给TCP客户进程发送一个TCP连接请求确认报文段，并进入连接已建立状态，TCP连接两次握手就完成建立，所以TCP服务进程发送完TCP连接请求确认后进入连接已建立（而不是同步已接收状态），连接完成传输数据，四次挥手完成释放连接，TCP双方进入关闭状态。一段时间后收到滞留在网络中的失效的TCP连接请求报文段，TCP服务器误以为TCP客户进程又发起一个新的连接请求，于是给TCP客户进程发送连接确认报文段，进入连接已建立状态，一直等待发来数据，浪费资源，然而TCP客户进程不理会。</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211112200313073.png" alt="image-20211112200313073"></p>
+<p><strong>TCP连接释放</strong></p>
+<p>连接释放：四挥手👋</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215185844445.png" alt="image-20211215185844445"></p>
+<p><strong>为什么要进入时间等待状态</strong></p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215190031326.png" alt="image-20211215190031326"></p>
+<p>TCP客户发送普通TCP确认报文段后，直接进入关闭状态，（不是时间等待状态），如果该报文丢失，引发TCP服务进程重传，此时TCP客户进程已经关闭，不会接受，造成TCP服务器进程反复重传无法进入关闭状态。</p>
+<hr>
+<h1 id="heading20">应用层</h1>
+<h2 id="dns">DNS</h2>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215193844937.png" alt="image-20211215193844937"></p>
+<p>递归查询 迭代查询</p>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215193945591.png" alt="image-20211215193945591"></p>
+<h2 id="ftp">FTP</h2>
+<p><img src="C:%5CUsers%5C1211%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211215195025421.png" alt="image-20211215195025421"></p>
+<hr>
+<h1 id="heading21">计算机网络实验</h1>
+<p>wireshark</p>
+<p>本机物理地址：C8-3D-D4-90-95-43</p>
+<p>IPv4地址：192.168.101.37</p>
+<p><strong>相关名词</strong></p>
+<p>Ethernet 以太网</p>
+<p><strong>确定自己的MAC地址</strong></p>
+<p>search for ip.src=ipv4 address /ethernet/source</p>
+      </article>
+    </section>
+
+    
+    <article class="ui segment post-disqus-area" data-html2canvas-ignore>
+      <div id="disqus_thread"></div>
+<script>
+  
+
+
+  var disqus_config = function () {
+    this.page.url = "https://github.com/felixhjx/felixhjx.github.io/posts/computer_network/" 
+    this.page.identifier = "/felixhjx/felixhjx.github.io/posts/computer_network/" 
+  }
+
+  ;(function () {
+    
+    var d = document,
+      s = d.createElement('script')
+    s.src = 'https://' + "felixhe" + '.disqus.com/embed.js'
+    s.setAttribute('data-timestamp', +new Date())
+    ;(d.head || d.body).appendChild(s)
+  })()
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </article>
+    
+
+    
+    <article class="ui segment utterances-comments" data-html2canvas-ignore>
+      <script
+        src="https://utteranc.es/client.js"
+        repo="g1eny0ung/g1eny0ung.github.io"
+        issue-term="og:title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </article>
+    
+
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+              
+              <p>© 2020 - 2022 hjxblog</p>
+              
+
+              <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <header class="ui basic very padded segment dream-header">
+  
+  <div class="ui small circular image">
+    <img src="/felixhjx/felixhjx.github.io/me/yy.jpg" alt="avatar" />
+  </div>
+  
+
+  <div class="content">
+    <h1 class="ui medium header">hjxblog<span class="sub header">Stay hungry, stay foolish!</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/felixhjx/felixhjx.github.io/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/felixhjx/felixhjx.github.io/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/felixhjx/felixhjx.github.io/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/felixhjx/felixhjx.github.io/tags/blog/" title="blog">
+              blog
+            </a>
+          
+          
+          
+            <a class="ui label" href="/felixhjx/felixhjx.github.io/tags/machine-learning/" title="machine learning">
+              machine learning
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+  <a class="item" href="/felixhjx/felixhjx.github.io/index.xml">
+    <i class="large rss square icon" title="RSS"></i>
+  </a>
+  
+
+  
+  <a class="item" href="mailto:15501975559@163.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <a class="item" href="https://github.com/felixhjx" target="_blank">
+    <i class="large github icon" title="GitHub"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+  
+  
+    <a class="item" href="https://twitter.com/g1eny0ung" target="_blank">
+      <i class="large twitter icon" title="Twitter"></i>
+    </a>
+  
+    <a class="item" href="https://facebook.com/g1eny0ung" target="_blank">
+      <i class="large facebook icon" title="Facebook"></i>
+    </a>
+  
+    <a class="item" href="https://instagram.com/g1eny0ung" target="_blank">
+      <i class="large instagram icon" title="Instagram"></i>
+    </a>
+  
+    <a class="item" href="https://www.linkedin.com/in/g1eny0ung" target="">
+      <i class="large linkedin icon" title="Linkedin"></i>
+    </a>
+  
+    <a class="item" href="https://github.com/felixhjx" target="_blank">
+      <i class="large github icon" title="GitHub"></i>
+    </a>
+  
+    <a class="item" href="https://stackoverflow.com/users/5676489/g1eny0ung" target="_blank">
+      <i class="large stack overflow icon" title="stack overflow"></i>
+    </a>
+  
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。<br /><br />背景使用了 <a href="https://www.pexels.com/zh-cn/" target="_blank">Pexels</a> 上 <a href="https://www.pexels.com/zh-cn/@minan1398" target="_blank">Min An</a> 拍摄的<a href="https://www.pexels.com/zh-cn/photo/1454794/" target="_blank">图片</a>。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js" integrity="sha256-CgSoWC9w5wNmI1aN8dIMK+6DPelUEtvDr+Bc2m/0Nx8=" crossorigin="anonymous"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/github.com\/felixhjx\/felixhjx.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/felixhjx/felixhjx.github.io/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "#fff"
+  window.defaultDark =  null 
+  window.backgroundDark = "#333"
+  window.backgroundImageDark = "/me/background.jpg"
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  true 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js" integrity="sha256-tBd38uWlvgfps3zHPrUb2ePBg+Z8EjMf0QloFONzpvU=" crossorigin="anonymous"></script>
+<script src="/felixhjx/felixhjx.github.io/js/header.js"></script>
+<script src="/felixhjx/felixhjx.github.io/js/main.js"></script>
+<script src="/felixhjx/felixhjx.github.io/js/theme.js"></script>
+
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0" integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin="anonymous"></script>
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/felixhjx/felixhjx.github.io/js/scrollToTop.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/clojure.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/ocaml.min.js"></script>
+
+
+
+<script>
+  hljs.highlightAll()
+  setHighlightTheme()
+
+  function setHighlightTheme() {
+    var isDark = localStore.getItem('hugo-theme-dream-is-dark')
+    isDark = isDark ? isDark : window.defaultDark ? 'y' : isDark
+
+    var lightTheme = "tomorrow"
+    var darkTheme = "tomorrow-night"
+    var theme = isDark === 'y' ? darkTheme : lightTheme
+
+    $('link[data-highlight]').attr('href', 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/' + theme + '.min.css')
+    $('pre').css('background', isDark === 'y' ? '#333' : '')
+  }
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1/dist/html2canvas.min.js" integrity="sha256-uacRffSSMP9qpvNWhVmYLykBv9YKMA1d/VSIN1AmfyQ=" crossorigin="anonymous"></script>
+<script src="/felixhjx/felixhjx.github.io/js/post.js" defer></script>
+
+
+    
+
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-98295641-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

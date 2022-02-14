@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hjxblog</title>
-    <link>https://github.com/felixhjx/felixhjx.github.io/</link>
+    <link>https://github.com/felixhjx/felixhjx.github.io/categories/hjxblog/</link>
     <description>Recent content on hjxblog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
     <copyright>&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;&lt;img alt=&#34;知识共享许可协议&#34; style=&#34;border-width:0&#34; src=&#34;https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png&#34; /&gt;&lt;/a&gt;&lt;br /&gt;本作品采用&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议&lt;/a&gt;进行许可。&lt;br /&gt;&lt;br /&gt;背景使用了 &lt;a href=&#34;https://www.pexels.com/zh-cn/&#34; target=&#34;_blank&#34;&gt;Pexels&lt;/a&gt; 上 &lt;a href=&#34;https://www.pexels.com/zh-cn/@minan1398&#34; target=&#34;_blank&#34;&gt;Min An&lt;/a&gt; 拍摄的&lt;a href=&#34;https://www.pexels.com/zh-cn/photo/1454794/&#34; target=&#34;_blank&#34;&gt;图片&lt;/a&gt;。</copyright>
     <lastBuildDate>Sat, 12 Feb 2022 21:13:46 +0800</lastBuildDate>
     
-	<atom:link href="https://github.com/felixhjx/felixhjx.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://github.com/felixhjx/felixhjx.github.io/categories/hjxblog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,42 +19,6 @@
       
       <guid>https://github.com/felixhjx/felixhjx.github.io/posts/blog/</guid>
       <description>Blog创建 基于Hugo创建个人博客 Hugo安装 GitHub网站安装对应系统版本 Hugo主题下载 hugo theme网站下载主题 公式 ==在本地启动个</description>
-    </item>
-    
-    <item>
-      <title>compute_networks</title>
-      <link>https://github.com/felixhjx/felixhjx.github.io/posts/computer_network/</link>
-      <pubDate>Sat, 12 Feb 2022 21:13:46 +0800</pubDate>
-      
-      <guid>https://github.com/felixhjx/felixhjx.github.io/posts/computer_network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>gradient descent</title>
-      <link>https://github.com/felixhjx/felixhjx.github.io/posts/gradient_descent/</link>
-      <pubDate>Sat, 12 Feb 2022 21:13:46 +0800</pubDate>
-      
-      <guid>https://github.com/felixhjx/felixhjx.github.io/posts/gradient_descent/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JAVA编程笔记</title>
-      <link>https://github.com/felixhjx/felixhjx.github.io/posts/java%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Sat, 12 Feb 2022 21:13:46 +0800</pubDate>
-      
-      <guid>https://github.com/felixhjx/felixhjx.github.io/posts/java%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>machine learning</title>
-      <link>https://github.com/felixhjx/felixhjx.github.io/posts/machine-learning/</link>
-      <pubDate>Wed, 29 Apr 2020 13:52:27 +0800</pubDate>
-      
-      <guid>https://github.com/felixhjx/felixhjx.github.io/posts/machine-learning/</guid>
-      <description></description>
     </item>
     
   </channel>

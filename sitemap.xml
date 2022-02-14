@@ -3,34 +3,63 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https//felixhjx.github.io/post/blog/</loc>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/tags/blog/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/blog/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/categories/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/computer_network/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/gradient_descent/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/categories/hjxblog/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/java%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/tags/</loc>
+    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/tags/machine-learning/</loc>
     <lastmod>2020-04-29T13:52:27+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https//felixhjx.github.io/</loc>
+    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/machine-learning/</loc>
     <lastmod>2020-04-29T13:52:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https//felixhjx.github.io/post/</loc>
-    <lastmod>2020-04-29T13:52:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https//felixhjx.github.io/post/java%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</loc>
-  </url>
-  
-  <url>
-    <loc>https//felixhjx.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-  </url>
-  
-  <url>
-    <loc>https//felixhjx.github.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https//felixhjx.github.io/tags/</loc>
   </url>
   
 </urlset>
