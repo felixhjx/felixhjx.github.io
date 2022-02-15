@@ -3,63 +3,98 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/tags/blog/</loc>
+    <loc>https://felixhjx.github.io/categories/</loc>
+    <lastmod>2022-02-15T13:42:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/tags/computer_visual/</loc>
+    <lastmod>2022-02-15T13:42:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/</loc>
+    <lastmod>2022-02-15T13:42:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/categories/machine_learning/</loc>
+    <lastmod>2022-02-15T13:42:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/posts/</loc>
+    <lastmod>2022-02-15T13:42:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/tags/</loc>
+    <lastmod>2022-02-15T13:42:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/posts/computer_visual/</loc>
+    <lastmod>2022-02-15T13:42:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/tags/machine-learning/</loc>
+    <lastmod>2022-02-15T13:41:22+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/posts/machine_learning/</loc>
+    <lastmod>2022-02-15T13:41:22+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/posts/blog/</loc>
+    <lastmod>2022-02-15T13:12:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/tags/blog/</loc>
+    <lastmod>2022-02-15T13:12:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/categories/hjxlife/</loc>
+    <lastmod>2022-02-15T13:12:00+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://felixhjx.github.io/posts/computer_network/</loc>
     <lastmod>2022-02-12T21:13:46+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/blog/</loc>
+    <loc>https://felixhjx.github.io/machine_learning/gradient_descent/</loc>
     <lastmod>2022-02-12T21:13:46+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/categories/</loc>
+    <loc>https://felixhjx.github.io/tags/gradient_descent/</loc>
     <lastmod>2022-02-12T21:13:46+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/computer_network/</loc>
+    <loc>https://felixhjx.github.io/tags/java/</loc>
     <lastmod>2022-02-12T21:13:46+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/gradient_descent/</loc>
+    <loc>https://felixhjx.github.io/posts/java_notes/</loc>
     <lastmod>2022-02-12T21:13:46+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/categories/hjxblog/</loc>
+    <loc>https://felixhjx.github.io/machine_learning/</loc>
     <lastmod>2022-02-12T21:13:46+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/</loc>
+    <loc>https://felixhjx.github.io/categories/program/</loc>
     <lastmod>2022-02-12T21:13:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/java%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/</loc>
-    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/tags/</loc>
-    <lastmod>2022-02-12T21:13:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/tags/machine-learning/</loc>
-    <lastmod>2020-04-29T13:52:27+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://github.com/felixhjx/felixhjx.github.io/posts/machine-learning/</loc>
-    <lastmod>2020-04-29T13:52:27+08:00</lastmod>
   </url>
   
 </urlset>
