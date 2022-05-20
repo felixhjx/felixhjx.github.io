@@ -7,10 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
     <copyright>&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;&lt;img alt=&#34;知识共享许可协议&#34; style=&#34;border-width:0&#34; src=&#34;https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png&#34; /&gt;&lt;/a&gt;&lt;br /&gt;本作品采用&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议&lt;/a&gt;进行许可。&lt;br /&gt;&lt;br /&gt;背景使用了 &lt;a href=&#34;https://www.pexels.com/zh-cn/&#34; target=&#34;_blank&#34;&gt;Pexels&lt;/a&gt; 上 &lt;a href=&#34;https://www.pexels.com/zh-cn/@minan1398&#34; target=&#34;_blank&#34;&gt;Min An&lt;/a&gt; 拍摄的&lt;a href=&#34;https://www.pexels.com/zh-cn/photo/1454794/&#34; target=&#34;_blank&#34;&gt;图片&lt;/a&gt;。</copyright>
-    <lastBuildDate>Tue, 15 Feb 2022 13:42:36 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 May 2022 12:16:07 +0800</lastBuildDate>
     
 	<atom:link href="https://felixhjx.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>至我热爱的广州</title>
+      <link>https://felixhjx.github.io/posts/soccer/</link>
+      <pubDate>Fri, 20 May 2022 12:16:07 +0800</pubDate>
+      
+      <guid>https://felixhjx.github.io/posts/soccer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>支教</title>
+      <link>https://felixhjx.github.io/posts/%E6%94%AF%E6%95%99/</link>
+      <pubDate>Fri, 20 May 2022 12:08:12 +0800</pubDate>
+      
+      <guid>https://felixhjx.github.io/posts/%E6%94%AF%E6%95%99/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mysql</title>
+      <link>https://felixhjx.github.io/posts/mysql/</link>
+      <pubDate>Fri, 20 May 2022 10:35:51 +0800</pubDate>
+      
+      <guid>https://felixhjx.github.io/posts/mysql/</guid>
+      <description>mysql文件的存储位置C:\Program Files\MySQL\MySQL Server 8.0\bin 数据库基础 行 表中的数据是按行存储的，所保存的每个记录存储在自己的行内 例如，顾客表可以每行存</description>
+    </item>
+    
+    <item>
+      <title>设计模式</title>
+      <link>https://felixhjx.github.io/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 20 May 2022 10:34:05 +0800</pubDate>
+      
+      <guid>https://felixhjx.github.io/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+      <description>设计模式原则 单一职责原则 (Single Responsibility Principle) 开放-关闭原则 (Open-Closed Principle) 里氏替换原则 (Liskov Substitution Principle) 依赖倒转原则 (Dependence Inversion Principle) 接口隔离原则 (Interface Segregation Principle) 迪米特法则（Law Of Demeter） 组</description>
+    </item>
+    
+    <item>
+      <title>DataConstruct</title>
+      <link>https://felixhjx.github.io/posts/dateconstruct/</link>
+      <pubDate>Fri, 20 May 2022 09:48:58 +0800</pubDate>
+      
+      <guid>https://felixhjx.github.io/posts/dateconstruct/</guid>
+      <description>稀疏数组 当一个数组中包含大量零的元素时，使用原完整数组会浪费内存以及消耗运行时间，可以转换为稀疏数组来实现减小内存，加快运行速度 稀疏数组组成</description>
+    </item>
     
     <item>
       <title>WALL-E</title>
@@ -45,15 +90,6 @@
       <pubDate>Sat, 12 Feb 2022 21:13:46 +0800</pubDate>
       
       <guid>https://felixhjx.github.io/posts/computer_network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>JAVA编程笔记</title>
-      <link>https://felixhjx.github.io/posts/java_notes/</link>
-      <pubDate>Sat, 12 Feb 2022 21:13:46 +0800</pubDate>
-      
-      <guid>https://felixhjx.github.io/posts/java_notes/</guid>
       <description></description>
     </item>
     

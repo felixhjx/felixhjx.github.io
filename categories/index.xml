@@ -7,24 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-Hans</language>
     <copyright>&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;&lt;img alt=&#34;知识共享许可协议&#34; style=&#34;border-width:0&#34; src=&#34;https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png&#34; /&gt;&lt;/a&gt;&lt;br /&gt;本作品采用&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc-sa/4.0/&#34;&gt;知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议&lt;/a&gt;进行许可。&lt;br /&gt;&lt;br /&gt;背景使用了 &lt;a href=&#34;https://www.pexels.com/zh-cn/&#34; target=&#34;_blank&#34;&gt;Pexels&lt;/a&gt; 上 &lt;a href=&#34;https://www.pexels.com/zh-cn/@minan1398&#34; target=&#34;_blank&#34;&gt;Min An&lt;/a&gt; 拍摄的&lt;a href=&#34;https://www.pexels.com/zh-cn/photo/1454794/&#34; target=&#34;_blank&#34;&gt;图片&lt;/a&gt;。</copyright>
-    <lastBuildDate>Tue, 15 Feb 2022 13:42:36 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 May 2022 12:16:07 +0800</lastBuildDate>
     
 	<atom:link href="https://felixhjx.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>machine_learning</title>
-      <link>https://felixhjx.github.io/categories/machine_learning/</link>
-      <pubDate>Tue, 15 Feb 2022 13:42:36 +0800</pubDate>
-      
-      <guid>https://felixhjx.github.io/categories/machine_learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>hjxlife</title>
       <link>https://felixhjx.github.io/categories/hjxlife/</link>
-      <pubDate>Tue, 15 Feb 2022 13:12:00 +0800</pubDate>
+      <pubDate>Fri, 20 May 2022 12:16:07 +0800</pubDate>
       
       <guid>https://felixhjx.github.io/categories/hjxlife/</guid>
       <description></description>
@@ -33,9 +24,18 @@
     <item>
       <title>program</title>
       <link>https://felixhjx.github.io/categories/program/</link>
-      <pubDate>Sat, 12 Feb 2022 21:13:46 +0800</pubDate>
+      <pubDate>Fri, 20 May 2022 10:35:51 +0800</pubDate>
       
       <guid>https://felixhjx.github.io/categories/program/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine_learning</title>
+      <link>https://felixhjx.github.io/categories/machine_learning/</link>
+      <pubDate>Tue, 15 Feb 2022 13:42:36 +0800</pubDate>
+      
+      <guid>https://felixhjx.github.io/categories/machine_learning/</guid>
       <description></description>
     </item>
     

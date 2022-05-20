@@ -1,0 +1,3023 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Java_notes | hjxblog</title>
+
+    
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+
+
+<meta name="author" content="felixhe" />
+<meta name="description" content="hjxblog" />
+
+
+
+<meta name="generator" content="Hugo 0.60.1" />
+
+<link rel="canonical" href="https://felixhjx.github.io/java/java_notes/" />
+
+
+<meta property="og:title" content="Java_notes" />
+<meta property="og:description" content="basic Java技术体系 Java程序设计语言 Java虚拟机（JVM）与底层硬件作一层支撑层 Java API类库（Java标准库函数） 一系列辅助工具 javac &hellip; 1&#43;2&#43;3&#43;4=JDK 2&#43;3=JRE" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://felixhjx.github.io/java/java_notes/" />
+<meta property="og:image" content="https://felixhjx.github.io/background1.jpg"/>
+<meta property="article:published_time" content="2022-05-20T10:00:40+08:00" />
+<meta property="article:modified_time" content="2022-05-20T10:00:40+08:00" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://felixhjx.github.io/background1.jpg"/>
+
+<meta name="twitter:title" content="Java_notes"/>
+<meta name="twitter:description" content="basic Java技术体系 Java程序设计语言 Java虚拟机（JVM）与底层硬件作一层支撑层 Java API类库（Java标准库函数） 一系列辅助工具 javac &hellip; 1&#43;2&#43;3&#43;4=JDK 2&#43;3=JRE"/>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" integrity="sha256-UXesixbeLkB/UYxVTzuj/gg3+LMzgwAmg3zD+C4ZASQ=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/icomoon.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/css/OverlayScrollbars.min.css" integrity="sha256-WKijf8KI68sbq8Znd6yMepIuFF0wdWfIt6gk3JWcQfk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css">
+<link rel="stylesheet" href="/css/site.css" />
+
+<style>
+  .ui.header a:not(.item, .ui.button):hover {
+    text-decoration: underline;
+  }
+
+  
+  a:not(.item, .ui.button) {
+    color: seagreen !important;
+  }
+  
+
+  
+  .inverted a:not(.item, .ui.button) {
+     color: darkseagreen !important;
+  }
+  
+
+  
+  body.default {
+    
+    background-color: #fff;
+    
+
+    
+    background-image: url(me/background1.jpg);
+    
+  }
+  
+
+  
+  body.dark {
+    
+    background-color: #333;
+    
+
+    
+    background-image: url(/me/background1.jpg);
+    
+  }
+  
+</style>
+
+
+    
+
+
+
+<link rel="stylesheet" data-highlight href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/tomorrow.min.css" />
+
+
+
+
+
+
+
+    
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+  </head>
+
+  <body class="default">
+    
+<nav class="ui secondary menu dream-menu dream-nav">
+
+  <a class="item dream-flip-toggle" title="翻转！">
+    <i class="large link bullseye icon"></i>
+  </a>
+  <a class="item" href="https://felixhjx.github.io/" title="首页">
+    <i class="large link home icon"></i>
+  </a>
+  
+  <a class="item" onclick="themeSwitch(event)">
+    <i class="large link icon theme-switch"></i>
+  </a>
+  
+  
+  <a class="item" title="搜索" onclick="toggleSearch(event)">
+    <i class="large link search icon"></i>
+  </a>
+  
+</nav>
+
+    <div class="flip-container">
+      <div class="flipper">
+        <section class="front">
+          <div class="dream-max-width">
+            
+<div class="ui relaxed centered grid dream-grid dream-grid-single">
+  
+  
+  
+  
+
+  
+  <aside class="sixteen wide mobile sixteen wide tablet three wide computer column dream-single-aside">
+    
+    <div class="ui segment toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#java">Java技术体系</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading">变量</a>
+      <ul>
+        <li><a href="#heading1">局部变量</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading2">引用与值传递</a></li>
+    <li><a href="#heading3">方法</a>
+      <ul>
+        <li><a href="#heading4">调用</a></li>
+        <li><a href="#heading5">构造方法</a></li>
+        <li><a href="#java-bean">标准类（Java Bean）</a></li>
+        <li><a href="#api">API</a></li>
+        <li><a href="#overload">方法重载(Overload)</a></li>
+        <li><a href="#heading6">方法使用注意事项</a></li>
+        <li><a href="#heading7">数组</a></li>
+        <li><a href="#heading8">循环遍历数组</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#encapsulation">封装encapsulation</a></li>
+    <li><a href="#polymorphic">多态polymorphic</a>
+      <ul>
+        <li><a href="#heading10">对象的多态</a></li>
+        <li><a href="#heading11">多态数组</a></li>
+        <li><a href="#important">动态绑定机制important</a></li>
+        <li><a href="#heading14">编译类型与运行类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading15">继承</a>
+      <ul>
+        <li><a href="#heading16">特点</a></li>
+        <li><a href="#heading17">由来</a></li>
+        <li><a href="#heading18">变量重名问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#override">方法的重写（override）</a>
+      <ul>
+        <li><a href="#heading19">设计原则</a></li>
+        <li><a href="#heading20">父子类的构造方法的访问特点</a></li>
+        <li><a href="#super-this">super this关键字</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#constructor">constructor</a></li>
+    <li><a href="#heading22">权限修饰符</a>
+      <ul>
+        <li><a href="#heading23">类的访问</a></li>
+        <li><a href="#heading24">类成员的访问</a></li>
+        <li><a href="#heading25">类的定义</a></li>
+        <li><a href="#java1">JAVA标准类</a></li>
+        <li><a href="#heading26">创建对象步骤</a></li>
+        <li><a href="#heading27">局部变量与成员变量的区别</a></li>
+        <li><a href="#private">private关键字</a></li>
+        <li><a href="#this">this关键字</a></li>
+        <li><a href="#heading28">匿名对象</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading29">代码块</a>
+      <ul>
+        <li><a href="#heading30">静态代码块</a></li>
+        <li><a href="#heading31">类加载</a></li>
+      </ul>
+    </li>
+    <li><a href="#scanner">Scanner类</a></li>
+    <li><a href="#random-">Random 类</a></li>
+    <li><a href="#arraylist">对象数组（ArrayList）</a></li>
+    <li><a href="#heading32">字符串</a>
+      <ul>
+        <li><a href="#heading33">字符串的常量池</a></li>
+        <li><a href="#static">static关键字</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading36">抽象类</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#heading38">接口与抽象类</a></li>
+    <li><a href="#heading39">继承与接口</a></li>
+    <li><a href="#heading40">接口的多态</a>
+      <ul>
+        <li><a href="#heading41">多态传递</a></li>
+        <li><a href="#heading42">抽象方法</a></li>
+        <li><a href="#heading43">默认方法</a></li>
+        <li><a href="#heading44">静态方法</a></li>
+        <li><a href="#heading45">私有方法</a></li>
+        <li><a href="#heading48">四种访问修饰符</a></li>
+        <li><a href="#final">final关键字</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#heading50">局部内部类</a></li>
+    <li><a href="#anonymous">匿名内部类anonymous</a></li>
+    <li><a href="#heading51">成员内部类</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#heading52">自定义泛型</a></li>
+    <li><a href="#heading53">自定义泛型接口</a></li>
+    <li><a href="#heading54">自定义泛型方法</a></li>
+    <li><a href="#system">System类</a></li>
+    <li><a href="#stringbuilder">StringBuilder类</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#heading55">异常体系图</a></li>
+    <li><a href="#throw">throw关键词</a></li>
+    <li><a href="#throws">throws声明异常</a></li>
+    <li><a href="#try-catch">try catch</a></li>
+    <li><a href="#heading56">自定义异常</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#string">String类</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#collection">collection接口</a></li>
+    <li><a href="#list">list接口</a>
+      <ul>
+        <li><a href="#arraylist1">ArrayLIst源码分析</a></li>
+        <li><a href="#vector">vector</a></li>
+        <li><a href="#linkedlist">LinkedList</a></li>
+      </ul>
+    </li>
+    <li><a href="#set">set接口</a>
+      <ul>
+        <li><a href="#hashset">Hashset</a></li>
+        <li><a href="#linkedhashset">LinkedHashSet</a></li>
+      </ul>
+    </li>
+    <li><a href="#map">map接口</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#heading60">并发与并行</a></li>
+    <li><a href="#heading61">进程与线程</a></li>
+    <li><a href="#heading62">线程的基本使用</a>
+      <ul>
+        <li><a href="#runable">使用实现Runable来创建多线程</a></li>
+        <li><a href="#thread">继承Thread类创建线程</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading63">线程常见方法</a></li>
+    <li><a href="#heading64">线程的七种状态</a></li>
+    <li><a href="#synchronized">线程同步机制synchronized</a>
+      <ul>
+        <li><a href="#heading65">同步代码块</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading66">互斥锁</a></li>
+    <li><a href="#heading67">释放锁</a></li>
+    <li><a href="#deadlock">死锁deadlock</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#heading68">创建文件的三种方式</a></li>
+    <li><a href="#heading69">字节流</a>
+      <ul>
+        <li><a href="#inputstream">字节输入流InputStream</a></li>
+        <li><a href="#heading70">字节输出流</a></li>
+        <li><a href="#fileoutputstream">fileoutputstream</a></li>
+        <li><a href="#fileoutputstream1">fileoutputstream</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading71">字符流</a></li>
+    <li><a href="#heading72">缓冲流</a></li>
+    <li><a href="#heading73">对象处理流</a></li>
+    <li><a href="#heading74">标准输入输出流</a></li>
+    <li><a href="#heading75">转换流</a></li>
+    <li><a href="#properties">Properties类</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#inetaddress">InetAddress</a></li>
+    <li><a href="#socket">Socket</a>
+      <ul>
+        <li><a href="#socketshutdown">socket.shutdown问题</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#class">Class类</a></li>
+    <li><a href="#class1">获取Class对象的方式</a></li>
+    <li><a href="#classforname">Class.forName()</a></li>
+    <li><a href="#class2">类名.class</a></li>
+    <li><a href="#heading78">静态与动态加载</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    
+  </aside>
+  
+  <div class="sixteen wide mobile sixteen wide tablet ten wide computer column markdown-body dream-single" id="dream-save-post-as-img">
+    <section class="ui segment">
+      <header>
+        <h1 class="ui large header">Java_notes<span class="sub header">
+            <span class="left">
+              @
+              
+                felixhe
+              
+
+              | 
+                  <span data-format="luxon">2022-05-20T10:00:40&#43;08:00</span>
+                
+
+              | 55 分钟阅读
+
+              
+              | 更新于
+                
+                  <span data-format="luxon">2022-05-20T10:00:40&#43;08:00</span>
+                
+              
+            </span>
+
+            
+            <span class="dream-share">
+  <a href="#" class="save-as-image" title="保存为图片" onclick="savePostAsImg()">
+    <i class="save icon"></i>
+  </a>
+  <a href="https://twitter.com/intent/tweet?text=Java_notes&url=https%3a%2f%2ffelixhjx.github.io%2fjava%2fjava_notes%2f" title="Twitter">
+    <i class="twitter icon"></i>
+  </a>
+  <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ffelixhjx.github.io%2fjava%2fjava_notes%2f" title="Facebook">
+    <i class="facebook icon"></i>
+  </a>
+</span>
+
+            
+          </span>
+        </h1>
+      </header>
+
+      <article class="main">
+        
+        <img class="cover" src="https://s1.ax1x.com/2022/05/20/OLeWWD.jpg" />
+        
+
+        <h1 id="basic">basic</h1>
+<h3 id="java">Java技术体系</h3>
+<ol>
+<li>
+<p>Java程序设计语言</p>
+</li>
+<li>
+<p>Java虚拟机（JVM）与底层硬件作一层支撑层</p>
+</li>
+<li>
+<p>Java API类库（Java标准库函数）</p>
+</li>
+<li>
+<p>一系列辅助工具 javac &hellip;</p>
+</li>
+</ol>
+<p>1+2+3+4=JDK   2+3=JRE (java运行时环境)</p>
+<p>Java'技术体系所划分的三大平台</p>
+<h2 id="heading">变量</h2>
+<h3 id="heading1">局部变量</h3>
+<ul>
+<li>声明构造方法</li>
+<li>局部变量没有默认值，所以局部变量被声明后，必须经过初始化，才可以使用。</li>
+</ul>
+<h2 id="heading2">引用与值传递</h2>
+<h2 id="heading3">方法</h2>
+<p>方法可以传入多个参数，但可以有0或者1个返回值，不能有多个返回值</p>
+<p>可以通过数组作为方法的返回类型来实现多个结果的数据返回</p>
+<h3 id="heading4">调用</h3>
+<p>对象变量名.方法名（实参列表）</p>
+<ol>
+<li>
+<p>通过对象名.方法名进行调用，这是最普通的也是最常见的一种调用方式。</p>
+</li>
+<li>
+<p>通过new关键字调用构造方法，这种是在实例化对象时使用的方式。</p>
+</li>
+<li>
+<p>通过类名.方法名调用，当需要调用的那个方法为静态（有static的）方法时使用</p>
+</li>
+</ol>
+<p>无返回值的方法只能使用单独调用</p>
+<p>圆括号中的“实参列表”为调用方法时实际传入的实际参数，称为实参列表。声明方法时圆括号中的参数称为形式参数，形式参数和实际参数在数据类型和个数上一定要匹配。</p>
+<h3 id="heading5">构造方法</h3>
+<p>专门用于创建对象的方法，当通过new关键字创建对象时就是调用构造方法，完成对对象的初始化（对象已经存在，属性初始化由构造器完成）</p>
+<p><strong>格式</strong></p>
+<p>public 类名称（参数类型，参数名称）</p>
+<p><strong>注意事项</strong></p>
+<ol>
+<li>
+<p>必须与所在类名称相同，大小写一致</p>
+</li>
+<li>
+<p>构造方法不写返回值，void都不写</p>
+</li>
+<li>
+<p>构造方法不能return具体返回值</p>
+</li>
+<li>
+<p>如果没有编写任何构造方法，编译器将至少赠送编写一个，没有参数，方法体什么也不做</p>
+</li>
+<li>
+<p>一旦编写了一个构造方法，那么编译器不在赠送</p>
+</li>
+<li>
+<p>构造方法也可以重载</p>
+</li>
+</ol>
+<h3 id="java-bean">标准类（Java Bean）</h3>
+<p>组成：</p>
+<ul>
+<li>
+<p>所有成员变量都需要使用private关键字修饰</p>
+</li>
+<li>
+<p>为每一个成员变量编写一对Getter/Setter方法</p>
+</li>
+<li>
+<p>编写一个无参数的构造方法</p>
+</li>
+<li>
+<p>编写一个全参数的构造方法</p>
+</li>
+</ul>
+<h3 id="api">API</h3>
+<p>应用程序接口</p>
+<h3 id="overload">方法重载(Overload)</h3>
+<p>多个方法名称相同，但参数列表不同（个数或者类型），与前端修饰词无关。</p>
+<p><strong>方法重载相关因素</strong></p>
+<ul>
+<li>
+<p>参数个数不同</p>
+</li>
+<li>
+<p>参数类型不同</p>
+</li>
+<li>
+<p>参数多类型但是顺序不同</p>
+</li>
+</ul>
+<p><strong>无关因素</strong></p>
+<p>大小写为不同方法，不是重载</p>
+<p>参数名称不同不代表两个不同方法，与参数名称无关</p>
+<p>与方法返回值无关</p>
+<h3 id="heading6">方法使用注意事项</h3>
+<ol>
+<li>
+<p>方法定义在类中，不能方法中调用方法，禁止套娃</p>
+</li>
+<li>
+<p>方法定义顺序没有先后</p>
+</li>
+<li>
+<p>方法定义后不会执行，执行须调用，（单独，打印，赋值）</p>
+</li>
+<li>
+<p>方法若有返回值，必须写上“return”，且返回值类型必须相同</p>
+</li>
+<li>
+<p>一个方法中可以存在多个return语句，但只能同时执行一个，双return不能连写</p>
+</li>
+</ol>
+<h3 id="heading7">数组</h3>
+<p>直接打印数组名称，得到的是数组对应的哈希地址值</p>
+<h3 id="heading8">循环遍历数组</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>最大值判断算法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> Array<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Demo01ArrayMax</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> array <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>1<span style="color:#f92672">,</span> 4<span style="color:#f92672">,</span> 61<span style="color:#f92672">,</span> 7<span style="color:#f92672">,</span> 238<span style="color:#f92672">,</span> 68<span style="color:#f92672">,</span> 32<span style="color:#f92672">,</span> 65<span style="color:#f92672">,</span><span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">int</span> max <span style="color:#f92672">=</span> array<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> max<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                max <span style="color:#f92672">=</span> array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>max<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>数组元素反转</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> Array<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Demo01ArrayReverse</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> array<span style="color:#f92672">=</span><span style="color:#f92672">{</span>1<span style="color:#f92672">,</span>2<span style="color:#f92672">,</span>3<span style="color:#f92672">,</span>4<span style="color:#f92672">,</span>5<span style="color:#f92672">,</span>6<span style="color:#f92672">,</span>7<span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;=======&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        <span style="color:#75715e">/*
+</span><span style="color:#75715e">        初始化语句:int min=0，max=array.length-1
+</span><span style="color:#75715e">        条件判断：min&lt;max
+</span><span style="color:#75715e">        步进表达式：min++,max--
+</span><span style="color:#75715e">        循环体：利用第三变量转换
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> min<span style="color:#f92672">=</span>0<span style="color:#f92672">,</span>max<span style="color:#f92672">=</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>min<span style="color:#f92672">&lt;</span>max<span style="color:#f92672">;</span>min<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">,</span>max<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span>array<span style="color:#f92672">[</span>min<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            array<span style="color:#f92672">[</span>min<span style="color:#f92672">]</span><span style="color:#f92672">=</span>array<span style="color:#f92672">[</span>max<span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            array<span style="color:#f92672">[</span>max<span style="color:#f92672">]</span><span style="color:#f92672">=</span>temp<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>i<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>array<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h1 id="heading9">面向对象编程</h1>
+<p><strong>特点</strong>：封装，继承，多态</p>
+<h2 id="encapsulation">封装encapsulation</h2>
+<p><strong>定义</strong>：一些细节信息隐藏，对外界不可见，数据前和数据的操作放在一起，对外之开发操作无法访问数据</p>
+<p>private私有化成员属性，提供公开public的get/set方法</p>
+<p>封装性在JAVA中的体现</p>
+<ul>
+<li>方法是一种封装</li>
+<li>关键字private是一种封装</li>
+</ul>
+<p>封装的步骤</p>
+<ol>
+<li>
+<p>将属性私有化（不能直接修改属性）</p>
+</li>
+<li>
+<p>提供一个公共的set方法，用于对属性判断并赋值（添加业务逻辑）</p>
+</li>
+<li>
+<p>提供一个公共的get方法，用于获取属性的值（权限判断  ）</p>
+</li>
+</ol>
+<h2 id="polymorphic">多态polymorphic</h2>
+<p>一个对象同时拥有多种形态</p>
+<p>方法的重写和重载是Java多态性的不同表现，重写是父类与子类之间多态性的一种表现，重载是一个类中多态性的一种表现</p>
+<p>如果在子类中定义某方法与其父类有相同的名称和参数，则说该方法被<strong>重写</strong></p>
+<p>如果在一个类中定义多个同名的方法，他们或有不同的参数个数或有不同的参数类型，则称为方法被<strong>重载</strong></p>
+<p>一个对象变量 （ 例如 变量 e ) 可以指示多种实际类型的现象被称为多态 （ polymorphism ) ， 。 ) 在运行时能够自动地选择调用哪个方法的现象称为动态绑定 （ dynamic binding ）。</p>
+<p>运行时多态指程序中定义的对象引用所指向的具体类型在运行期间才确定</p>
+<p>在 Java 程序设计语言中 。 对象变量是多态的 一个 Employee 变量既可以引用一个 Employee 类对象 也可以引用一个 Employee 类的任何一个子类的对象 （ 例如 Manager ， Executive ，Secretary 等）</p>
+<h3 id="heading10"><strong>对象的多态</strong></h3>
+<ol>
+<li>
+<p>一个对象的编译类型和运行类型可以不一致</p>
+</li>
+<li>
+<p>编译类型在定义对象时就确定了，不能改变</p>
+</li>
+<li>
+<p>运行类型是可以变化的</p>
+</li>
+<li>
+<p>编译类型看=左，运行类型看右边</p>
+</li>
+</ol>
+<p>多态的前提：两个对象（类）存在继承关系</p>
+<p>继承性在Java的体现：类的继承extends或者接口的实现implement  类与类的继承，接口与接口的继承，类与接口的实现</p>
+<p>代码当中体现多态性：父类引用指向子类对象</p>
+<p>父子类关系	格式：<code>父类名称 对象名 =new 子类名称();</code></p>
+<p>接口实现关系	格式：`接口名称 对象名 =new 实现类名称();</p>
+<h3 id="heading11">多态数组</h3>
+<p>数组的定义类型为父类类型，里面保存的实际元素类型为子类型</p>
+<h4 id="equals">equals方法</h4>
+<h4 id="hashcode">hashcode方法</h4>
+<ol>
+<li>提高具有哈希结构的容器的效率</li>
+</ol>
+<h4 id="tostring">toString方法</h4>
+<p>默认返回</p>
+<h4 id="heading12"><strong>对象的向上转型</strong></h4>
+<p>本质：父类的引用指向了子类的对象</p>
+<p>格式：父类名称 对象名 = new 子类名称();</p>
+<p>含义：右键创建一个子类对象，把他当中父类来对待使用，向上转型一定是安全的，从小范围转向大范围</p>
+<p>可以调用父类中的所有成员（属性，方法）需遵守访问权限，不能调用子类中特有成员（见下）</p>
+<h4 id="heading13"><strong>对象的向下转型</strong></h4>
+<p>向上转型存在弊端：对象一旦向上转型为父类，那么无法再调用子类原本特有方法。所以提出解决方法：向下转型(还原)</p>
+<p>格式：<code>子类名称 对象名=（子类名称）父类对象</code></p>
+<p>要求父类的引用必须指向的是当前目标类型的对象（原先是啥就得是啥)，否则会类转换异常（Class Cast Exception)</p>
+<p>当一个子类向上转型成为父类时，只能向下转型回原子类。若转换成其他子类则会运行报错类转换异常（编译时不会报错）</p>
+<h4 id="instanceof">instanceof关键字</h4>
+<p>属性没有重写之说，属性的值看编译类型</p>
+<p>向下转型时需要进行instanceof判断，用于判断对象的运行类型是否为xx类型或xx类型的子类型</p>
+<h3 id="important">动态绑定机制important</h3>
+<ol>
+<li>当调用对象方法的时候，该方法会和该对象的内存地址/运行类型绑定</li>
+<li>当调用对象属性时，没有动态绑定机制，哪里声明哪里使用</li>
+</ol>
+<p>过程</p>
+<ol>
+<li>首先，编译器根据对象的声明类型和方法名，搜索相应类(Son)及其父类(Father)的“方法表”，找出所有访问属性为public的method方法。 可能存在多个方法名为method的方法，只是参数类型或数量不同。</li>
+<li>然后，根据方法的“签名”找出完全匹配的方法。</li>
+</ol>
+<p>方法的名称和参数列表称为方法的签名。</p>
+<p>在Java SE 5.0 以前的版本中，覆盖父类的方法时，要求返回类型必须是一样的。现在子类覆盖父类的方法时，允许其返回类型定义为原始类型的子类型。</p>
+<ol start="3">
+<li>
+<p>如果是private、static、final 方法或者是构造器，则编译器明确地知道要调用哪儿个方法，这种调用方式成为“静态调用”。</p>
+</li>
+<li>
+<p>调用方法。</p>
+</li>
+</ol>
+<p>如果子类Son中定义了 method() 的方法，则直接调用子类中的相应方法；如果子类Son中没有定义相应的方法，则到其父类中寻找method()方法。</p>
+<p>Java中的许多对象（一般都是具有父子类关系的父类对象）在运行时都会出现两种类型：编译时类型和运行时类型，例如：Person person = new Student();这行代码将会生成一个person变量，该变量的编译时类型是Person，运行时类型是Student。</p>
+<h3 id="heading14">编译类型与运行类型</h3>
+<p>Java的引用变量有两个类型，一个是编译时类型，一个是运行时类型，编译时类型由声明该变量时使用的类型决定，运行时类型由实际赋给该变量的对象决定。如果编译时类型和运行时类型不一致，会出现所谓的多态。因为子类其实是一种特殊的父类，因此java允许把一个子类对象直接赋值给一个父类引用变量，无须任何类型转换，或者被称为向上转型，由系统自动完成。</p>
+<p>引用变量在编译阶段只能调用其编译时类型所具有的方法，但运行时则执行它运行时类型所具有的方法，因此，编写Java代码时，引用变量只能调用声明该变量所用类里包含的方法。与方法不同的是，对象的属性则不具备多态性。通过引用变量来访问其包含的实例属性时，系统总是试图访问它编译时类所定义的属性，而不是它运行时所定义的属性。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.hspedu.poly_.dynamic_<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DynamicBinding</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//a 的编译类型 A, 运行类型 B
+</span><span style="color:#75715e"></span>        A a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> B<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//向上转型
+</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>a<span style="color:#f92672">.</span><span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//?40 -&gt; 30
+</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>a<span style="color:#f92672">.</span><span style="color:#a6e22e">sum1</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//?30-&gt; 20
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span> <span style="color:#f92672">{</span><span style="color:#75715e">//父类
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 10<span style="color:#f92672">;</span>
+    <span style="color:#75715e">//动态绑定机制:
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sum</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//父类sum()
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> getI<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> 10<span style="color:#f92672">;</span><span style="color:#75715e">//20 + 10
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sum1</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//父类sum1()
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> i <span style="color:#f92672">+</span> 10<span style="color:#f92672">;</span><span style="color:#75715e">//10 + 10
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getI</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//父类getI
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> i<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span> <span style="color:#66d9ef">extends</span> A <span style="color:#f92672">{</span><span style="color:#75715e">//子类
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 20<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">//    public int sum() {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//        return i + 20;
+</span><span style="color:#75715e"></span><span style="color:#75715e">//    }
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getI</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//子类getI()
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> i<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+<span style="color:#75715e">//    public int sum1() {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//        return i + 10;
+</span><span style="color:#75715e"></span><span style="color:#75715e">//    }
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><h2 id="heading15">继承</h2>
+<p><strong>在同一个包下的继承关系</strong></p>
+<p>在同一个包下，子类自然继承父类中Private的成员变量作为自己的成员变量，Private方法作为自己的方法</p>
+<p><strong>在不同的包下的继承关系</strong></p>
+<p>在不同包下，子类继承了父类的Protected，Public成员变量作为子类的成员变量，继承父类的Protected，Public方法作为子类方法</p>
+<p>不用private，public，protected修饰的成员变量和方法被称为<strong>友好变量和友好方法</strong>，在不同包下，子类不能继承父类的友好变量和友好方法</p>
+<h3 id="heading16">特点</h3>
+<p>Java语言是单继承的，一个类的直接父类只有一个，Java可以多级继承</p>
+<p>一个子类只有唯一的父类，一个父类可以有多个子类</p>
+<h3 id="heading17">由来</h3>
+<p>多个类中存在相同属性和行为时，将这些内容抽取到单独一个类中，那么多个类无需再定义这些属性和行为，只要继承那一个类即可，子类可以直接访问父类中非私有的属性和行为</p>
+<p>继承是多态的前提</p>
+<p>继承主要解决的问题：共性抽取，父类中包含子类的公共部分。只需在父类中编写一遍</p>
+<p><strong>好处</strong>：提高代码的复用性，类与类之前产生关系</p>
+<p><strong>子父类成员变量重名</strong></p>
+<p>子父类中出现了同名的成员变量时，在子类中需要访问父类中<strong>非私有成员变量</strong>时，需要使用<code>super</code>关键字，修饰父类成员变量</p>
+<h3 id="heading18">变量重名问题</h3>
+<p>局部变量						直接写成员变量名</p>
+<p>本类中的成员变量		this.成员变量名</p>
+<p>父类中的成员变量		super.成员变量名</p>
+<p>无论成员方法还是成员变量，如果重名且没有super关键字，则向上找父类，绝不会向下找子类</p>
+<h2 id="override">方法的重写（override）</h2>
+<p>覆写：方法名称相同，参数列表也相同</p>
+<p>重载：方法名称相同，参数列表不同</p>
+<p><strong>方法重写注意事项</strong></p>
+<ul>
+<li>必须保证父子类之间的方法的名称相同，参数列表也相同</li>
+</ul>
+<p>@Override，写在方法前，用于检测是否是有效的正确覆盖重写</p>
+<ul>
+<li>子类方法的返回类型与父类方法返回类型一样，或者是父类返回类型的子类</li>
+</ul>
+<p>java.long.Object类是所有类的公共最高类</p>
+<ul>
+<li>子类方法权限修饰符必须大于等于父类方法权限修饰符</li>
+</ul>
+<p>public&gt;protected&gt;(default)&gt;private</p>
+<p>公共的&gt; 受保护的&gt;预设的&gt;私有的</p>
+<p>(default)不是关键字default，而是什么都不写</p>
+<p><strong>重写与重载</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>发生范围</th>
+<th>方法名</th>
+<th>参数列表</th>
+<th>返回类型</th>
+<th>修饰符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>重载Overroad</td>
+<td>本类</td>
+<td>必须一样</td>
+<td>类型，个数，顺序至少一个不同</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td>重写Override</td>
+<td>父子类</td>
+<td>必须一样</td>
+<td>必须相同</td>
+<td>子类重写的方法，返回的类型与父类返回的类型相同，或其子类</td>
+<td>子类方法不能缩小父类方法的访问范围</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading19">设计原则</h3>
+<p>对于以及实用的类，尽量不要进行修改，推荐定义一个新的类</p>
+<p>，来重复利用其中的共性内容1，并添加新的内容</p>
+<h3 id="heading20">父子类的构造方法的访问特点</h3>
+<ul>
+<li>
+<p>子类构造方法当中有一个默认隐含的&quot;super()&ldquo;调用，所以一定要先调用父类，后执行子类构造</p>
+</li>
+<li>
+<p>子类构造可以通过super关键字来调用父类重载构造</p>
+</li>
+<li>
+<p>super的父类构造调用，必须是子类构造方法的第一个语句，一个子类构造方法不能调用多次super构造</p>
+</li>
+</ul>
+<p>子类必须调用父类的构造器，完成父类初始化</p>
+<p>当创建子类对象时，不管使用子类的那个构造器，默认情况下总会调用父类的无参构造器。如果父类没有提供无参构造器，则必须在子类的构造器中用super去指定使用父类的那个构造器完成对父类的初始化工作，负责编译不通过</p>
+<p>想调用父类的哪个构造器，就显示的调用一下，super（参数列表）第一句话</p>
+<h3 id="super-this">super this关键字</h3>
+<p>super关键字代表父类的引用，用于访问父类的属性，方法，构造器（私有无法访问）</p>
+<ul>
+<li>
+<p>在子类的成员方法中访问父类的成员变量</p>
+</li>
+<li>
+<p>在子类的成员方法中，访问父类的成员方法</p>
+</li>
+<li>
+<p>在子类的构造方法中，访问父类的构造方法</p>
+</li>
+</ul>
+<pre><code>class Person { 
+    public static void prt(String s) { 
+       System.out.println(s); 
+    } 
+   
+    Person() { 
+       prt(&quot;父类·无参数构造方法： &quot;+&quot;A Person.&quot;); 
+    }//构造方法(1) 
+    
+    Person(String name) { 
+       prt(&quot;父类·含一个参数的构造方法： &quot;+&quot;A person's name is &quot; + name); 
+    }//构造方法(2) 
+} 
+    
+public class Chinese extends Person { 
+    Chinese() { 
+       super(); // 调用父类构造方法（1） 
+       prt(&quot;子类·调用父类&quot;无参数构造方法&quot;： &quot;+&quot;A chinese coder.&quot;); 
+    } 
+    
+    Chinese(String name) { 
+       super(name);// 调用父类具有相同形参的构造方法（2） 
+       prt(&quot;子类·调用父类&quot;含一个参数的构造方法&quot;： &quot;+&quot;his name is &quot; + name); 
+    } 
+    
+    Chinese(String name, int age) { 
+       this(name);// 调用具有相同形参的构造方法（3） 
+       prt(&quot;子类：调用子类具有相同形参的构造方法：his age is &quot; + age); 
+    } 
+    
+    public static void main(String[] args) { 
+       Chinese cn = new Chinese(); 
+       cn = new Chinese(&quot;codersai&quot;); 
+       cn = new Chinese(&quot;codersai&quot;, 18); 
+    } 
+}
+
+==========out===========
+父类·无参数构造方法： A Person.
+子类·调用父类”无参数构造方法“： A chinese coder.
+父类·含一个参数的构造方法： A person's name is codersai
+子类·调用父类”含一个参数的构造方法“： his name is codersai
+父类·含一个参数的构造方法： A person's name is codersai
+子类·调用父类”含一个参数的构造方法“： his name is codersai
+子类：调用子类具有相同形参的构造方法：his age is 18
+
+从本例可以看到，可以用 super 和 this 分别调用父类的构造方法和本类中其他形式的构造方法。
+</code></pre><p>与this关键字类似，this用于访问本类内容，super用于访问父类内容，super与this两种构造调用，不能同时使用，两者都必须唯一</p>
+<ol>
+<li>调用父类构造器的好处（分工明确，父类属性由父类初始化，子类的属性由子类初始化）</li>
+<li>子类中成员与父类重名时必须使用super访问父类成员</li>
+</ol>
+<p>super与this的区别</p>
+<table>
+<thead>
+<tr>
+<th>区别点</th>
+<th>this</th>
+<th>super</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>访问属性</td>
+<td>访问本类中的属性，如果本类没有此属性则从父类中继续查找</td>
+<td>从父类中开始查找属性</td>
+</tr>
+<tr>
+<td>调用方法</td>
+<td>访问本类中的方法，如果本类没有此方法则从父类中继续查找</td>
+<td>从父类中开始查找方法</td>
+</tr>
+<tr>
+<td>调用构造器</td>
+<td>调用本类构造器，必须放在构造器的首行</td>
+<td>调用父类构造器，必须放在子类构造器的首行</td>
+</tr>
+<tr>
+<td>特殊</td>
+<td>表示当前对象</td>
+<td>子类中访问父类对象</td>
+</tr>
+</tbody>
+</table>
+<h1 id="heading21">类与对象</h1>
+<p>类的五大成员</p>
+<ol>
+<li>属性</li>
+<li>方法</li>
+<li>构造器</li>
+<li>代码块</li>
+<li>内部类</li>
+</ol>
+<p>面向对象最重要的概念就是类（Class）和实例（Instance），必须牢记类是抽象的模板，比如Student类，而实例是根据类创建出来的一个个具体的“对象”，每个对象都拥有相同的方法，但各自的数据可能不同</p>
+<p>类定义特点，规范，定义，对象根据类创造的实体</p>
+<p>类定义了对象中所具有的变量，称为成员变量</p>
+<p>创建对象</p>
+<p>` Cat cat1=new Cat</p>
+<p>cat1是对象名（对象引用），真正对象是new后面的Cat</p>
+<h2 id="constructor">constructor</h2>
+<p>当一个对象被创建时候，构造方法用来初始化该对象。构造方法和它所在类的名字相同，但构造方法没有返回值。</p>
+<p>通常会使用构造方法给一个类的实例变量赋初值，或者执行其它必要的步骤来创建一个完整的对象。</p>
+<p>不管你是否自定义构造方法，所有的类都有构造方法，因为 Java 自动提供了一个默认构造方法，默认构造方法的访问修饰符和类的访问修饰符相同(类为 public，构造函数也为 public；类改为 protected，构造函数也改为 protected)。</p>
+<p>一旦你定义了自己的构造方法，默认构造方法就会失效。</p>
+<p>类的实例，我们需要用类来创建对象，进而访问其属性，因为实例是需要被用来调用的，但是调用的话，我们不得不去考虑一个问题，就是对象，最终是被存储在内存里面的，而存储的时候，我们的内存不得不需要给他再另外开辟新的内存空间，那么，java是如何给这种我们所需要的类来开辟内存空间的呢？这就涉及到了java的内存机制，就是说，我们必须要给这个类制作一个构造器，而且这个构造器的名称必须和这个类的名称是一致的，这样，我们的java编译器才能识别这个类，进而给这个类在内存中开辟内存空间，也就是我们所说的，我们手动，人为的给他进行“初始化”</p>
+<h2 id="heading22">权限修饰符</h2>
+<h3 id="heading23">类的访问</h3>
+<p>Java中文件存储在包中，代码编写在类中。为了实现java的多态性，常需要创建子，父类。为了更好的管理类之前关系。对类的访问权限进行控制</p>
+<p>类修饰符可定义为：<strong>public,abstract,final,friendly</strong></p>
+<p><strong>public</strong></p>
+<p>公共类</p>
+<p>当一个类定义为 <strong>public</strong> 时，该类对任何一个类可见，创建这个类的对象（对象实例化），就可以使用这个类的成员变量和方法</p>
+<p><strong>abstract</strong></p>
+<p>抽象类</p>
+<p>抽象类无法直接实例化，不能直接产生属于这个类的对象，但可以通过创建子类继承这个类来使用经过重写的子类方法。</p>
+<p>如果子类不全部实现父类中的抽象方法，那么子类也只能声明为抽象类。</p>
+<p><strong>final</strong></p>
+<p>最终类</p>
+<p>final类不能被继承和覆盖，执行密码管理的类，处理数据库信息的管理类。</p>
+<hr>
+<h3 id="heading24">类成员的访问</h3>
+<ul>
+<li>类一组相关属性和行为的集合,属性：事物的状态信息，行为：事物能够做什么</li>
+<li>类与对象的关系</li>
+</ul>
+<p>类是对一类事物的描述，抽象化</p>
+<p>对象是一类事物的实例，具体化</p>
+<p>类是对象的模板，对象是类的实体</p>
+<h3 id="heading25">类的定义</h3>
+<ul>
+<li>成员变量（属性）定义</li>
+</ul>
+<p>数据类型 变量名称</p>
+<ul>
+<li>成员方法（行为）定义</li>
+</ul>
+<p><code>public void 方法名（）{}</code></p>
+<p>无static关键字</p>
+<p>一个类无法直接使用，需根据类创建对象才能使用</p>
+<h3 id="java1">JAVA标准类</h3>
+<ul>
+<li>
+<p>所有成员方法都用private关键字修饰</p>
+</li>
+<li>
+<p>为每一个成员变量都编写一对Getter和Setter</p>
+</li>
+<li>
+<p>编写一个无参数的构造方法</p>
+</li>
+<li>
+<p>编写一个全参数的构造方法</p>
+</li>
+</ul>
+<h3 id="heading26">创建对象步骤</h3>
+<ol>
+<li>导包：指出需要使用的类所在位置.需要的类当前类属于同一个包下时，可以不用导包</li>
+</ol>
+<p>import  包名称.类名称；</p>
+<ol start="2">
+<li>创建；根究类创建一个对象</li>
+</ol>
+<p>类名称 对象名 =new类名称();</p>
+<ol start="3">
+<li>使用</li>
+</ol>
+<p>使用成员变量：对象名.成员变量名;</p>
+<p>使用成员方法：对象名.成员方法名(参数）;</p>
+<p>若成员变量没有进行赋值操作，也会存在一个默认值，规则与组相同## 类与对象的内存分析</p>
+<h3 id="heading27">局部变量与成员变量的区别</h3>
+<ul>
+<li>
+<p><strong>定义位置不同</strong>，局部变量定义在方法内，成员变量定义在方法外部，直接写在类中。</p>
+</li>
+<li>
+<p><strong>作用域不同</strong>，局部变量只能在方法中使用，出方法不能使用,成员变量作用在类中，整个类都能使用。</p>
+</li>
+<li>
+<p><strong>默认值不同</strong>，局部变量不存在默认值，若要使用须先手动赋值，成员变量存在默认值，规则与数组相同</p>
+</li>
+</ul>
+<h3 id="private">private关键字</h3>
+<ul>
+<li>什么时候需要private关键字</li>
+</ul>
+<p>定义类时可能传入不合理数据，可以通过private关键字对成员变量进行修饰</p>
+<p>一旦使用private修饰时，本类当中可以随意访问，超出本类无法直接访问。</p>
+<p>间接访问private成员变量就是定义一对Setter/Getter方法</p>
+<ul>
+<li>Setter/Getter使用方法</li>
+</ul>
+<p>Set必须有参数无返回值，参数类型须与Set对象保持一致</p>
+<p>Get必须有返回值无参数。</p>
+<p>boolean类型的Getter要改成is xxx</p>
+<h3 id="this">this关键字</h3>
+<p>this关键字只能在方法内部使用，this表示当前对象的属性，那个对象调用，this就代表那个对象。不再是局部变量</p>
+<ul>
+<li>什么时候用到this关键字</li>
+</ul>
+<p>当方法的局部变量和类的成员变量重名时</p>
+<p>根据“就近原则”，优先使用局部变量</p>
+<p>如果需要访问类中成员变量使用this.成员变量名调用</p>
+<h3 id="heading28">匿名对象</h3>
+<p>匿名对象只能使用唯一的一次，再次使用就得创建一个新对象。</p>
+<p>所以，如果确认一个对象只需要使用唯一的一次就可以使用匿名对象</p>
+<p>new 类名称();</p>
+<h2 id="heading29">代码块</h2>
+<p>类似于方法，将逻辑语句封装在方法体中，通过{}包围，和方法不同，没有方法名，没有返回，没有参数，只有方法体，而且不用通过对对象或类显式调用，而是类加载时，或创建对象时隐式调用</p>
+<p>用法</p>
+<p>[修饰符]{</p>
+<p>代码块}</p>
+<ol>
+<li>修饰符可选，写的话只能写static，写了static就是静态代码块，没有则是普通代码块</li>
+<li>逻辑语句可以是任何语句（输入，输出，方法调用，循环，判断）</li>
+</ol>
+<p>相当于构造器的补充机制，可以做初始化工作</p>
+<p>当多个构造器都有重复的语句时，就可以抽取到代码块中，提高复用</p>
+<h3 id="heading30">静态代码块</h3>
+<p>static代码块，对类进行初始化，而且它随着类的加载而执行，并且只会执行一次，如果是普通代码块，没创建个对象，就执行一次</p>
+<p>在创建一个对象时，在一个类调用的顺序</p>
+<ol>
+<li>调用静态代码块和静态属性初始化</li>
+</ol>
+<p>两者优先级相同，如果有多个静态代码块和多个静态变量初始化，则按他们定义的顺序调用</p>
+<ol start="2">
+<li>调用普通代码块和普通属性初始化</li>
+</ol>
+<p>两者优先级相同，如果有多个普通代码块和多个普通变量初始化，则按他们定义的顺序调用</p>
+<ol start="3">
+<li>调用构造方法</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.javahigh<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">codeblock</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        A a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> A<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span><span style="color:#f92672">{</span>
+    <span style="color:#75715e">//----------普通代码测试------------
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">//普通属性初始化
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> test01<span style="color:#f92672">=</span>get<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#75715e">//normal codeblock
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;normal codeblock success&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;normal function success&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> 20<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">A</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;construct success&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span>
+    <span style="color:#75715e">//静态属性初始化
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> test<span style="color:#f92672">=</span>getstatic<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+    <span style="color:#75715e">//static function
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getstatic</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;static function success&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> 10<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">//static codeblock
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">static</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;static codeblock success&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span>
+output 
+<span style="color:#66d9ef">static</span> function success
+<span style="color:#66d9ef">static</span> codeblock success
+normal function success
+normal codeblock success
+construct success
+</code></pre></div><h3 id="heading31">类加载</h3>
+<p>类什么时候被加载</p>
+<ol>
+<li>创建对象实例时（new）</li>
+<li>创建子类对象实例时，父类也会被加载</li>
+<li>使用类的静态成员时（静态属性，静态方法）</li>
+</ol>
+<p><strong>普通代码块</strong></p>
+<p>普通代码块是在创建对象实例时，会隐式的调用。被创建一次，就会被调用一次</p>
+<p>如果只是使用类的静态成员时，普通代码块不会执行，所以普通代码块可以理解为是构造器的补充</p>
+<p>创建一个子类对象时（继承关系），他们的静态代码块，静态属性初始化，普通代码块，普通属性初始化，构造方法的调用顺序</p>
+<ol>
+<li>父类的静态代码块和静态属性初始化（优先级一样，按定义顺序执行）</li>
+<li>子类的静态代码块和静态属性初始化（优先级一样，按定义顺序执行）</li>
+<li>父类的普通代码块和普通属性初始化（优先级一样，按定义顺序执行）</li>
+<li>父类的构造方法</li>
+<li>子类的普通代码块和普通属性初始化（优先级一样，按定义顺序执行）</li>
+<li>子类的构造方法</li>
+</ol>
+<p>静态代码块只能直接调用静态成员（静态属性和静态方法），普通代码块可以调用任意成员</p>
+<h2 id="scanner">Scanner类</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Scanner sc<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> Scanner<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><p>获取键盘输入字符</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String str <span style="color:#f92672">=</span>sc<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</code></pre></div><h2 id="random-">Random 类</h2>
+<p>导包:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> java.util.Random<span style="color:#f92672">;</span>
+</code></pre></div><p>创建：类名称 对象名 =new类名称();</p>
+<p>使用成员方法：对象名.成员方法名(参数）</p>
+<p>定义随即范围：参数代表范围，左闭右开区间</p>
+<h2 id="arraylist">对象数组（ArrayList）</h2>
+<p><code>ArrayList&lt;E&gt;</code>	泛型内数据类型统一，只能时引用类型，不能是基本类型</p>
+<p>ArrayList直接打印得到的不是地址值，是内容，内容为空则得到空中括号</p>
+<p>Alt +Ins</p>
+<h2 id="heading32">字符串</h2>
+<p>程序当中引号字符串都是String类的对象，不需要new操作也是字符串</p>
+<p>字符串特点</p>
+<ol>
+<li>
+<p>字符串内容永不改变，字符串是常量</p>
+</li>
+<li>
+<p>字符串不可变所以字符串可以共享使用，节省内存</p>
+</li>
+<li>
+<p>字符串相当于char[]字符数组，但底层原理是byte[]字节数组。String类底层存储时是用一个字节数组储存每一个字幕的字节数据</p>
+</li>
+</ol>
+<p>创建字符串的3+1方法</p>
+<p>三种构造方法</p>
+<ol>
+<li>
+<p>public String():创建一个空白字符串，不包含内容</p>
+</li>
+<li>
+<p>public String(char[] array):根究字符数组的内容，创建对应字符串</p>
+</li>
+<li>
+<p>public String(byte[] array):根究字节数组的内容，创建对应字符串</p>
+</li>
+</ol>
+<p>直接引用</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String str <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;	&#34;</span><span style="color:#f92672">;</span>
+</code></pre></div><p><strong>字符串的截取方法</strong></p>
+<p><code>public String substring (int index)</code>从索引位置开始到末尾(从零开始)，返回新字符串</p>
+<p><code>public String substring (int begin，int end)</code>从begin到end中间的字符串，<strong>左闭右开</strong>区间</p>
+<p>创建一个新的字符串并传入字符。如果改变字符只是</p>
+<h3 id="heading33">字符串的常量池</h3>
+<h3 id="static">static关键字</h3>
+<p>静态变量(类变量)和静态方法(类方法)为类所拥有，创建的所有对象都有，可以不创建对象直接使用</p>
+<p>类变量是随着类的加载创建的，不需要创建一个对象（实例），没有创建对象实例也能访问。此外，类变量的访问必须遵守访问权限</p>
+<p>如果声明时不用static关键字修饰，则为实例变量和实例方法。</p>
+<p>static的函数只能调用static的函数，只能访问static的成员变量。也能通过对象名字访问。</p>
+<p>类变量的生命周期是随类的加载开始，随着类消亡而销毁</p>
+<p><strong>使用场景</strong></p>
+<p>当方法中不涉及到任何和对象相关的成员，则可以将方法设计成静态方法，提高开发效率</p>
+<h4 id="heading34">引用方式</h4>
+<p>类名.静态变量/静态方法（满足访问修饰符）</p>
+<p>实例对象进行调用</p>
+<p><strong>一个类可以通过new运算符创建多个对象，这些对象的实例变量被分配到不同的内存空间，若类的成员变量中有类变量则将类变量分配至一处保存，即对象共享类变量，所以改变一个类变量则会影响其他对象的此类变量</strong></p>
+<h4 id="heading35">类方法与实例方法</h4>
+<p>类方法不能访问实例变量，只能访问类变量</p>
+<p>实例方法可以调用实例变量，类变量。由实例对象调用</p>
+<h4 id="main">main方法</h4>
+<pre><code>public static void main(String[] args)
+</code></pre><ul>
+<li>
+<p>mian方法是jvm调用，j不在一个类，所以必须是public</p>
+</li>
+<li>
+<p>jvm在执行mian方法时不用创建对象所以必须是static，所以main方法可以访问所在类中的静态属性</p>
+</li>
+<li>
+<p>main方法接受String类型的数组参数，该数组中保存执行java命令时传递给所运行的类的参数</p>
+</li>
+</ul>
+<h2 id="heading36">抽象类</h2>
+<p>当父类方法需要声明但又不确定如何实现时，可将其声明为抽象方法</p>
+<p><strong>抽象方法</strong></p>
+<p>所谓抽象方法就是没有实现的方法，没有实现就是没有方法体，抽象类的价值更多在于设计，设计者设计好后，让子类继承实现抽象类</p>
+<p>加上abstract关键字（只能修饰类和方法），去掉大括号，直接分号结束</p>
+<pre><code>public abstract 返回值类型 方法名称(参数列表)；
+</code></pre><p>抽象方法不能使用private，final和static来修饰，因为这些关键字都是和重写相违背</p>
+<p>private修饰符只能访问本类，当子类继承抽象类时无法访问</p>
+<p>final修饰符修饰后无法继承，更无重写可言</p>
+<p>static关键字与方法 重写无关</p>
+<p><strong>抽象类</strong>：抽象方法所在的类（抽象类还是类），必须是抽象类，在class前写上abstract</p>
+<p>使用</p>
+<ul>
+<li>
+<p>不能直接new创建抽象类对象</p>
+</li>
+<li>
+<p>必须用一个子类来继承抽象父类</p>
+</li>
+<li>
+<p>抽象类不一定要包含abstract方法，还可以有实现的方法</p>
+</li>
+<li>
+<p>子类必须覆盖重写抽象父类当中的抽象方法</p>
+</li>
+</ul>
+<p>覆盖重写^^子类去掉抽象方法的abstract关键字，补全方法体大括号</p>
+<ul>
+<li>创建子类对象进行使用</li>
+</ul>
+<h1 id="heading37">接口</h1>
+<p>Java里面由于不允许多重继承，所以如果要实现多个类的功能，则可以通过实现多个接口来实现。</p>
+<p>接口时多个类的公共规范，接口是一个 引用数据类型，</p>
+<h2 id="heading38">接口与抽象类</h2>
+<p>Java接口和Java抽象类最大的一个区别，就在于Java抽象类可以提供某些方法的部分实现，而Java接口不可以，这大概就是Java抽象类唯一的优点吧，但这个优点非常有用。如果向一个抽象类里加入一个新的具体方法时，那么它所有的子类都一下子都得到了这个新方法，而Java接口做不到这一点，如果向一个Java接口里加入一个新方法，所有实现这个接口的类就无法成功通过编译了，因为你必须让每一个类都再实现这个方法才行，这显然是Java接口的缺点。</p>
+<p>一个抽象类的实现只能由这个抽象类的子类给出，也就是说，这个实现处在抽象类所定义出的继承的等级结构中，而由于Java语言的单继承性，所以抽象类作为类型定义工具的效能大打折扣。在这一点上，Java接口的优势就出来了，任何一个实现了一个Java接口所规定的方法的类都可以具有这个接口的类型，而一个类可以实现任意多个Java接口，从而这个类就有了多种类型。</p>
+<p>从第2点不难看出，Java接口是定义混合类型的理想工具，混合类表明一个类不仅仅具有某个主类型的行为，而且具有其他的次要行为。</p>
+<ul>
+<li>一个子类只能继承一个抽象类, 但能实现多个接口</li>
+<li>抽象类可以有构造方法, 接口没有构造方法</li>
+<li>抽象类可以有普通成员变量, 接口没有普通成员变量</li>
+<li>抽象类和接口都可有静态成员变量, 抽象类中静态成员变量访问类型任意，接口只能public static final(默认)</li>
+<li>抽象类可以没有抽象方法, 抽象类可以有普通方法；接口在JDK8之前都是抽象方法，在JDK8可以有default方法，在JDK9中允许有私有普通方法</li>
+<li>抽象类可以有静态方法；接口在JDK8之前不能有静态方法，在JDK8中可以有静态方法，且只能被接口类直接调用（不能被实现类的对象调用）</li>
+<li>抽象类中的方法可以是public、protected; 接口方法在JDK8之前只有public abstract，在JDK8可以有default方法，在JDK9中允许有private方法</li>
+</ul>
+<p>接口使用细节</p>
+<ol>
+<li>接口不能实例化（instantiated），接口是抽象概念</li>
+<li>接口中所有方法是public的，接口中抽象方法可以不用abstract修饰</li>
+<li>普通类实现接口，就必须将该接口的所有方法都实现</li>
+<li>一个类可以同时实现多个接口</li>
+<li>接口中的属性只能是final，而且是public static final修饰符的</li>
+<li>接口中属性的访问形式：接口名.属性名</li>
+<li>接口不能继承其他的类，但是可以继承多个别的接口</li>
+<li>接口的修饰符只能是public和默认，这点和类的修饰符一样</li>
+</ol>
+<h2 id="heading39">继承与接口</h2>
+<ul>
+<li>当子类继承父类，就自动的拥有父类的功能</li>
+<li>如果子类需要拓展功能，可以通过实现接口的方式拓展</li>
+<li>所以，实现接口可以理解是对java单继承机制的补充</li>
+</ul>
+<p>继承的价值主要在于：解决代码的复用性和可维护性</p>
+<p>接口的价值主要在于：设计，设计好各种规范（方法），让其他类去实现这些方法，更加灵活</p>
+<p>继承是is-a的关系，接口是like-a的关系。接口在一定程度上实现了代码的解耦</p>
+<h2 id="heading40">接口的多态</h2>
+<ol>
+<li>接口引用可以指向实现了接口的类的对象</li>
+<li>接口也能多态数组</li>
+</ol>
+<h3 id="heading41">多态传递</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.hspedu.interface_<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 演示多态传递现象
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InterfacePolyPass</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//接口类型的变量可以指向，实现了该接口的类的对象实例
+</span><span style="color:#75715e"></span>        IG ig <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Teacher<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#75715e">//如果IG 继承了 IH 接口，而Teacher 类实现了 IG接口
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//那么，实际上就相当于 Teacher 类也实现了 IH接口.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//这就是所谓的 接口多态传递现象.
+</span><span style="color:#75715e"></span>        IH ih <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Teacher<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IH</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hi</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IG</span> <span style="color:#66d9ef">extends</span> IH<span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Teacher</span> <span style="color:#66d9ef">implements</span> IG <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">hi</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="heading42">抽象方法</h3>
+<p><strong>定义格式</strong>：public interface 接口名称（大驼峰）{&hellip;.}</p>
+<p>Java 9接口包含内容</p>
+<ol>
+<li>
+<p>常量</p>
+</li>
+<li>
+<p>抽象方法</p>
+</li>
+<li>
+<p>默认方法</p>
+</li>
+<li>
+<p>静态方法</p>
+</li>
+<li>
+<p>私有方法</p>
+</li>
+</ol>
+<p>接口当中的抽象方法，修饰符必须是两个固定关键字：</p>
+<p>public abstract,两个修饰符可以选择性省略，方法三要素可以随意定义</p>
+<p><strong>接口使用步骤</strong></p>
+<ol>
+<li>接口不能直接使用，必须有一个“实现类”(子类)来实现(implement)该接口</li>
+</ol>
+<p><code>public class 接口类名称 implements 接口名称{....}</code></p>
+<ol start="2">
+<li>接口的实现类必须覆盖重写(实现)接口中所有的抽象方法</li>
+</ol>
+<p>实现：去掉abstract关键字，加上方法体大括号</p>
+<ol start="3">
+<li>创建实现类的对象，进行使用</li>
+</ol>
+<p>注意事项：如果实现类并没有覆盖重写接口中所有的抽象方法，那么这个实现类自己必须是抽象类</p>
+<h3 id="heading43">默认方法</h3>
+<p>用于接口升级问题，类A，B分别是接口的实现类，当接口中添加抽象方法时，A，B必须实现接口所有的抽象方法，若A，B已经投入使用</p>
+<pre><code>public default 返回值类型 方法名称(参数列表){ 方法体 }
+</code></pre><h3 id="heading44">静态方法</h3>
+<pre><code>public static 返回值类型 方法名称(参数列表){...}
+</code></pre><p>不能通过接口实现类的对象来调用接口当中的静态方法，一个类有多个接口，多接口静态方法产生冲突,静态与类有关</p>
+<p>调用格式</p>
+<p>接口名称.静态方法名(参数)</p>
+<h3 id="heading45">私有方法</h3>
+<p>我们需要抽取一个共有方法，用来解决两个默认方法之前重复代码的问题，而且此共有方法还不能让实现类使用，将其私有化</p>
+<p>格式：</p>
+<ul>
+<li>普通私有方法</li>
+</ul>
+<p><code>public 返回值类型 方法名称 (参数列表){方法体}</code></p>
+<ul>
+<li>静态私有方法</li>
+</ul>
+<p><code>public static 返回值类型 方法名称 (参数列表){方法体}</code></p>
+<p>接口中的常量，必须进行赋值</p>
+<p>接口中常量的名称必须使用全大写，单词之间用下划线分割</p>
+<h4 id="heading46">接口小结</h4>
+<p>接口内容包括</p>
+<ol>
+<li>常量</li>
+</ol>
+<p>格式:<code>public static final 数据类型 变量名=数据值</code></p>
+<ol start="2">
+<li>接口中最重要的是抽象方法</li>
+</ol>
+<p>格式：<code>public abstract 返回值类型 方法名称（参数列表）;</code></p>
+<p>实现类必须覆盖重写接口所有的抽象方法，除非实现类是抽像类</p>
+<ol start="3">
+<li>从Java 8开始，接口允许定义默认方法，</li>
+</ol>
+<p>格式：<code>public default 返回值类型 方法名称(参数列表){方法体}</code></p>
+<p>也可以覆盖重写，覆盖重写调用实现类的方法，没有则调用接口中的</p>
+<ol start="4">
+<li>从Java 8开始接口允许使用静态方法</li>
+</ol>
+<p>格式:<code>public static 返回值类型 方法名称 (参数列表){方法体}</code></p>
+<p>应该通过接口名称进行调用，不能通过实现类对象进行调用接口静态方法</p>
+<ol start="5">
+<li>Java 9开始，接口允许定义私有方法</li>
+</ol>
+<p>普通私有方法	<code>public 返回值类型 方法名称 (参数列表){方法体}</code></p>
+<p>静态私有方法	<code>public static 返回值类型 方法名称 (参数列表){方法体}</code></p>
+<p>private的方法只能接口自己才能调用，不能被实现类或其他调用</p>
+<hr>
+<h4 id="heading47">接口注意事项</h4>
+<ul>
+<li></li>
+</ul>
+<ul>
+<li>接口不能有静态代码块，不能有构造方法</li>
+<li>一个类的父类是唯一的，但一个类可以同时实现多个接口</li>
+</ul>
+<pre><code>public class MyInterfaceImpl implements 接口A,接口B
+</code></pre><ul>
+<li></li>
+</ul>
+<ul>
+<li>
+<p>如果一个实现类所实现的多个接口当中，存在重复的抽象方法，那么只需要覆盖重写一次</p>
+</li>
+<li>
+<p>如果实现类当中没有覆盖重写所有的抽象方法，那么实现类必须是一个抽象类</p>
+</li>
+<li>
+<ul>
+<li>如果实现类实现的多个接口中，存在重复的默认方法，那么一定要对冲突的默认方法进行覆盖重写</li>
+<li>一个类如果继承父类中的方法，和接口当中的默认方法产生冲突，优先用父类当中的方法，优先级 继承&gt;接口实现</li>
+</ul>
+</li>
+<li>
+<p>类与类之间是单继承，直接父类只能有一个</p>
+</li>
+<li>
+<p>类与接口之间是实现的，一个类可与实现多个接口</p>
+</li>
+<li>
+<p>接口与接口之间是多继承</p>
+</li>
+</ul>
+<p>多个父接口的抽象方法重复没关系，默认方法重复那么子接口必须进行默认方法覆盖重写，而且带着default关键字</p>
+<p>`</p>
+<p>finalize方法</p>
+<p>当对象被回收时，系统自动调用该对象的finalize方法，子类可以重写该方法，做一些释放资源（打开一个文件，有数据库的连接，占用电脑使用资源）的操作</p>
+<p>什么时候被回收：</p>
+<p>当某个对象没有引用时，jvm就认为这个对象是个垃圾对象，就使用垃圾回收机制销毁该对象，销毁前会调用finalize方法，所以可以重写该方法，加入业务逻辑。垃圾回收算法很复杂</p>
+<h3 id="heading48">四种访问修饰符</h3>
+<p>用于控制方法和属性的访问权限（范围）</p>
+<ol>
+<li>
+<p>public  对外公开</p>
+</li>
+<li>
+<p>protected  对子类和同一个包中的类公开</p>
+</li>
+<li>
+<p>default  向同一个包的类公开</p>
+</li>
+<li>
+<p>private  只有类本身可以访问，不对外开放</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>访问级别</th>
+<th>访问修饰符</th>
+<th>同类（本类）</th>
+<th>同包</th>
+<th>子类</th>
+<th>不同包</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公开</td>
+<td>public</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>受保护</td>
+<td>protected</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>默认</td>
+<td>default</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>私有</td>
+<td>private</td>
+<td>√</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>访问修饰符可以用来修饰类中的属性，成员方法及类，其中只有default，public才能修饰类</p>
+<h3 id="final">final关键字</h3>
+<p>最终的不可变的，可以修饰类，属性，方法和局部变量</p>
+<ul>
+<li>类，修饰类时表示这个类不能拥有任何子类（无法被继承），但是可以拥有父类。</li>
+</ul>
+<p>一个类如果是final类，其中所有成员方法都不能被覆盖重写</p>
+<p><code>public final class 类名称</code></p>
+<ul>
+<li>方法，修饰一个方法时表示是最终方法，不能被覆盖重写</li>
+</ul>
+<p><code>修饰符 final 返回值类型 方法名称 (参数列表)</code></p>
+<p>对于类和方法来说，abstract和final关键字不能同时使用，两者矛盾</p>
+<ul>
+<li>
+<p>局部变量，修饰局部变量，那这个变量不能改变，一次赋值，终生不变，对于基本数据类型来说，变量当中的数据不能改变。对于引用类型来说，变量当中的的地址值不能改变，但是地址所指向的对象能改变</p>
+</li>
+<li>
+<p>成员变量。修饰后，变量不变。成员变量存在默认值，使用final后必须手动赋值。赋值方式直接复制或构造方法。必须保证类当中所有重载的构造方法都最终对final的成员变量赋值</p>
+</li>
+</ul>
+<h1 id="heading49">内部类</h1>
+<p>一个类的内部又完整的嵌套了另一个类结构，被嵌套的类被称为<strong>内部类</strong>，嵌套其他类的类称为外部类</p>
+<p>内部类最大的特点就是可以直接访问私有属性，而且可以体现类与类之间的包含关系</p>
+<p>内部类的分类</p>
+<ul>
+<li>
+<p>定义在外部类<strong>局部位置</strong>上（通常在方法内）</p>
+<ul>
+<li>局部内部类（有类名）</li>
+<li>匿名内部类（没有类名，重点！！！）</li>
+</ul>
+</li>
+<li>
+<p>定义在外部类的<strong>成员位置</strong>上</p>
+<ul>
+<li>成员内部类（没用static修饰）</li>
+<li>静态内部类（使用static修饰）</li>
+</ul>
+</li>
+</ul>
+<h2 id="heading50">局部内部类</h2>
+<ol>
+<li>本质仍然是个类，可以直接访问外部类的所有成员（包括私有）</li>
+<li>不能添加访问修饰符，因为它的地位就是一个局部变量，局部变量是不能使用修饰符的，但是可以使用final修饰（有时内部类可能会有继承，final可以限制继承）</li>
+<li>作用域：仅仅在定义它的方法或代码块中</li>
+<li>外部类访问局部内部类的成员（访问方式：创建对象，再访问（必须在作用域内）</li>
+<li>外部其他类不能访问局部内部类（局部内部类地位是一个局部变量）</li>
+<li>如果外部类和局部内部类的成员重名时，默认遵循就近原则，如果想访问外部类的成员，则使用（外部类名.this.成员）访问</li>
+</ol>
+<h2 id="anonymous">匿名内部类anonymous</h2>
+<ol>
+<li>本质是类</li>
+<li>内部类</li>
+<li>该类没有名字</li>
+<li>同时还是一个对象</li>
+</ol>
+<p>匿名内部类是定义在外部类的局部位置（方法中）而且没有类名</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.hspedu.innerclass<span style="color:#f92672">;</span>
+
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * 演示匿名内部类的使用
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AnonymousInnerClass</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Outer04 outer04 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Outer04<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        outer04<span style="color:#f92672">.</span><span style="color:#a6e22e">method</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Outer04</span> <span style="color:#f92672">{</span> <span style="color:#75715e">//外部类
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> n1 <span style="color:#f92672">=</span> 10<span style="color:#f92672">;</span><span style="color:#75715e">//属性
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//方法
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//基于接口的匿名内部类
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//老韩解读
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//1.需求： 想使用IA接口,并创建对象
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//2.传统方式，是写一个类，实现该接口，并创建对象
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//3.老韩需求是 Tiger/Dog 类只是使用一次，后面再不使用
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//4. 可以使用匿名内部类来简化开发
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//5. tiger的编译类型 ? IA
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//6. tiger的运行类型 ? 就是匿名内部类  Outer04$1
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/*
+</span><span style="color:#75715e">            我们看底层 会分配 类名 Outer04$1
+</span><span style="color:#75715e">            class Outer04$1 implements IA {
+</span><span style="color:#75715e">                @Override
+</span><span style="color:#75715e">                public void cry() {
+</span><span style="color:#75715e">                    System.out.println(&#34;老虎叫唤...&#34;);
+</span><span style="color:#75715e">                }
+</span><span style="color:#75715e">            }
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#75715e">//7. jdk底层在创建匿名内部类 Outer04$1,立即马上就创建了 Outer04$1实例，并且把地址
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//   返回给 tiger
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//8. 匿名内部类使用一次，就不能再使用
+</span><span style="color:#75715e"></span>        IA tiger <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IA<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#a6e22e">@Override</span>
+            <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cry</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;老虎叫唤...&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;tiger的运行类型=&#34;</span> <span style="color:#f92672">+</span> tiger<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        tiger<span style="color:#f92672">.</span><span style="color:#a6e22e">cry</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        tiger<span style="color:#f92672">.</span><span style="color:#a6e22e">cry</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        tiger<span style="color:#f92672">.</span><span style="color:#a6e22e">cry</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        IA cat <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IA<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#a6e22e">@Override</span>
+            <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cry</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;maomao&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+        cat<span style="color:#f92672">.</span><span style="color:#a6e22e">cry</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+<span style="color:#75715e">//        IA tiger = new Tiger();
+</span><span style="color:#75715e"></span><span style="color:#75715e">//        tiger.cry();
+</span><span style="color:#75715e"></span>
+        <span style="color:#75715e">//演示基于类的匿名内部类
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//分析
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//1. father编译类型 Father
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//2. father运行类型 Outer04$2
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//3. 底层会创建匿名内部类
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/*
+</span><span style="color:#75715e">            class Outer04$2 extends Father{
+</span><span style="color:#75715e">                @Override
+</span><span style="color:#75715e">                public void test() {
+</span><span style="color:#75715e">                    System.out.println(&#34;匿名内部类重写了test方法&#34;);
+</span><span style="color:#75715e">                }
+</span><span style="color:#75715e">            }
+</span><span style="color:#75715e">         */</span>
+        <span style="color:#75715e">//4. 同时也直接返回了 匿名内部类 Outer04$2的对象
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//5. 注意(&#34;jack&#34;) 参数列表会传递给 构造器
+</span><span style="color:#75715e"></span>        Father father <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Father<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;jack&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+
+            <span style="color:#a6e22e">@Override</span>
+            <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;匿名内部类重写了test方法&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;father对象的运行类型=&#34;</span> <span style="color:#f92672">+</span> father<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//Outer04$2
+</span><span style="color:#75715e"></span>        father<span style="color:#f92672">.</span><span style="color:#a6e22e">test</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        <span style="color:#75715e">//基于抽象类的匿名内部类
+</span><span style="color:#75715e"></span>        Animal animal <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Animal<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#a6e22e">@Override</span>
+            <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eat</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;小狗吃骨头...&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+        animal<span style="color:#f92672">.</span><span style="color:#a6e22e">eat</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IA</span> <span style="color:#f92672">{</span><span style="color:#75715e">//接口
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cry</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">//class Tiger implements IA {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//
+</span><span style="color:#75715e"></span><span style="color:#75715e">//    @Override
+</span><span style="color:#75715e"></span><span style="color:#75715e">//    public void cry() {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//        System.out.println(&#34;老虎叫唤...&#34;);
+</span><span style="color:#75715e"></span><span style="color:#75715e">//    }
+</span><span style="color:#75715e"></span><span style="color:#75715e">//}
+</span><span style="color:#75715e"></span><span style="color:#75715e">//class Dog implements  IA{
+</span><span style="color:#75715e"></span><span style="color:#75715e">//    @Override
+</span><span style="color:#75715e"></span><span style="color:#75715e">//    public void cry() {
+</span><span style="color:#75715e"></span><span style="color:#75715e">//        System.out.println(&#34;小狗汪汪...&#34;);
+</span><span style="color:#75715e"></span><span style="color:#75715e">//    }
+</span><span style="color:#75715e"></span><span style="color:#75715e">//}
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Father</span> <span style="color:#f92672">{</span><span style="color:#75715e">//类
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Father</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//构造器 
+</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;接收到name=&#34;</span> <span style="color:#f92672">+</span> name<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span><span style="color:#75715e">//方法
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+ 
+<span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span> <span style="color:#75715e">//抽象类
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">eat</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>匿名内部类细节</p>
+<h2 id="heading51">成员内部类</h2>
+<p>定义在外部类的成员位置，没有static修饰</p>
+<ol>
+<li>可以直接访问外部类的所有成员，包括私有的</li>
+<li>可以添加任意访问修饰符（public，protected，默认，private）因为它地位就是一个成员（成员内部类就是一个成员）</li>
+</ol>
+<p>格式：</p>
+<pre><code>修饰符 class 外部类名称{
+	修饰符 class 内部类名称{}
+	}
+</code></pre><p>内用外随意访问，外用内要借助内部类对象</p>
+<p>直接调用：</p>
+<pre><code>外部类名称.内部类名称 对象名=new 外部类名称().new内部类名称()
+</code></pre><p>内部类的同名变量访问</p>
+<p>假设定义一个外部类，一个内部类，内部类中包含内部类的成员变量和成员方法，外部类当中包含成员变量，当内部类中的局部变啦需要访问成员变量时使用this关键字访问。想要访问外部类的成员变量时可以通过外部类名称.this.外部类成员变量</p>
+<h1 id="enum">枚举enum</h1>
+<p>把具体的对象一个个列举，枚举是一组常量的集合，枚举属于一种特殊的类，里面包含一组有限的特定对象</p>
+<p>自定义枚举类</p>
+<ol>
+<li>构造器私有化</li>
+<li>本类内部创建一组对象</li>
+<li>对外暴露对象（通过为对象添加public final static修饰符）</li>
+<li>提供get方法，不提供set方法</li>
+</ol>
+<h1 id="annotation">注解annotation</h1>
+<p>三种基本annotation</p>
+<ol>
+<li><a href="/override">@override </a> 限定某个方法，是重写父类方法，只能用于方法</li>
+<li><a href="/deprecated">@deprecated </a> 用于表示某个程序元素已过时，不推荐用但还能用</li>
+<li><a href="/suppressWarning">@suppressWarning </a> 抑制编译器错误</li>
+<li><a href="/target">@target </a> 修饰注解的注解，元注解</li>
+</ol>
+<h1 id="generic">泛型generic</h1>
+<p>泛型就是一种广泛的未知的数据类型（接受数据类型的数据类型），当我们不知道用什么数据类型时就可以使用泛型。可以在类声明时通过一个标识表示<strong>类中某个属性的类型，或者是某个方法的返回值的类型，或者是参数类型</strong>（泛型类型在定义时， 编译期间就确定）</p>
+<p><strong>使用泛型的好处</strong>：</p>
+<p>1.避免了类型转换的麻烦，存储什么类型，取出就是什么类型</p>
+<p>2.编译时，检查添加元素的类型，提高安全性。运行期（代码运行之后才会抛出的异常）异常转换为编译期（写编码是就会报错）异常</p>
+<p><strong>detail</strong></p>
+<ol>
+<li>泛型存入的只能是引用类型</li>
+<li>在给泛型指定具体类型后，可以传入该类型或其子类类型</li>
+<li>泛型使用形式简化：List list=new ArrayList&lt;&gt;()</li>
+<li>如果没有给泛型指定类型，泛型的默认类型就是object</li>
+</ol>
+<h2 id="heading52">自定义泛型</h2>
+<ol>
+<li>普通成员可以使用泛型（属性，方法）</li>
+<li>使用泛型的数组不能初始化</li>
+<li>静态方法中不能使用类的泛型</li>
+</ol>
+<p>因为静态是和类相关的，在类加载时，对象还没有创建</p>
+<p>所以，如果静态方法和静态属性使用了泛型，JVM就无法完成初始化</p>
+<h2 id="heading53">自定义泛型接口</h2>
+<ol>
+<li>接口中，静态成员中不能使用泛型（与泛型类规定一样）</li>
+<li>泛型接口的类型，在继承接口或实现接口时确定</li>
+<li>没有指定类型，默认为object</li>
+</ol>
+<h2 id="heading54">自定义泛型方法</h2>
+<p><code>修饰符 &lt;T,r...&gt; 返回类型 方法名（参数列表）</code></p>
+<p>泛型方法可以定义在普通类中，也可以定义在泛型类中</p>
+<p>泛型方法，可以使用类声明的泛型，也可以使用自己声明的泛型</p>
+<p><code>public&lt;K&gt; void function(R r,K k)</code></p>
+<pre><code>以下方法不是泛型方法，是function方法使用了类声明的泛型
+public void function(T t)
+</code></pre><p>泛型不具备继承性</p>
+<p>泛型的通配符</p>
+<ol>
+<li>
+<p>支持任意泛型类型</p>
+</li>
+<li>
+<p>支持A类以及A类的子类，规定泛型的上限</p>
+</li>
+<li>
+<p>支持A类以及A的父类，不限于直接父类，规定了泛型的下限</p>
+</li>
+</ol>
+<h2 id="system">System类</h2>
+<h2 id="stringbuilder">StringBuilder类</h2>
+<p>字符串是常量，它们的值不能被创建后改变。字符串缓冲区支持可变字符串。因为字符串对象是不可改变的，所以可以共享。字符串不能变但是字符串缓冲区可以发生变化</p>
+<p>字符串底层是一个final修饰的数组，赋值之后无法改变。在底层中有N个字符串进行相加，就需要生成2N-1个（N+N-1)数组。较为麻烦，需要StringBuilder类进行效率优化</p>
+<p><strong>StringBuilder&ndash;字符串缓冲区</strong></p>
+<p>一个长度可变的的字符串，在底层中也是一个数组但是没有被final修饰，初始容量16，如果超过自动扩容</p>
+<h1 id="exception">异常exception</h1>
+<p>throwable，所有 异常错误的父类</p>
+<ul>
+<li>
+<p>error，不能处理，只能避免。无法治愈，必须修改源代码</p>
+</li>
+<li>
+<p>exception，可避免，</p>
+<ul>
+<li>编译期（写代码）异常</li>
+<li>runtime exception运行期异常</li>
+</ul>
+</li>
+</ul>
+<h2 id="heading55">异常体系图</h2>
+<p>异常处理方式</p>
+<ul>
+<li>throw into虚拟机处理，虚拟机中断程序抛出异常</li>
+<li>try (可能出现异常的代码）catch（异常处理）</li>
+</ul>
+<p>异常的处理过程</p>
+<p>JVM检测到异常，会根究该异常产生的原因创建一个异常对象，其中包括了异常产生的（内容，原因，位置），如果方法中没有异常处理逻辑就继续向上抛出给方法调用者，最后中断程序。</p>
+<h2 id="throw">throw关键词</h2>
+<p>使用throw关键字再指定方法中抛出指定的异常</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> xxxexception
+</code></pre></div><ol>
+<li>
+<p>throw关键字必须写在方法的内部</p>
+</li>
+<li>
+<p>后面new的对象必须是exception或者exception的子类</p>
+</li>
+<li>
+<p>异常创建的对象必须处理</p>
+</li>
+</ol>
+<p>在方法传递过来的参数要先进行合法性校验，参数不合法，必须使用抛出异常的方式，告知方法调用者</p>
+<h2 id="throws">throws声明异常</h2>
+<p>方法内部抛出异常时，使用throws关键字处理异常对象，把异常对象声明抛出给方法调用者</p>
+<pre><code>在方法声明时使用
+修饰符 返回值类型 方法名（参数列表）throws 异常种类，{
+	throws new AAAException(&quot;reason&quot;);
+	throe new BBBException(&quot;reason&quot;);
+	}
+</code></pre><p>Notes:</p>
+<ol>
+<li>
+<p>throws关键字必须写在方法声明处</p>
+</li>
+<li>
+<p>throws关键字后声明的异常必须是Exception或其子类</p>
+</li>
+<li>
+<p>方法内部如果抛出多个异常，throw后必须声明多个异常，如果抛出的多个异常对象有子父类关系，直接声明父类异常即可</p>
+</li>
+</ol>
+<h2 id="try-catch">try catch</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">try</span><span style="color:#f92672">{</span>
+	产生异常的代码
+<span style="color:#f92672">}</span><span style="color:#66d9ef">catch</span><span style="color:#960050;background-color:#1e0010">（</span>定义一个异常变量<span style="color:#960050;background-color:#1e0010">，</span>用来接收抛出异常对象<span style="color:#960050;background-color:#1e0010">（</span>可多<span style="color:#960050;background-color:#1e0010">）</span><span style="color:#960050;background-color:#1e0010">）</span><span style="color:#f92672">{</span>
+	异常处理逻辑<span style="color:#960050;background-color:#1e0010">，</span>怎么处理
+	一般记录到日志中
+<span style="color:#f92672">}</span><span style="color:#66d9ef">finally</span><span style="color:#f92672">{</span> 
+	不管try代码块是否有异常发生<span style="color:#960050;background-color:#1e0010">，</span>始终执行finally
+	一般将释放资源代码放在finally
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Notes</p>
+<ol>
+<li>try抛出多个异常对象，使用多个catch处理这些异常对象</li>
+<li>try中产生异常，执行catch中异常处理逻辑，执行完毕后，继续执行后续程序，没异常不执行</li>
+</ol>
+<h2 id="heading56">自定义异常</h2>
+<p>格式：</p>
+<pre><code>public class xxxException extends Exception{
+	添加一个空参数的构造方法
+	添加一个带异常信息的构造方法
+}
+</code></pre><p>Notes</p>
+<ul>
+<li>
+<p>自定义异常类一般以Exception结尾，说明这是一个异常类</p>
+</li>
+<li>
+<p>自定义异常必须继承Exception or RuntimeException</p>
+</li>
+<li>
+<ul>
+<li>继承Exception就是编译期异常</li>
+<li>继承RuntimeException就是运行期异常</li>
+</ul>
+</li>
+</ul>
+<h1 id="heading57">常用类</h1>
+<p>包装类与基本数据类型的转换</p>
+<p>自动装箱 int-&gt;Integer</p>
+<p>Integer integer2 = n2; //底层使用的是 Integer.valueOf(n2)</p>
+<pre><code>//底层
+@HotSpotIntrinsicCandidate
+public static Integer valueOf(int i) {
+    if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)
+        return IntegerCache.cache[i + (-IntegerCache.low)];
+    return new Integer(i);
+}
+</code></pre><p>自动拆箱 Integer-&gt;int</p>
+<p>int n3 = integer2; //底层仍然使用的是 intValue()方法</p>
+<pre><code>//底层  
+@HotSpotIntrinsicCandidate
+public int intValue() {
+    return value;
+}
+</code></pre><h2 id="string">String类</h2>
+<ol>
+<li>
+<p>String 对象用于保存字符串，也就是一组字符序列</p>
+</li>
+<li>
+<p>&ldquo;jack&rdquo; 字符串常量, 双引号括起的字符序列</p>
+</li>
+<li>
+<p>字符串的字符使用 Unicode 字符编码，一个字符(不区分字母还是汉字)占两个字节</p>
+</li>
+<li>
+<p>String 类有很多构造器，构造器的重载</p>
+</li>
+</ol>
+<p>常用的有 String s1 = new String(); //</p>
+<pre><code>                    String s2 = new String(String original);
+
+                    String s3 = new String(char[] a);
+
+                    String s4 = new String(char[] a,int startIndex,int count)
+
+                    String s5 = new String(byte[] b)
+</code></pre>
+<ol start="5">
+<li>String 类实现了接口 Serializable[String 可以串行化:可以在网络传输]</li>
+</ol>
+<p>接口 Comparable [String 对象可以比较大小]</p>
+<ol start="6">
+<li>
+<p>String 是 final 类，不能被其他的类继承</p>
+</li>
+<li>
+<p>String 有属性 private final char value[]; 用于存放字符串内容</p>
+</li>
+<li>
+<p>一定要注意：value 是一个 final 类型， 不可以修改(需要功力)：即 value 不能指向新的地址，但是单个字符内容是可以变化</p>
+</li>
+</ol>
+<h1 id="heading58">集合</h1>
+<p>容器，就是可以容纳其他Java对象的对象。_Java Collections Framework(JCF)_为Java开发者提供了通用的容器，其始于JDK 1.2，优点是:</p>
+<ul>
+<li>降低编程难度</li>
+<li>提高程序性能</li>
+<li>提高API间的互操作性</li>
+<li>降低学习难度</li>
+<li>降低设计和实现相关API的难度</li>
+<li>增加程序的重用性</li>
+</ul>
+<p>Java容器里只能放对象，对于基本类型(int, long, float, double等)，需要将其包装成对象类型后(Integer, Long, Float, Double等)才能放到容器里。很多时候拆包装和解包装能够自动完成。这虽然会导致额外的性能和空间开销，但简化了设计和编程。</p>
+<p>容器主要包括 Collection 和 Map 两种，Collection 存储着对象的集合，而 Map 存储着键值对(两个对象)的映射表。</p>
+<ol>
+<li>可以动态保存任意多个对象，使用比较方便</li>
+<li>提供了一系列方便的操作对象的方法：add，remove，set，get</li>
+<li>使用集合添加，删除新元素方便</li>
+</ol>
+<h2 id="collection">collection接口</h2>
+<p>collection接口遍历元素方式</p>
+<p>Iterator迭代器</p>
+<p>但凡是实现了Collection接口的集合都有个一个iterator（）方法</p>
+<p>增强for loop</p>
+<p>简化版Iterator，本质一样，只能用于遍历集合或数组</p>
+<pre><code>for(elemType elemName:arrayName or listName){
+	访问元素
+}
+</code></pre><h2 id="list">list接口</h2>
+<p>list-列表</p>
+<p>list接口是collection接口的子接口</p>
+<ol>
+<li>list集合类中元素有序（添加顺序和取出顺序一致），且可重复</li>
+<li>list集合中每个元素都有其对应的顺序索引（支持索引，底层其实是数组）</li>
+</ol>
+<p><strong>list method</strong></p>
+<ol>
+<li>void add(int index, Object ele):在index位置插入ele</li>
+<li>boolean addAll(int index, Collection eles):从index位置开始将eles中的所有元素添加进来</li>
+<li>int indexOf(Object obj):返回obj在集合中首次出现的位置</li>
+<li>List subList(int fromIndex, int toIndex):返回从fromIndex到toIndex位置的子集合</li>
+<li>int lastIndexOf(Object obj):返回obj在当前集合中末次出现的位置</li>
+<li>Object remove(int index):移除指定index位置的元素，并返回此元素</li>
+<li>Object set(int index, Object ele):设置指定index位置的元素为ele , 相当于是替换.</li>
+</ol>
+<p>ArrayList线程不安全，没有sycohronized</p>
+<h3 id="arraylist1">ArrayLIst源码分析</h3>
+<p>arraylist数组列表（线性表）</p>
+<ol>
+<li>ArrayList中维护了一个Object类型（所以什么类型都能存入）的数组elementData</li>
+</ol>
+<p>使用无参构造器创建和使用ArrayList，初始elementData容量为0，第一次添加则扩容elementData为10，如果再次扩容则为elementData的1.5倍</p>
+<p>DEFAULRTCAPACITY_EMPTY_ELEMENTDATA底层</p>
+<p>使用有参构造器创建和使用ArrayList，初始elementData容量为指定大小，如果需要扩容则直接扩容elementData的1.5倍</p>
+<h3 id="vector">vector</h3>
+<p>vector底层也是一个对象数组，是线程安全的</p>
+<p>vector的扩容机制，底层源码</p>
+<h3 id="linkedlist">LinkedList</h3>
+<p>linkedliest成链的列表-列表</p>
+<p>底层实现了双向链表和双端队列，可以添加任意元素（可重复，nulll），线程不安全，没有实现同步</p>
+<p><strong>底层源码</strong></p>
+<p>重要</p>
+<p><strong>ArrayLisrt与LinkedList</strong></p>
+<p>如果改查操作多，选择ArrayList</p>
+<p>如果增删的操作多，选择LinkedList</p>
+<p>一般来说，程序中80%-90%是查询，大多数情况下选择ArrayList。此外两者都是线程不安全，所以要在单线程中使用</p>
+<h2 id="set">set接口</h2>
+<ol>
+<li>无序（添加和取出顺序不一致）没有索引</li>
+<li>不允许重复元素/对象，最多一个null</li>
+</ol>
+<p>常用方法：和List接口一样，set接口也是collection的子接口，常用方法与Collection接口一样</p>
+<p>set接口的遍历方式与collection的遍历方式一样，可以使用迭代器，增强for，但不能用索引的方式来获取</p>
+<h3 id="hashset">Hashset</h3>
+<p>hashset底层其实是hashmap（底层是数组+链表+红黑树）</p>
+<p>哈希表是一种数据结构，所有以一对值存入，键，值。键值</p>
+<ol>
+<li>实现了set接口</li>
+<li>不保证元素是有序，取决于hash后，再确定索引的结果</li>
+</ol>
+<h4 id="hashset1">hashset底层</h4>
+<p>重要</p>
+<ol>
+<li>添加一个元素时，先得到一个hash值，会转成索引值</li>
+<li>找到存储数据表table，看这个索引位置是否已经存放了元素，如果没有就直接加入</li>
+<li>如果有元素，调用equals比较（比较内容可以根据重写的equals方法具体实现），如果值相同则放弃添加，如果不同则添加到最后</li>
+<li>Java8中如果一条链表元素个数超过TREEIFY_THRESHOLD（默认是8）而且tablesize&gt;=MIN_TREEIFY_CAPACITY(默认64)就转成红黑树，如果仅满足前者则进行扩容</li>
+</ol>
+<p>521</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.hspedu.set_<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> java.util.HashSet<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @author 韩顺平
+</span><span style="color:#75715e"> * @version 1.0
+</span><span style="color:#75715e"> */</span>
+<span style="color:#a6e22e">@SuppressWarnings</span><span style="color:#f92672">(</span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;all&#34;</span><span style="color:#f92672">}</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HashSetSource</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+        HashSet hashSet <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashSet<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        hashSet<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//到此位置，第1次add分析完毕.
+</span><span style="color:#75715e"></span>        hashSet<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;php&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//到此位置，第2次add分析完毕
+</span><span style="color:#75715e"></span>        hashSet<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;set=&#34;</span> <span style="color:#f92672">+</span> hashSet<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        <span style="color:#75715e">/*
+</span><span style="color:#75715e">        老韩对HashSet 的源码解读
+</span><span style="color:#75715e">        1. 执行 HashSet()
+</span><span style="color:#75715e">            public HashSet() {
+</span><span style="color:#75715e">                map = new HashMap&lt;&gt;();
+</span><span style="color:#75715e">            }
+</span><span style="color:#75715e">        2. 执行 add()
+</span><span style="color:#75715e">           public boolean add(E e) {//e = &#34;java&#34;
+</span><span style="color:#75715e">                return map.put(e, PRESENT)==null;//(static) PRESENT = new Object();
+</span><span style="color:#75715e">           }
+</span><span style="color:#75715e">         3.执行 put() , 该方法会执行 hash(key) 得到key对应的hash值 算法h = key.hashCode()) ^ (h &gt;&gt;&gt; 16)
+</span><span style="color:#75715e">             public V put(K key, V value) {//key = &#34;java&#34; value = PRESENT 共享
+</span><span style="color:#75715e">                return putVal(hash(key), key, value, false, true);
+</span><span style="color:#75715e">            }
+</span><span style="color:#75715e">         4.执行 putVal
+</span><span style="color:#75715e">         final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+</span><span style="color:#75715e">                   boolean evict) {
+</span><span style="color:#75715e">                Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i; //定义了辅助变量
+</span><span style="color:#75715e">                //table 就是 HashMap 的一个数组，类型是 Node[]
+</span><span style="color:#75715e">                //if 语句表示如果当前table 是null, 或者 大小=0
+</span><span style="color:#75715e">                //就是第一次扩容，到16个空间.
+</span><span style="color:#75715e">                if ((tab = table) == null || (n = tab.length) == 0)
+</span><span style="color:#75715e">                    n = (tab = resize()).length;
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">                //(1)根据key，得到hash 去计算该key应该存放到table表的哪个索引位置
+</span><span style="color:#75715e">                //并把这个位置的对象，赋给 p
+</span><span style="color:#75715e">                //(2)判断p 是否为null
+</span><span style="color:#75715e">                //(2.1) 如果p 为null, 表示还没有存放元素, 就创建一个Node (key=&#34;java&#34;,value=PRESENT)
+</span><span style="color:#75715e">                //(2.2) 就放在该位置 tab[i] = newNode(hash, key, value, null)
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">                if ((p = tab[i = (n - 1) &amp; hash]) == null)
+</span><span style="color:#75715e">                    tab[i] = newNode(hash, key, value, null);
+</span><span style="color:#75715e">                else {
+</span><span style="color:#75715e">                    //一个开发技巧提示： 在需要局部变量(辅助变量)时候，在创建
+</span><span style="color:#75715e">                    Node&lt;K,V&gt; e; K k; //
+</span><span style="color:#75715e">                    //如果当前索引位置对应的链表的第一个元素和准备添加的key的hash值一样
+</span><span style="color:#75715e">                    //并且满足 下面两个条件之一:
+</span><span style="color:#75715e">                    //(1) 准备加入的key 和 p 指向的Node 结点的 key 是同一个对象
+</span><span style="color:#75715e">                    //(2) p 指向的Node 结点的 key 的equals() 和准备加入的key比较后相同
+</span><span style="color:#75715e">                    //就不能加入
+</span><span style="color:#75715e">                    if (p.hash == hash &amp;&amp;
+</span><span style="color:#75715e">                        ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+</span><span style="color:#75715e">                        e = p;
+</span><span style="color:#75715e">                    //再判断 p 是不是一颗红黑树,
+</span><span style="color:#75715e">                    //如果是一颗红黑树，就调用 putTreeVal , 来进行添加
+</span><span style="color:#75715e">                    else if (p instanceof TreeNode)
+</span><span style="color:#75715e">                        e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+</span><span style="color:#75715e">                    else {//如果table对应索引位置，已经是一个链表, 就使用for循环比较
+</span><span style="color:#75715e">                          //(1) 依次和该链表的每一个元素比较后，都不相同, 则加入到该链表的最后
+</span><span style="color:#75715e">                          //    注意在把元素添加到链表后，立即判断 该链表是否已经达到8个结点
+</span><span style="color:#75715e">                          //    , 就调用 treeifyBin() 对当前这个链表进行树化(转成红黑树)
+</span><span style="color:#75715e">                          //    注意，在转成红黑树时，要进行判断, 判断条件
+</span><span style="color:#75715e">                          //    if (tab == null || (n = tab.length) &lt; MIN_TREEIFY_CAPACITY(64))
+</span><span style="color:#75715e">                          //            resize();
+</span><span style="color:#75715e">                          //    如果上面条件成立，先table扩容.
+</span><span style="color:#75715e">                          //    只有上面条件不成立时，才进行转成红黑树
+</span><span style="color:#75715e">                          //(2) 依次和该链表的每一个元素比较过程中，如果有相同情况,就直接break
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">                        for (int binCount = 0; ; ++binCount) {
+</span><span style="color:#75715e">                            if ((e = p.next) == null) {
+</span><span style="color:#75715e">                                p.next = newNode(hash, key, value, null);
+</span><span style="color:#75715e">                                if (binCount &gt;= TREEIFY_THRESHOLD(8) - 1) // -1 for 1st
+</span><span style="color:#75715e">                                    treeifyBin(tab, hash);
+</span><span style="color:#75715e">                                break;
+</span><span style="color:#75715e">                            }
+</span><span style="color:#75715e">                            if (e.hash == hash &amp;&amp;
+</span><span style="color:#75715e">                                ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+</span><span style="color:#75715e">                                break;
+</span><span style="color:#75715e">                            p = e;
+</span><span style="color:#75715e">                        }
+</span><span style="color:#75715e">                    }
+</span><span style="color:#75715e">                    if (e != null) { // existing mapping for key
+</span><span style="color:#75715e">                        V oldValue = e.value;
+</span><span style="color:#75715e">                        if (!onlyIfAbsent || oldValue == null)
+</span><span style="color:#75715e">                            e.value = value;
+</span><span style="color:#75715e">                        afterNodeAccess(e);
+</span><span style="color:#75715e">                        return oldValue;
+</span><span style="color:#75715e">                    }
+</span><span style="color:#75715e">                }
+</span><span style="color:#75715e">                ++modCount;
+</span><span style="color:#75715e">                //size 就是我们每加入一个结点Node(k,v,h,next), size++
+</span><span style="color:#75715e">                if (++size &gt; threshold)
+</span><span style="color:#75715e">                    resize();//扩容
+</span><span style="color:#75715e">                afterNodeInsertion(evict);
+</span><span style="color:#75715e">                return null;
+</span><span style="color:#75715e">            }
+</span><span style="color:#75715e">         */</span>
+
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>看完源码整理</p>
+<hr>
+<p>//看源码，做分析， 先给小伙伴留一个坑，以后讲完源码，你就了然</p>
+<p>//去看他的源码，即 add 到底发生了什么?=&gt; 底层机制.</p>
+<p>set.add(new String(&ldquo;hsp&rdquo;));//ok</p>
+<p>set.add(new String(&ldquo;hsp&rdquo;));//加入不了.</p>
+<hr>
+<h3 id="linkedhashset">LinkedHashSet</h3>
+<ol>
+<li>是hashset的子类</li>
+<li>linkedhashset底层是linkedhashmap，底层维护一个数组+双向链表</li>
+<li>linkedhashset根究元素的hashcode的值来决定元素的存储位置，同时使用链表维护元素的次序，使得元素看起来是以插入顺序存储</li>
+<li>不允许重复元素</li>
+</ol>
+<h4 id="linkedhashset1">LinkedHashSet底层</h4>
+<p>在linkedhashset中维护一个哈希表的双向链表，每个节点有pre，next属性。在添加一个元素时，先求hash值，再求索引，确定该元素在hashtable的位置，然后添加元素到双向链表中（如果存在不添加，与hashset相同）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.hspedu.set_<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> java.util.LinkedHashSet<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.Set<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @author 韩顺平
+</span><span style="color:#75715e"> * @version 1.0
+</span><span style="color:#75715e"> */</span>
+<span style="color:#a6e22e">@SuppressWarnings</span><span style="color:#f92672">(</span><span style="color:#f92672">{</span><span style="color:#e6db74">&#34;all&#34;</span><span style="color:#f92672">}</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LinkedHashSetSource</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//分析一下LinkedHashSet的底层机制
+</span><span style="color:#75715e"></span>        Set set <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedHashSet<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        set<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> String<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AA&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        set<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>456<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        set<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>456<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        set<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Customer<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;刘&#34;</span><span style="color:#f92672">,</span> 1001<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        set<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>123<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        set<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;HSP&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;set=&#34;</span> <span style="color:#f92672">+</span> set<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#75715e">//老韩解读
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//1. LinkedHashSet 加入顺序和取出元素/数据的顺序一致
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//2. LinkedHashSet 底层维护的是一个LinkedHashMap(是HashMap的子类)
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//3. LinkedHashSet 底层结构 (数组table+双向链表)
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//4. 添加第一次时，直接将 数组table 扩容到 16 ,存放的结点类型是 LinkedHashMap$Entry
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//5. 数组是 HashMap$Node[] 存放的元素/数据是 LinkedHashMap$Entry类型(多态数组)
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">/*
+</span><span style="color:#75715e">                //继承关系是在内部类完成.
+</span><span style="color:#75715e">                static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; {
+</span><span style="color:#75715e">                    Entry&lt;K,V&gt; before, after;
+</span><span style="color:#75715e">                    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) {
+</span><span style="color:#75715e">                        super(hash, key, value, next);
+</span><span style="color:#75715e">                    }
+</span><span style="color:#75715e">                }
+</span><span style="color:#75715e">
+</span><span style="color:#75715e">         */</span>
+
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Customer</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> no<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Customer</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> no<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">no</span> <span style="color:#f92672">=</span> no<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="map">map接口</h2>
+<p>常用</p>
+<ol>
+<li>Map与Collection并列存在，用于保存具有映射关系的数据key-value</li>
+<li>Map中的key和value可以是任何引用类型的数据，会封装到HashMap$Node（静态内部类）对象中</li>
+<li>Map中的key不允许重复（key相同等价于替换），原理与hashset相同，Map中的val可以重复</li>
+<li>Map 的key 可以为 null, value 也可以为null ，注意 key 为null 只能有一个，value 为null ,可以多个</li>
+<li>常用String类作为Map的 key（object类）</li>
+<li>key 和 value 之间存在单向一对一关系，即通过指定的 key 总能找到对应的 value</li>
+</ol>
+<h1 id="heading59">多线程</h1>
+<p>编写多线程程序要注意线程什么时候退出</p>
+<h2 id="heading60">并发与并行</h2>
+<p>并发：两个或多个时间在同一时间段内发生（交替执行）</p>
+<p>并行：两个或多个时间同一时刻发生（同时进行）</p>
+<h2 id="heading61">进程与线程</h2>
+<p><strong>进程</strong>：一个内存中运行的应用程序，每个进程都有独立内存空间</p>
+<p>当我们双击打开软件时，软件从硬盘中进入内存，占用一定存储空间，此时创建了一个进程</p>
+<p><strong>线程</strong>：一个进程至少有一个线程，可以有多个，线程是进程中的一个执行单元，负责程序执行。当我们点击功能时，就会开启一条应用程序到CPU的执行路径，CPU可以通过这个路径执行功能，这条路径叫线程</p>
+<ul>
+<li>单线程</li>
+<li>多线程：同一时刻可以执行多个线程</li>
+</ul>
+<p>CPU：中央处理器，对数据进行计算，常见几线程就代表可以同时执行多任务</p>
+<p><strong>并发与并行</strong></p>
+<p>并发是同一时刻，多个任务交替执行，单核cpu实现的多人我就是并发，并行是同一时刻，多个任务同时执行。多核cpu可以实现并行</p>
+<h2 id="heading62">线程的基本使用</h2>
+<p>创建线程的两种方法</p>
+<ol>
+<li>
+<p>继承thread类（本身就实现了Runnable接口），重写run方法（增加业务逻辑），当一个类继承了 Thread 类， 该类就可以当做线程使用</p>
+</li>
+<li>
+<p>实现Runnable接口，重写run方法（最底层在Runnable接口中）</p>
+</li>
+</ol>
+<p>由于java是单继承机制，一个类可能已经继承了其他的类，所以此时不能继承thread类，提供了实现接口的第二种方式</p>
+<p>多线程编程中，主方法结束不意味着进程就结束，是最后一个线程结束，进程才会结束</p>
+<pre><code>为什么是调用start方法
+如果是cat.start。那使用的还是主线程
+
+cat.start();//启动线程-&gt; 最终会执行 cat 的 run 方法 
+
+cat.run();//run 方法就是一个普通的方法, 没有真正的启动一个线程，就会把 run 方法执行完毕，才向下执行 
+
+说明: 当 main 线程启动一个子线程 Thread-0, 主线程不会阻塞, 会继续执行 
+
+这时 主线程和子线程是交替执行
+</code></pre><h3 id="runable">使用实现Runable来创建多线程</h3>
+<p>实现Runable接口方式更加适合多个线程共享一个资源的情况，同时避免单继承的限制</p>
+<p>创建步骤</p>
+<ul>
+<li>创建一个实现了<code>Runnable</code>接口的类</li>
+<li>实现类去实现<code>Runnable</code>接口中的抽象方法：<code>run()</code></li>
+<li>创建实现类的对象</li>
+<li>将此对象作为参数传递到<code>Thread</code>类的构造器中，创建<code>Thread</code>类的对象</li>
+<li>通过<code>Thread</code>类的对象调用<code>start()</code></li>
+<li>这里的<code>start()</code>首先启动了当前的线程，然后调用了<code>Runnable</code>类型的target的<code>run()</code></li>
+</ul>
+<p>静态代理模式</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Thread02</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> 
+
+        Tiger tiger <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Tiger<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//实现了 Runnable
+</span><span style="color:#75715e"></span>        ThreadProxy threadProxy <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ThreadProxy<span style="color:#f92672">(</span>tiger<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        threadProxy<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">//Tiger 继承了Animal无法再继承Thread，使用实现Runable创建多线程
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span> <span style="color:#f92672">{</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tiger</span> <span style="color:#66d9ef">extends</span> Animal <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;老虎嗷嗷叫....&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">//线程代理类 , 模拟了一个极简的Thread类
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ThreadProxy</span> <span style="color:#66d9ef">implements</span> Runnable <span style="color:#f92672">{</span><span style="color:#75715e">//你可以把Proxy类当做 ThreadProxy
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">private</span> Runnable target <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span><span style="color:#75715e">//属性，类型是 Runnable
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>target <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            target<span style="color:#f92672">.</span><span style="color:#a6e22e">run</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//动态绑定（运行类型Tiger）
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ThreadProxy</span><span style="color:#f92672">(</span>Runnable target<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">target</span> <span style="color:#f92672">=</span> target<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        start0<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//这个方法时真正实现多线程方法
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start0</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        run<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="thread">继承Thread类创建线程</h3>
+<h2 id="heading63">线程常见方法</h2>
+<ul>
+<li>setname</li>
+<li>getname</li>
+<li>sleep</li>
+<li>setpriority 更改线程优先级</li>
+<li>getpriority 获取线程的优先级</li>
+<li>run</li>
+<li>start</li>
+<li>interrupt中断线程</li>
+<li>yield 让出cpu，让其他线程执行</li>
+<li>join 线程插队，插队一旦成功，先执行该线程至结束</li>
+</ul>
+<p>用户线程与守护线程</p>
+<p>用户线程，线程的任务执行完或通知结束</p>
+<p>守护线程，一般为工作线程服务的，当所有的用户线程结束，守护线程自动结束（GC垃圾回收机制）</p>
+<h2 id="heading64">线程的七种状态</h2>
+<h2 id="synchronized">线程同步机制synchronized</h2>
+<p>在多线程编程中，一些敏感数据不允许多个线程同时访问，此时需要同步访问技术，保证数据在同一时刻，最多只有一个线程访问，即当有一个线程对内存进行操作时，其他线程不可以对这个内存地址进行操作。</p>
+<h3 id="heading65">同步代码块</h3>
+<pre><code>synchronized (object){
+	//synchronized code
+}
+</code></pre><p>得到对象的锁才能操作同步代码块</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.thread_<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @author felix he
+</span><span style="color:#75715e"> * @version 1.0
+</span><span style="color:#75715e"> *使用实现Runable接口的方式创建三个子线程，来模拟抢票，这种情况下出现无票还在销售情况，需要锁管理
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ticketsell</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        sellmachine sellmachine <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> sellmachine<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        Thread thread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>sellmachine<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        Thread thread1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>sellmachine<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        Thread thread2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>sellmachine<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        thread<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        thread1<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        thread2<span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">sellmachine</span> <span style="color:#66d9ef">implements</span> Runnable<span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> ticketnum<span style="color:#f92672">=</span>100<span style="color:#f92672">;</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>1000<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;买票成功&#34;</span><span style="color:#f92672">+</span><span style="color:#f92672">(</span>ticketnum<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">)</span><span style="color:#f92672">+</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ticketnum<span style="color:#f92672">&lt;</span>0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sell out&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">synchronized</span> 
+<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span>
+<span style="color:#f92672">package</span> com.thread_<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @author felix he
+</span><span style="color:#75715e"> * @version 1.0
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ticketsell</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        sellmachine sellmachine <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> sellmachine<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>sellmachine<span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>sellmachine<span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">new</span> Thread<span style="color:#f92672">(</span>sellmachine<span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">start</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">sellmachine</span> <span style="color:#66d9ef">implements</span> Runnable<span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> ticketnum<span style="color:#f92672">=</span>50<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">boolean</span> loop <span style="color:#f92672">=</span><span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    
+    <span style="color:#75715e">//同步方法
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">runfunction</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ticketnum<span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>0<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;sell out&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            loop<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">sleep</span><span style="color:#f92672">(</span>100<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>InterruptedException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;买票成功&#34;</span><span style="color:#f92672">+</span><span style="color:#f92672">(</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span>ticketnum<span style="color:#f92672">)</span><span style="color:#f92672">+</span>Thread<span style="color:#f92672">.</span><span style="color:#a6e22e">currentThread</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>loop<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            runfunction<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> 
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="heading66">互斥锁</h2>
+<p>引入互斥锁的概念来保证共享数据操作的完整性</p>
+<p>每个对象都对应一个可称为“互斥锁”的标记（底层操作系统保证），这个标记用来保证在任一时刻，只能有一个线程访问该对象</p>
+<p>使用关键字sycophantized来与对象的互斥锁联系，当某个对象用sycophanized修饰时，表明该对象在任一时刻只能有一个线程访问</p>
+<p>注意事项和细节</p>
+<ol>
+<li>
+<p>同步方法如果没有使用static修饰：默认锁对象为this</p>
+</li>
+<li>
+<p>如果方法使用static修饰，默认锁对象为当前类.class</p>
+</li>
+<li>
+<p>实现步骤</p>
+</li>
+</ol>
+<p>先分析上锁的代码，选择同步代码块（建议）或同步方法，需求多个线程的锁对象为同一个</p>
+<h2 id="heading67">释放锁</h2>
+<h2 id="deadlock">死锁deadlock</h2>
+<h1 id="io">I/O流</h1>
+<p>文件在程序中是以流的形式操作的</p>
+<p>流：数据从数据源（文件）和程序（内存）之间经历的路径，以内存为参考点</p>
+<p>输入流：数据从数据源（文件）到程序（内存）的路径</p>
+<p>输出流：数据从程序（内存）到数据源（文件）的路径</p>
+<p>字节输出流的使用</p>
+<ol>
+<li>创建一个fileOutputStream对象，构造方法中传递写入数据的目的地</li>
+<li>调用fileOutputStream对象中de方法write，把数据写入文件</li>
+<li>释放资源</li>
+</ol>
+<h2 id="heading68">创建文件的三种方式</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> com.hspedu.file<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> org.junit.jupiter.api.Test<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> java.io.*<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * @author 韩顺平
+</span><span style="color:#75715e"> * @version 1.0
+</span><span style="color:#75715e"> * 演示创建文件
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FileCreate</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">//方式1 new File(String pathname)
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create01</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        String filePath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;D:\\java\\IOstreamtest\\news1.txt&#34;</span><span style="color:#f92672">;</span>
+        File file <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>filePath<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            file<span style="color:#f92672">.</span><span style="color:#a6e22e">createNewFile</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;文件创建成功&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">//方式2 new File(File parent,String child) //根据父目录文件+子路径构建
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//e:\\news2.txt
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create02</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        File parentFile <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;D:\\java\\IOstreamtest\\&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        String fileName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;news2.txt&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#75715e">//这里的file对象，在java程序中，只是一个对象
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//只有执行了createNewFile 方法，才会真正的，在磁盘创建该文件
+</span><span style="color:#75715e"></span>        File file <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>parentFile<span style="color:#f92672">,</span> fileName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            file<span style="color:#f92672">.</span><span style="color:#a6e22e">createNewFile</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;创建成功~&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">//方式3 new File(String parent,String child) //根据父目录+子路径构建
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//可能需要在一个父目录下创建多个子文件
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Test</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">create03</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//String parentPath = &#34;e:\\&#34;;
+</span><span style="color:#75715e"></span>        String parentPath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;e:\\&#34;</span><span style="color:#f92672">;</span>
+        String fileName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;news4.txt&#34;</span><span style="color:#f92672">;</span>
+        File file <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> File<span style="color:#f92672">(</span>parentPath<span style="color:#f92672">,</span> fileName<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+            file<span style="color:#f92672">.</span><span style="color:#a6e22e">createNewFile</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;创建成功~&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IOException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">//下面四个都是抽象类
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//InputStream
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//OutputStream
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//Reader //字符输入流
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//Writer  //字符输出流
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><p>文件存储原理</p>
+<p>创建FileOUtoutStream对象时，根究传入的路径，使用文件路径创建一个文件并指向它，然后调用.writh方法写入文件，写入数据时是将10进制整数转换为二进制整数。</p>
+<p>字节流和字符流</p>
+<ul>
+<li>字节流读取单个字节，字符流读取单个字符(一个字符根据编码的不同，对应的字节也不同，如 UTF-8 编码是 3 个字节，中文编码是 2 个字节。)</li>
+<li>字节流用来处理二进制文件(图片、MP3、视频文件)，字符流用来处理文本文件(可以看做是特殊的二进制文件，使用了某种编码，人可以阅读)。</li>
+</ul>
+<p>简而言之，字节是个计算机看的，字符才是给人看的</p>
+<h2 id="heading69">字节流</h2>
+<h3 id="inputstream">字节输入流InputStream</h3>
+<p>InputStream抽象类</p>
+<p>public int read(byte[] b) throws IOException</p>
+<p>读取一定数量的字节从输入流并存入缓冲区阵列b。实际读取的字节数作为一个整数返回。此方法块，直到输入数据可用，检测到文件结束，或抛出异常。</p>
+<p>public int read(byte[] b,int off,int len) throws IOException</p>
+<p>从输入流读入字节数组，读到 len字节数据。尝试读  len字节为多，实际读取的字节数作为一个整数返回。</p>
+<p>此方法块，直到输入数据可用，检测到文件结束，或抛出异常。</p>
+<h3 id="heading70">字节输出流</h3>
+<p>单次实现多个字节写入</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">write</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> b<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException
+</code></pre></div><p>如果写入的第一个字节是正数（0-127），显示的时候查询ASCII码</p>
+<p>如果写入的第一个字节是负数，第一和第二组成一个中文显示，查询系统默认码表（GBK）</p>
+<p>public void write(byte[] b)</p>
+<p>写入数组索引</p>
+<pre><code>public void write(byte[] b,int off,int len)
+	throws IOException
+</code></pre><p>从索引off开始，写入len长度的数组</p>
+<p>字节输出流续写和换行</p>
+<p>创建对象时使用</p>
+<pre><code>FileOutputStream (File file, boolean append)
+</code></pre><p>Boolean为真则续写</p>
+<h3 id="fileoutputstream">fileoutputstream</h3>
+<h3 id="fileoutputstream1">fileoutputstream</h3>
+<p>要使用.close才能写入文件 ，close底层是writeBytes()</p>
+<p><strong>flush,close方法区别</strong></p>
+<ul>
+<li><strong>flush</strong>：刷新缓冲区，流对象可以继续使用</li>
+</ul>
+<p>使用flush吧内存缓冲区中的数据刷新到文件中，还能继续使用流对象往文件添加</p>
+<ul>
+<li><strong>close</strong>：刷新缓冲区，通知JVM释放资源，流对象不能再用</li>
+</ul>
+<p>close方法释放资源，无法再次使用。</p>
+<h2 id="heading71">字符流</h2>
+<p>节点流和处理流</p>
+<pre><code>bufferedreader处理流
+
+package com.IOStream;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+/**
+ * @author felix he
+ * @version 1.0
+ */
+public class bufferedread{
+    public static void main(String[] args) throws IOException {
+        String filepath=&quot;D:\\idea\\learning\\object_orient\\src\\com\\poly\\cat.java&quot;;
+
+		//创建 BufferedReader，存入FileReader-
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(filepath));
+
+        String readlen=&quot;&quot;;
+        while ((readlen=bufferedReader.readLine())!=null){
+            System.out.println(readlen);
+        }
+        //关闭外层流，内层FileReader流也随之关闭
+        bufferedReader.close();
+        
+        //底层
+        public void close() throws IOException {
+                synchronized (lock) {
+                    if (in == null)
+                        return;
+                    try {
+                        in.close();//in 就是我们传入的 new FileReader(filePath), 关闭了.
+                    } finally {
+                        in = null;
+                        cb = null;
+                    }
+                }
+         }
+    }
+}
+</code></pre><p>修饰器模式</p>
+<h2 id="heading72">缓冲流</h2>
+<p>优势：不带缓冲的流读取到一个字节或字符，就直接写出数据。带缓冲的流读取到一个字节或字符，先不输出，等达到了缓冲区的最大容量再一次性写出去 优点：减少了写出次数，提高了效率 缺点：接收端可能无法及时获取到数据。</p>
+<p><strong>原理</strong>：使用基本的字节输入流读取文件时，使用FIleInputStream类中的read方法读取，java程序使用虚拟机，虚拟机使用OS 然后读取文件返回。过程中只能实现单字节读取。而字节缓冲流是给基本的字节输入流增加一个缓存区（数组），读取文件时可使用数组多字节读取，</p>
+<p>constructor</p>
+<p>public BufferedReader(Reader in)</p>
+<p>构造器中可传入Reader及其子类，创建一个使用默认大小输入缓冲区的缓冲字符输入流</p>
+<p>BufferedReader也是Reader的子类，所以也可以</p>
+<p>BufferedReader bufferedReader = new BufferedReader(BufferedReader);</p>
+<h2 id="heading73">对象处理流</h2>
+<p>保存数据时需要保存数据的值和数据类型（序列化）</p>
+<p>反序列化：在恢复数据的值和数据类型</p>
+<p>不会对静态变量进行序列化，因为序列化只是保存对象的状态，静态变量属于类的状态。</p>
+<p>需要让某个对象支持序列化机制，就需要该类是可序列化的，即实现Serializable（推荐，标记接口，内部无任何方法）或Externalizable接口，它只是一个标准，没有任何方法需要实现，但是如果不去实现它的话而进行序列化，会抛出异常。</p>
+<h2 id="heading74">标准输入输出流</h2>
+<h2 id="heading75">转换流</h2>
+<p>编码就是把字符转换为字节，而解码是把字节重新组合成字符。</p>
+<p>如果编码和解码过程使用不同的编码方式那么就出现了乱码。</p>
+<ul>
+<li>GBK 编码中，中文字符占 2 个字节，英文字符占 1 个字节；</li>
+<li>UTF-8 编码中，中文字符占 3 个字节，英文字符占 1 个字节；</li>
+<li>UTF-16be 编码中，中文字符和英文字符都占 2 个字节。</li>
+</ul>
+<pre><code>//把 FileInputStream 转成 InputStreamReader									指定编码 gbk
+InputStreamReader isr = new InputStreamReader(new FileInputStream(filePath), &quot;gbk&quot;);
+// 把 InputStreamReader 传入 BufferedReader
+BufferedReader br = new BufferedReader(isr);
+OR
+BufferedReader br = new BufferedReader(new InputStreamReader(
+                                                    new FileInputStream(filePath), &quot;gbk&quot;));
+analysis：InputStreamReader构造器能接受InputStream的子类，同理BufferedReader能接受Reader的子类。
+从而实现了字节流到字符流
+</code></pre><h2 id="properties">Properties类</h2>
+<p>properties类表示一个持久属性值，可保存在流中或从流中加载。属性列表中每个键对应一个字符串</p>
+<p>properties集合是一个双列集合，key和value默认都是字符串</p>
+<p><strong>store</strong>方法</p>
+<p>可使用properties集合中的store方法，把集合中的临时数据，持久化的写入硬盘存储。</p>
+<p><strong>load</strong>方法</p>
+<p>可使用properties集合中的load方法，把硬盘中保存的文件（键值对），读取到集合中使用</p>
+<h1 id="heading76">网络编程</h1>
+<h2 id="inetaddress">InetAddress</h2>
+<p>LocalHost：DESKTOP-ITUKSG0/192.168.10.32</p>
+<p>没有公有的构造函数，只能通过静态方法来创建实例</p>
+<pre><code>InetAddress.getByName(String host);
+InetAddress.getByAddress(byte[] address);
+</code></pre><h2 id="socket">Socket</h2>
+<p>TCP字节流编程</p>
+<p>创建端口监听</p>
+<blockquote>
+<p>ServerSocket serverSocket =new ServerSocket(9999);</p>
+</blockquote>
+<h3 id="socketshutdown">socket.shutdown问题</h3>
+<p>当客户端连接到服务器端后，实际上客户端也是通过一个端口和服务进行通讯的，这个端口由TCP/IP来随机分配</p>
+<h1 id="heading77">反射</h1>
+<p>通过外部配置文件，在不修改源码的情况下，来控制程序</p>
+<p>反射就是把java类中的各种成分映射成一个个的Java对象</p>
+<p>例如：一个类有：成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。</p>
+<h2 id="class">Class类</h2>
+<ul>
+<li>Class也是类，也继承了Object类</li>
+<li>Clas类对象不是new出来的，而是系统创建的</li>
+<li>对于某个类的Class对象，在内存中只有一份，因为类只加载一次</li>
+<li>每个类的实例都会记得自己由那个Class实例所产生的</li>
+<li>通过Class类可以得到一个类的完整结构</li>
+</ul>
+<h2 id="class1">获取Class对象的方式</h2>
+<h2 id="classforname">Class.forName()</h2>
+<p>已知一个类的全类名，且该类在路径下，可通过Class类的静态方法forName获取</p>
+<pre><code>String classAllPath = &quot;com.hspedu.Car&quot;; //通过读取配置文件获取
+Class&lt;?&gt; cls1 = Class.forName(classAllPath);
+</code></pre><p>多用于配置文件，读取类全路径，加载类</p>
+<h2 id="class2">类名.class</h2>
+<pre><code>Class cls2 = Car.class; 
+System.out.println(cls2);
+</code></pre><p>多用于参数传递</p>
+<h2 id="heading78">静态与动态加载</h2>
+<h1 id="heading79">项目</h1>
+<p>零钱通项目</p>
+<p>tankgame</p>
+<h1 id="important1">断点调试important</h1>
+<p>在断点调试过程中，是运行状态，以对象的运行类型来执行的</p>
+<p>断电可以在debug过程中，动态的下断点</p>
+<p>F7（跳入）跳入方法体内执行</p>
+<p>F8（跳过）下一行，一行行语句执行</p>
+<p>shift+F8（跳出）进入方法后跳出</p>
+<p>F9（resume）执行到下一个断点 重要技能</p>
+<h1 id="heading80">代码习惯</h1>
+<p>首字母大写,多个单词构成，把他们并在一起并且首字母大写。类，方法，字段，对象引用名称</p>
+<p>标识符全小写。</p>
+<p>方法是类的动作行为，一般以动词开头</p>
+<p>包的命名全部使用小写，包括中间</p>
+<p>一段代码就完成一个小功能，尽量不要混在一起</p>
+<p>在需要局部变量(辅助变量)时候，再创建</p>
+
+      </article>
+    </section>
+
+    
+    <article class="ui segment post-disqus-area" data-html2canvas-ignore>
+      <div id="disqus_thread"></div>
+<script>
+  
+
+
+  var disqus_config = function () {
+    this.page.url = "https://felixhjx.github.io/java/java_notes/" 
+    this.page.identifier = "/java/java_notes/" 
+  }
+
+  ;(function () {
+    
+    var d = document,
+      s = d.createElement('script')
+    s.src = 'https://' + "felixhe" + '.disqus.com/embed.js'
+    s.setAttribute('data-timestamp', +new Date())
+    ;(d.head || d.body).appendChild(s)
+  })()
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </article>
+    
+
+    
+    <article class="ui segment utterances-comments" data-html2canvas-ignore>
+      <script
+        src="https://utteranc.es/client.js"
+        repo="felixhjx/felixhjx.github.io"
+        issue-term="og:title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </article>
+    
+
+    
+  </div>
+</div>
+
+
+            <footer class="ui basic center aligned segment" style="background-color: transparent;">
+              
+              <p>© 2020 - 2022 hjxblog</p>
+              
+
+              <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
+
+              
+            </footer>
+          </div>
+        </section>
+        <section class="back">
+          <div class="dream-max-width">
+            <header class="ui basic very padded segment dream-header">
+  
+  <div class="ui small circular image">
+    <img src="/me/yyhjx.jpg" alt="avatar" />
+  </div>
+  
+
+  <div class="content">
+    <h1 class="ui medium header">hjxblog<span class="sub header">Stay hungry, stay foolish!</span>
+    </h1>
+
+    <article class="ui horizontal list">
+      
+      <a class="item" href="/posts">
+        <i class="archive icon" title="归档"></i>
+      </a>
+      
+      <a class="item" href="/categories">
+        <i class="th list icon" title="所有分类"></i>
+      </a>
+      <a class="item" href="/tags">
+        <i class="tags icon" title="所有标签"></i>
+      </a>
+    </article>
+
+    
+    
+    
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+
+    
+
+    
+    
+    
+          <div class="dream-tags">
+          
+          
+          
+            <a class="ui label" href="/tags/blog/" title="blog">
+              blog
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/computer_visual/" title="computer_visual">
+              computer_visual
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/dataconstruct/" title="dataconstruct">
+              dataconstruct
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/framework/" title="framework">
+              framework
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/gradient_descent/" title="gradient_descent">
+              gradient_descent
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/machine-learning/" title="machine learning">
+              machine learning
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/mysql/" title="mysql">
+              mysql
+            </a>
+          
+          
+          
+            <a class="ui label" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+              设计模式
+            </a>
+          
+          </div>
+    
+
+    
+  </div>
+</header>
+
+
+<div class="ui relaxed grid dream-grid dream-back">
+  
+  
+  
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    <article class="ui segment">
+      <div class="ui medium header">社交链接</div>
+      <nav class="ui secondary menu dream-menu dream-socials">
+  
+  <a class="item" href="/index.xml">
+    <i class="large rss square icon" title="RSS"></i>
+  </a>
+  
+
+  
+  <a class="item" href="mailto:15501975559@163.com">
+    <i class="large mail icon" title="Email"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+    <a class="item" href="https://instagram.com/hehjx97" target="_blank">
+      <i class="large instagram icon" title="Instagram"></i>
+    </a>
+  
+    <a class="item" href="https://github.com/felixhjx" target="_blank">
+      <i class="large github icon" title="GitHub"></i>
+    </a>
+  
+    <a class="item" href="https://stackoverflow.com/users/18233633/felixhjx" target="_blank">
+      <i class="large stack overflow icon" title="stack overflow"></i>
+    </a>
+  
+  
+</nav>
+
+    </article>
+  </div>
+
+  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
+    
+    <article class="ui segment">
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。<br /><br />背景使用了 <a href="https://www.pexels.com/zh-cn/" target="_blank">Pexels</a> 上 <a href="https://www.pexels.com/zh-cn/@minan1398" target="_blank">Min An</a> 拍摄的<a href="https://www.pexels.com/zh-cn/photo/1454794/" target="_blank">图片</a>。
+    </article>
+    
+  </div>
+
+  
+</div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js" integrity="sha256-CgSoWC9w5wNmI1aN8dIMK+6DPelUEtvDr+Bc2m/0Nx8=" crossorigin="anonymous"></script>
+
+    
+    <div class="ui segment" id="dream-search">
+  <div class="ui search">
+    <div class="ui transparent input">
+      <input class="prompt" type="text" placeholder="搜索" />
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $.getJSON('https:\/\/felixhjx.github.io\//index.json', function (data) {
+      $('.ui.search').search({
+        source: data,
+        searchFields: ['title'],
+        showNoResults: false,
+      })
+    })
+  })
+</script>
+<script src="/js/search.js"></script>
+
+    
+
+    
+
+    <script>
+  window.background = "#fff"
+  window.defaultDark =  null 
+  window.backgroundDark = "#333"
+  window.backgroundImageDark = "/me/background1.jpg"
+  window.darkNav =  null 
+  window.maxTags =  null 
+  window.hasTwitterEmbed =  null 
+  window.fixedNav =  true 
+
+  if (window.hasTwitterEmbed) {
+    
+    window.twttr = (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = 'https://platform.twitter.com/widgets.js'
+      fjs.parentNode.insertBefore(js, fjs)
+
+      t._e = []
+      t.ready = function (f) {
+        t._e.push(f)
+      }
+
+      return t
+    })(document, 'script', 'twitter-wjs')
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@1.13.1/js/jquery.overlayScrollbars.min.js" integrity="sha256-tBd38uWlvgfps3zHPrUb2ePBg+Z8EjMf0QloFONzpvU=" crossorigin="anonymous"></script>
+<script src="/js/header.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/theme.js"></script>
+
+    
+
+
+<script src="https://cdn.jsdelivr.net/npm/luxon@1.26.0" integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0=" crossorigin="anonymous"></script>
+<script>
+  format()
+
+  function format() {
+    $('span[data-format="luxon"]').each(function () {
+      var date = $(this).text()
+
+      $(this).text(luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日"))
+    })
+  }
+</script>
+
+
+
+<script src="/js/scrollToTop.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/highlight.min.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/clojure.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/languages/ocaml.min.js"></script>
+
+
+
+<script>
+  hljs.highlightAll()
+  setHighlightTheme()
+
+  function setHighlightTheme() {
+    var isDark = localStore.getItem('hugo-theme-dream-is-dark')
+    isDark = isDark ? isDark : window.defaultDark ? 'y' : isDark
+
+    var lightTheme = "tomorrow"
+    var darkTheme = "tomorrow-night"
+    var theme = isDark === 'y' ? darkTheme : lightTheme
+
+    $('link[data-highlight]').attr('href', 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/' + theme + '.min.css')
+    $('pre').css('background', isDark === 'y' ? '#333' : '')
+  }
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1/dist/html2canvas.min.js" integrity="sha256-uacRffSSMP9qpvNWhVmYLykBv9YKMA1d/VSIN1AmfyQ=" crossorigin="anonymous"></script>
+<script src="/js/post.js" defer></script>
+
+
+    
+
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-98295641-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>
